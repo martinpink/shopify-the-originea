@@ -197,10 +197,11 @@
                   {%- assign decimal     = display_rating | modulo: 1 -%}
                   {%- if decimal >= 0.3 and decimal < 0.8 -%}{%- assign half_star = true -%}{%- endif -%}
                   {%- if decimal >= 0.8 -%}{%- assign full_stars = full_stars | plus: 1 -%}{%- endif -%}
+                  {%- assign half_star_pos = full_stars | plus: 1 -%}
                   {%- for i in (1..5) -%}
                     {%- if i <= full_stars -%}
                       <span class="originea-star originea-star--full" aria-hidden="true">★</span>
-                    {%- elsif half_star and i == full_stars | plus: 1 -%}
+                    {%- elsif half_star and i == half_star_pos -%}
                       <span class="originea-star originea-star--half" aria-hidden="true">★</span>
                     {%- else -%}
                       <span class="originea-star originea-star--empty" aria-hidden="true">★</span>
