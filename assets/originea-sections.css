@@ -78,6 +78,50 @@
   letter-spacing: 0.04em !important;
 }
 
+/* ── Trust Badges — Product page ─────────────── */
+.originea-trust-badges {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.6rem 0;
+  border-top: 1px solid rgba(21, 22, 5, 0.12);
+  border-bottom: 1px solid rgba(21, 22, 5, 0.12);
+  margin-top: 0.5rem;
+}
+
+.originea-trust-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  text-align: center;
+}
+
+.originea-trust-badge svg {
+  flex-shrink: 0;
+  color: var(--color-olive-dark);
+  opacity: 0.75;
+}
+
+.originea-trust-badge span {
+  font-family: var(--font-body-family);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-olive-dark);
+  line-height: 1.4;
+}
+
+@media (max-width: 749px) {
+  .originea-trust-badges {
+    gap: 0.5rem;
+  }
+  .originea-trust-badge span {
+    font-size: 0.6rem;
+  }
+}
+
 /* ═══════════════════════════════════════════════
    The Originea — Homepage Sections Styles
    Matches Claude.ai Design v2 prototype
