@@ -1,4 +1,58 @@
 /* ═══════════════════════════════════════════════
+   Boutique Page — Filter Header
+═══════════════════════════════════════════════ */
+.boutique-header {
+  padding: 5rem 0 1rem;
+}
+.boutique-header__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.boutique-header__title {
+  font-family: var(--font-heading-family);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-olive-dark);
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+}
+.boutique-header__subtitle {
+  font-family: var(--font-body-family);
+  font-size: 0.95rem;
+  color: var(--color-olive-dark);
+  opacity: 0.6;
+  margin-bottom: 2.4rem;
+  letter-spacing: 0.02em;
+}
+.boutique-header__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.boutique-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.4rem;
+  border: 1px solid var(--color-olive-dark);
+  border-radius: 50px;
+  font-family: var(--font-body-family);
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  color: var(--color-olive-dark);
+  background: transparent;
+  text-decoration: none;
+  transition: background 160ms ease, color 160ms ease;
+}
+.boutique-filter-chip:hover,
+.boutique-filter-chip--active {
+  background: var(--color-olive-dark);
+  color: var(--color-cream);
+}
+
+/* ═══════════════════════════════════════════════
    Originea Product Card — Branded Style
    Cream background · Dark badge · Hover overlay
 ═══════════════════════════════════════════════ */

@@ -3,6 +3,29 @@
    Matches Claude.ai Design v2 prototype
 ═══════════════════════════════════════════════ */
 
+/* ═══ DESKTOP NAV LINKS (left side) ═══════════ */
+.originea-desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.originea-nav-link {
+  font-family: var(--font-body-family);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+  text-decoration: none;
+  transition: opacity 150ms ease;
+  white-space: nowrap;
+}
+
+.originea-nav-link:hover {
+  opacity: 0.7;
+}
+
 /* ── Desktop inline nav (left of centered logo) ─ */
 /* Force visible when drawer mode is active */
 @media screen and (min-width: 990px) {

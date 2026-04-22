@@ -1,0 +1,71 @@
+{{ 'originea-sections.css' | asset_url | stylesheet_tag }}
+
+{%- assign current_type = '' -%}
+{%- if request.query_string contains 'filter.p.product_type' -%}
+  {%- assign current_type = request.query_string | split: 'filter.p.product_type=' | last | split: '&' | first | url_decode -%}
+{%- endif -%}
+
+<div class="boutique-header color-{{ section.settings.color_scheme }}">
+  <div class="page-width boutique-header__inner">
+    <h1 class="boutique-header__title">{{ section.settings.heading }}</h1>
+    <p class="boutique-header__subtitle">{{ section.settings.subtitle }}</p>
+
+    <div class="boutique-header__filters" role="navigation" aria-label="Filtrer par catégorie">
+      <a href="/collections/all-collection-theoriginea"
+         class="boutique-filter-chip{% if current_type == '' %} boutique-filter-chip--active{% endif %}">
+        Tout
+      </a>
+      <a href="/collections/all-collection-theoriginea?filter.p.product_type=Solare"
+         class="boutique-filter-chip{% if current_type == 'Solare' %} boutique-filter-chip--active{% endif %}">
+        Solare
+      </a>
+      <a href="/collections/all-collection-theoriginea?filter.p.product_type=Agrumes"
+         class="boutique-filter-chip{% if current_type == 'Agrumes' %} boutique-filter-chip--active{% endif %}">
+        Agrumes
+      </a>
+      <a href="/collections/all-collection-theoriginea?filter.p.product_type=Botaniques"
+         class="boutique-filter-chip{% if current_type == 'Botaniques' %} boutique-filter-chip--active{% endif %}">
+        Botaniques
+      </a>
+      <a href="/collections/all-collection-theoriginea?filter.p.product_type=Herbes+%26+Fleurs"
+         class="boutique-filter-chip{% if current_type == 'Herbes & Fleurs' %} boutique-filter-chip--active{% endif %}">
+        Herbes &amp; Fleurs
+      </a>
+      <a href="/collections/all-collection-theoriginea?filter.p.product_type=Mariage"
+         class="boutique-filter-chip{% if current_type == 'Mariage' %} boutique-filter-chip--active{% endif %}">
+        Mariage
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Boutique Filter Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tous nos produits"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Agrumes et fruits artisanaux déshydratés · Provence, France"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Boutique Filter Header"
+    }
+  ]
+}
+{% endschema %}
