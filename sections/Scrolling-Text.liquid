@@ -66,7 +66,8 @@
 <div class="marquee marquee--borders {{ section.settings.scroll_text_move }}" style="--duration: {{ section.settings.scroll_time }}s">
   <div class="marquee__group">
         {% for block in section.blocks %}
-            {%- if request.locale.iso_code == 'fr' and block.settings.text_fr != blank -%}
+            {%- assign current_lang = localization.language.iso_code | downcase -%}
+            {%- if current_lang contains 'fr' and block.settings.text_fr != blank -%}
               <p>{{ block.settings.text_fr }}</p>
             {%- else -%}
               <p>{{ block.settings.text }}</p>
@@ -76,7 +77,8 @@
 
   <div class="marquee__group">
         {% for block in section.blocks %}
-            {%- if request.locale.iso_code == 'fr' and block.settings.text_fr != blank -%}
+            {%- assign current_lang = localization.language.iso_code | downcase -%}
+            {%- if current_lang contains 'fr' and block.settings.text_fr != blank -%}
               <p>{{ block.settings.text_fr }}</p>
             {%- else -%}
               <p>{{ block.settings.text }}</p>
