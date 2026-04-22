@@ -75,6 +75,14 @@
               {%- else -%}
                 <p>{{ block.settings.text }}</p>
               {%- endif -%}
+            {%- elsif current_lang contains 'de' -%}
+              {%- if block.settings.text contains 'France' -%}
+                <p>Kostenloser Versand in Frankreich ab 45 €</p>
+              {%- elsif block.settings.text contains 'Europe' -%}
+                <p>Kostenloser Versand in Europa ab 65 €</p>
+              {%- else -%}
+                <p>{{ block.settings.text }}</p>
+              {%- endif -%}
             {%- else -%}
               <p>{{ block.settings.text }}</p>
             {%- endif -%}
@@ -89,6 +97,14 @@
                 <p>Livraison offerte en France dès 45 €</p>
               {%- elsif block.settings.text contains 'Europe' -%}
                 <p>Livraison offerte en Europe dès 65 €</p>
+              {%- else -%}
+                <p>{{ block.settings.text }}</p>
+              {%- endif -%}
+            {%- elsif current_lang contains 'de' -%}
+              {%- if block.settings.text contains 'France' -%}
+                <p>Kostenloser Versand in Frankreich ab 45 €</p>
+              {%- elsif block.settings.text contains 'Europe' -%}
+                <p>Kostenloser Versand in Europa ab 65 €</p>
               {%- else -%}
                 <p>{{ block.settings.text }}</p>
               {%- endif -%}
