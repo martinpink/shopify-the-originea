@@ -31,14 +31,6 @@
   display: block;
 }
 
-/* Transparent header: background override for .gradient class */
-.header-at-top .header-wrapper,
-.header-at-top sticky-header {
-  background: transparent !important;
-  background-color: transparent !important;
-  border-color: transparent !important;
-}
-
 /* ── Hamburger icon sizing ─────────────────────── */
 .header__icon--menu .icon-hamburger,
 .header__icon--menu .icon-close {
