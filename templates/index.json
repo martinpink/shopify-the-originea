@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "originea-hero": {
@@ -68,7 +77,12 @@
           }
         }
       },
-      "block_order": ["coll-row-1", "coll-row-2", "coll-row-3", "coll-row-4"],
+      "block_order": [
+        "coll-row-1",
+        "coll-row-2",
+        "coll-row-3",
+        "coll-row-4"
+      ],
       "settings": {
         "eyebrow": "Nos collections"
       }
@@ -76,25 +90,24 @@
     "featured-bestsellers": {
       "type": "featured-collection",
       "settings": {
+        "collection": "notre-collection-originea",
+        "products_to_show": 4,
         "title": "Nos best-sellers",
         "heading_size": "h1",
         "description": "<p>Sélection</p>",
         "show_description": true,
         "description_style": "body",
-        "collection": "notre-collection-originea",
-        "products_to_show": 4,
         "columns_desktop": 2,
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "link",
-        "enable_desktop_slider": false,
         "color_scheme": "scheme-1",
         "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "enable_quick_add": false,
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 96,
@@ -134,22 +147,35 @@
       "blocks": {
         "block_a": {
           "type": "block",
-          "settings": { "text": "Artisanat · Provence · France · Fait à la main" }
+          "settings": {
+            "text": "Artisanat · Provence · France · Fait à la main"
+          }
         },
         "block_b": {
           "type": "block",
-          "settings": { "text": "Vegan · Sans gluten · Sans additifs · 100% naturel" }
+          "settings": {
+            "text": "Vegan · Sans gluten · Sans additifs · 100% naturel"
+          }
         },
         "block_c": {
           "type": "block",
-          "settings": { "text": "Artisanat · Provence · France · Fait à la main" }
+          "settings": {
+            "text": "Artisanat · Provence · France · Fait à la main"
+          }
         },
         "block_d": {
           "type": "block",
-          "settings": { "text": "Vegan · Sans gluten · Sans additifs · 100% naturel" }
+          "settings": {
+            "text": "Vegan · Sans gluten · Sans additifs · 100% naturel"
+          }
         }
       },
-      "block_order": ["block_a", "block_b", "block_c", "block_d"],
+      "block_order": [
+        "block_a",
+        "block_b",
+        "block_c",
+        "block_d"
+      ],
       "settings": {
         "bg_color": "#151605",
         "font_color": "#f5f5dc",
@@ -178,10 +204,15 @@
           }
         },
         "nl-email": {
-          "type": "email_form"
+          "type": "email_form",
+          "settings": {}
         }
       },
-      "block_order": ["nl-heading", "nl-paragraph", "nl-email"],
+      "block_order": [
+        "nl-heading",
+        "nl-paragraph",
+        "nl-email"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "full_width": true,
