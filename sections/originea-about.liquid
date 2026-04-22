@@ -35,7 +35,7 @@
             href="{{ section.settings.cta_link }}"
             class="originea-btn originea-btn--ghost{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
           >
-            {{ section.settings.cta_label }}
+            {{ 'sections.originea_about.cta_label' | t | default: section.settings.cta_label }}
           </a>
         {%- endif -%}
 

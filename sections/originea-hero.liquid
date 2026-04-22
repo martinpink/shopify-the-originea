@@ -26,7 +26,7 @@
         {%- endif -%}
         {%- if section.settings.cta2_label != blank -%}
           <a href="{{ section.settings.cta2_link }}" class="originea-btn originea-btn--ghost">
-            {{ section.settings.cta2_label }}
+            {{ 'sections.originea_hero.cta2_label' | t | default: section.settings.cta2_label }}
           </a>
         {%- endif -%}
       </div>

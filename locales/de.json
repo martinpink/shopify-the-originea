@@ -282,6 +282,12 @@
       "shipping_france": "Kostenloser Versand in Frankreich ab 45 €",
       "shipping_europe": "Kostenloser Versand in Europa ab 65 €"
     },
+    "originea_hero": {
+      "cta2_label": "Unsere Geschichte"
+    },
+    "originea_about": {
+      "cta_label": "Unsere Geschichte"
+    },
     "cart": {
       "title": "Dein Warenkorb",
       "caption": "Artikel im Warenkorb",

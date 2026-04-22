@@ -292,6 +292,12 @@
       "shipping_france": "Livraison offerte en France dès 45 €",
       "shipping_europe": "Livraison offerte en Europe dès 65 €"
     },
+    "originea_hero": {
+      "cta2_label": "Notre histoire"
+    },
+    "originea_about": {
+      "cta_label": "Notre histoire"
+    },
     "cart": {
       "title": "Votre panier",
       "caption": "Articles du panier",

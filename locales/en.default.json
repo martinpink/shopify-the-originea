@@ -290,6 +290,12 @@
       "shipping_france": "Free shipping in France on orders over €45",
       "shipping_europe": "Free shipping on orders over €65 in Europe"
     },
+    "originea_hero": {
+      "cta2_label": "Our Story"
+    },
+    "originea_about": {
+      "cta_label": "Our Story"
+    },
     "cart": {
       "title": "Your cart",
       "caption": "Cart items",
