@@ -1,0 +1,107 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "brand-block": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": false
+          }
+        },
+        "nav-block": {
+          "type": "link_list",
+          "settings": {
+            "heading": "NAVIGATION",
+            "menu": "main-menu"
+          }
+        },
+        "info-block": {
+          "type": "link_list",
+          "settings": {
+            "heading": "INFORMATIONS",
+            "menu": "footer"
+          }
+        },
+        "social-block": {
+          "type": "text",
+          "settings": {
+            "heading": "SUIVEZ-NOUS",
+            "subtext": "<p><a href=\"https://www.instagram.com/theoriginea\">Instagram</a><br/><a href=\"https://www.tiktok.com/@theoriginea\">TikTok</a><br/><a href=\"https://www.pinterest.com/theoriginea\">Pinterest</a><br/><a href=\"https://www.youtube.com/@theoriginea\">YouTube</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "brand-block",
+        "nav-block",
+        "info-block",
+        "social-block"
+      ],
+      "settings": {
+        "color_scheme": "inverse",
+        "newsletter_enable": false,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": false,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": false,
+        "show_policy": false,
+        "margin_top": 0,
+        "padding_top": 60,
+        "padding_bottom": 0
+      }
+    },
+    "4fb52654-a058-43c3-8f11-4cc0fd120770": {
+      "type": "newsletter",
+      "blocks": {
+        "2ad71c10-6bcf-40d4-ab7c-1e0449e82a01": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "<strong>Subscribe to our emails</strong>",
+            "heading_size": "h0"
+          }
+        },
+        "paragraph_RHq3R3": {
+          "type": "paragraph",
+          "disabled": true,
+          "settings": {
+            "text": "<p>Be the first to know about new collections and exclusive offers.</p>"
+          }
+        },
+        "sections--20699905818918__4fb52654-a058-43c3-8f11-4cc0fd120770-email_form-1": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "2ad71c10-6bcf-40d4-ab7c-1e0449e82a01",
+        "paragraph_RHq3R3",
+        "sections--20699905818918__4fb52654-a058-43c3-8f11-4cc0fd120770-email_form-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-547753a6-47f6-44f2-8bbf-56d0d0661c9f",
+        "full_width": true,
+        "padding_top": 28,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "footer",
+    "4fb52654-a058-43c3-8f11-4cc0fd120770"
+  ]
+}

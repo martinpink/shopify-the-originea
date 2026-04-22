@@ -1,0 +1,112 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "scrolling_text_pJ48ph": {
+      "type": "Scrolling-Text",
+      "blocks": {
+        "block_bAiw8P": {
+          "type": "block",
+          "settings": {
+            "text": "Free shipping in France on orders over €45"
+          }
+        },
+        "block_YjBz38": {
+          "type": "block",
+          "settings": {
+            "text": "Free shipping on orders over €65 in Europe"
+          }
+        },
+        "block_nGzrXi": {
+          "type": "block",
+          "settings": {
+            "text": "Free shipping in France on orders over €45"
+          }
+        },
+        "block_6ybJ6x": {
+          "type": "block",
+          "settings": {
+            "text": "Free shipping on orders over €65 in Europe"
+          }
+        },
+        "block_amegHx": {
+          "type": "block",
+          "settings": {
+            "text": "Free shipping in France on orders over €45"
+          }
+        },
+        "block_aGY4E8": {
+          "type": "block",
+          "settings": {
+            "text": "Free shipping on orders over €65 in Europe"
+          }
+        }
+      },
+      "block_order": [
+        "block_bAiw8P",
+        "block_YjBz38",
+        "block_nGzrXi",
+        "block_6ybJ6x",
+        "block_amegHx",
+        "block_aGY4E8"
+      ],
+      "settings": {
+        "bg_color": "#f1ebe8",
+        "font_color": "#000000",
+        "scroll_time": "100",
+        "font_size": 16,
+        "scroll_text_move": "marquee-left",
+        "pause_text": "paused",
+        "padding_top": 5,
+        "padding_bottom": 0
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-center",
+        "menu": "main-menu-1",
+        "menu_type_desktop": "drawer",
+        "sticky_header_type": "always",
+        "show_line_separator": true,
+        "color_scheme": "inverse",
+        "menu_color_scheme": "inverse",
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "mobile_logo_position": "center",
+        "margin_bottom": 0,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
+    "blocks_AhxBDR": {
+      "type": "_blocks",
+      "name": "Image",
+      "settings": {}
+    },
+    "17754542690e487cde": {
+      "type": "_blocks",
+      "settings": {}
+    },
+    "1775454316ec04ad00": {
+      "type": "_blocks",
+      "settings": {}
+    }
+  },
+  "order": [
+    "scrolling_text_pJ48ph",
+    "header",
+    "blocks_AhxBDR",
+    "17754542690e487cde",
+    "1775454316ec04ad00"
+  ]
+}

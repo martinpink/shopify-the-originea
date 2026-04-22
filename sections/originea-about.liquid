@@ -1,0 +1,162 @@
+{% comment %} About split section — The Originea v2 Design {% endcomment %}
+{% comment %} Dark olive bg, 2-col: left = text, right = image with overlay caption {% endcomment %}
+
+<section class="originea-about">
+  <div class="page-width">
+    <div class="originea-about__grid">
+
+      {% comment %} Left: text content {% endcomment %}
+      <div class="originea-about__text">
+
+        <div class="originea-about__eyebrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.eyebrow }}
+        </div>
+
+        <h2 class="originea-about__heading{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.heading_line1 }},<br>
+          <span class="display-script originea-about__script">{{ section.settings.heading_line2 }}</span>
+        </h2>
+
+        <p class="originea-about__body{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {{ section.settings.body_text }}
+        </p>
+
+        <div class="originea-about__badges{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {%- for i in (1..4) -%}
+            {%- assign badge_key = 'badge_' | append: i -%}
+            {%- if section.settings[badge_key] != blank -%}
+              <span class="originea-about__badge">{{ section.settings[badge_key] }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.cta_label != blank -%}
+          <a
+            href="{{ section.settings.cta_link }}"
+            class="originea-btn originea-btn--ghost{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          >
+            {{ section.settings.cta_label }}
+          </a>
+        {%- endif -%}
+
+      </div>
+
+      {% comment %} Right: image with bottom-left overlay caption {% endcomment %}
+      <div class="originea-about__image-col">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 800
+            | image_tag:
+              loading: 'lazy',
+              class: 'originea-about__img',
+              widths: '400, 600, 800',
+              alt: section.settings.image.alt
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'originea-about__placeholder placeholder-svg' }}
+        {%- endif -%}
+
+        {%- if section.settings.caption_text != blank -%}
+          <div class="originea-about__caption">
+            {%- if section.settings.caption_label != blank -%}
+              <div class="originea-about__caption-label">{{ section.settings.caption_label }}</div>
+            {%- endif -%}
+            <div class="originea-about__caption-text">{{ section.settings.caption_text }}</div>
+          </div>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Originea About",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "À PROPOS DE NOUS"
+    },
+    {
+      "type": "text",
+      "id": "heading_line1",
+      "label": "Heading line 1",
+      "default": "Nés en Provence"
+    },
+    {
+      "type": "text",
+      "id": "heading_line2",
+      "label": "Heading line 2 (display script)",
+      "default": "portés par la Méditerranée"
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body text",
+      "default": "Chaque tranche est séchée à la main, en petites séries, pour préserver le goût, la couleur et le parfum des terroirs du Sud. Ce n'est pas de la production — c'est de l'intention."
+    },
+    {
+      "type": "text",
+      "id": "badge_1",
+      "label": "Badge 1",
+      "default": "Vegan"
+    },
+    {
+      "type": "text",
+      "id": "badge_2",
+      "label": "Badge 2",
+      "default": "Sans gluten"
+    },
+    {
+      "type": "text",
+      "id": "badge_3",
+      "label": "Badge 3",
+      "default": "Sans additifs"
+    },
+    {
+      "type": "text",
+      "id": "badge_4",
+      "label": "Badge 4",
+      "default": "100% naturel"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Notre histoire"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "caption_label",
+      "label": "Image caption label",
+      "default": "Atelier"
+    },
+    {
+      "type": "text",
+      "id": "caption_text",
+      "label": "Image caption text",
+      "default": "Drôme Provençale"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Originea About"
+    }
+  ]
+}
+{% endschema %}

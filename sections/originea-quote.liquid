@@ -1,0 +1,50 @@
+{% comment %} Quote banner — The Originea v2 Design {% endcomment %}
+{% comment %} Rose poudré background, italic Playfair quote with display-script word {% endcomment %}
+
+<section class="originea-quote">
+  <div class="page-width">
+    <p class="originea-quote__text">
+      {{ section.settings.line1 }}<br>
+      {{ section.settings.prefix }}
+      <span class="display-script originea-quote__script">{{ section.settings.script_word }}</span>{{ section.settings.suffix }}
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Originea Quote",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "line1",
+      "label": "Quote line 1",
+      "default": "« Nous ne faisons pas des produits alimentaires."
+    },
+    {
+      "type": "text",
+      "id": "prefix",
+      "label": "Text before script word",
+      "default": "Nous faisons des"
+    },
+    {
+      "type": "text",
+      "id": "script_word",
+      "label": "Script word (display font, terracotta)",
+      "default": "moments"
+    },
+    {
+      "type": "text",
+      "id": "suffix",
+      "label": "Text after script word",
+      "default": ". »"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Originea Quote"
+    }
+  ]
+}
+{% endschema %}

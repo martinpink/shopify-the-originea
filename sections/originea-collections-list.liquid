@@ -1,0 +1,131 @@
+{% comment %} Collections list — The Originea v2 Design {% endcomment %}
+{% comment %} Black background, numbered rows: 01 / Name / Sub / Note / Arrow {% endcomment %}
+
+<section class="originea-coll-list">
+
+  <div class="page-width">
+    <div class="originea-coll-list__eyebrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {{ section.settings.eyebrow }}
+    </div>
+  </div>
+
+  {%- for block in section.blocks -%}
+    <a
+      href="{{ block.settings.link }}"
+      class="originea-coll-list__row{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      {{ block.shopify_attributes }}
+    >
+      <div class="page-width originea-coll-list__row-inner">
+        <span class="originea-coll-list__num">{{ block.settings.number }}</span>
+        <div class="originea-coll-list__info">
+          <div class="originea-coll-list__name">{{ block.settings.name }}</div>
+          <div class="originea-coll-list__sub">{{ block.settings.subtitle }}</div>
+        </div>
+        <div class="originea-coll-list__note">{{ block.settings.note }}</div>
+        <div class="originea-coll-list__arrow" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1">
+            <path d="M1 6h10M6 1l5 5-5 5"/>
+          </svg>
+        </div>
+      </div>
+    </a>
+  {%- endfor -%}
+
+  <div class="originea-coll-list__spacer"></div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Originea Collections List",
+  "tag": "div",
+  "blocks": [
+    {
+      "type": "collection_row",
+      "name": "Collection row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Collection name",
+          "default": "Collection Solare"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Agrumes & Chocolat Valrhona"
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note (italic, right side)",
+          "default": "Pièces uniques · Coffrets gastronomiques"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Collection link"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Nos collections"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Originea Collections List",
+      "blocks": [
+        {
+          "type": "collection_row",
+          "settings": {
+            "number": "01",
+            "name": "Collection Solare",
+            "subtitle": "Agrumes & Chocolat Valrhona",
+            "note": "Pièces uniques · Coffrets gastronomiques"
+          }
+        },
+        {
+          "type": "collection_row",
+          "settings": {
+            "number": "02",
+            "name": "Agrumes Séchés",
+            "subtitle": "6 variétés de Méditerranée",
+            "note": "Menton · Corse · Japon · Provence"
+          }
+        },
+        {
+          "type": "collection_row",
+          "settings": {
+            "number": "03",
+            "name": "Botaniques & Herbes",
+            "subtitle": "Lavande, Rose, Verveine, Hibiscus",
+            "note": "Infusions · Cocktails · Table"
+          }
+        },
+        {
+          "type": "collection_row",
+          "settings": {
+            "number": "04",
+            "name": "Mariage & Décoration",
+            "subtitle": "Confettis, Coffrets, Marque-places",
+            "note": "Biodégradable · Sur mesure"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

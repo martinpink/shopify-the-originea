@@ -1,0 +1,120 @@
+{% comment %} Hero section — The Originea v2 Design {% endcomment %}
+{% comment %} Full viewport, dark olive bg, L'art des / agrumes (script) / séchés {% endcomment %}
+
+<section class="originea-hero">
+
+  {% comment %} Warm radial glow overlay {% endcomment %}
+  <div class="originea-hero__glow" aria-hidden="true"></div>
+
+  <div class="originea-hero__content page-width">
+
+    <div class="originea-hero__eyebrow">{{ section.settings.eyebrow }}</div>
+
+    <div class="originea-hero__headline">
+      <div class="originea-hero__line1">{{ section.settings.line1 }}</div>
+      <div class="originea-hero__line2 display-script">{{ section.settings.line2 }}</div>
+      <div class="originea-hero__line3">{{ section.settings.line3 }}</div>
+    </div>
+
+    <div class="originea-hero__body">
+      <p class="originea-hero__tagline">{{ section.settings.tagline }}</p>
+      <div class="originea-hero__ctas">
+        {%- if section.settings.cta1_label != blank -%}
+          <a href="{{ section.settings.cta1_link }}" class="originea-btn originea-btn--cream">
+            {{ section.settings.cta1_label }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.cta2_label != blank -%}
+          <a href="{{ section.settings.cta2_link }}" class="originea-btn originea-btn--ghost">
+            {{ section.settings.cta2_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+
+  {% comment %} Bottom certification bar {% endcomment %}
+  <div class="originea-hero__bottom-bar">
+    <span>{{ section.settings.certification_text }}</span>
+  </div>
+
+  {% comment %} Vertical scroll indicator on right {% endcomment %}
+  <div class="originea-hero__scroll-indicator" aria-hidden="true">
+    <span>Défiler</span>
+    <div class="originea-hero__scroll-line"></div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Originea Hero",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Provence · France · Fait à la main"
+    },
+    {
+      "type": "text",
+      "id": "line1",
+      "label": "Headline line 1 (italic Playfair)",
+      "default": "L'art des"
+    },
+    {
+      "type": "text",
+      "id": "line2",
+      "label": "Headline line 2 (display script, terracotta)",
+      "default": "agrumes"
+    },
+    {
+      "type": "text",
+      "id": "line3",
+      "label": "Headline line 3 (Playfair)",
+      "default": "séchés"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Chaque tranche, un objet sensoriel — séché à la main en petites séries."
+    },
+    {
+      "type": "text",
+      "id": "cta1_label",
+      "label": "Primary CTA label",
+      "default": "Découvrir la boutique"
+    },
+    {
+      "type": "url",
+      "id": "cta1_link",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "Secondary CTA label",
+      "default": "Notre histoire"
+    },
+    {
+      "type": "url",
+      "id": "cta2_link",
+      "label": "Secondary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "certification_text",
+      "label": "Bottom bar text",
+      "default": "Vegan · Sans gluten · Sans additifs · 100% naturel"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Originea Hero"
+    }
+  ]
+}
+{% endschema %}

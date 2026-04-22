@@ -1,0 +1,176 @@
+/* ═══════════════════════════════════════════════
+   The Originea — Header & Menu Drawer Styles
+   Matches Claude.ai Design v2 prototype
+═══════════════════════════════════════════════ */
+
+/* ── Desktop inline nav (left of centered logo) ─ */
+/* Force visible when drawer mode is active */
+@media screen and (min-width: 990px) {
+  .header.drawer-menu .header__inline-menu {
+    display: flex !important;
+  }
+}
+
+.header__inline-menu .list-menu__item--link,
+.header__inline-menu a.list-menu__item {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.1rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  transition: opacity 200ms ease !important;
+}
+
+.header__inline-menu a.list-menu__item:hover {
+  opacity: 0.6 !important;
+}
+
+/* ── Header logo: centered, correct sizing ────── */
+.header__heading-logo {
+  display: block;
+}
+
+/* Transparent header: background override for .gradient class */
+.header-at-top .header-wrapper {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* ── Hamburger icon alignment ─────────────────── */
+/* Push hamburger to far right inside the icons area */
+.header__icons .header__icon--menu,
+header-drawer summary.header__icon--menu {
+  margin-left: 1.2rem;
+}
+
+/* ── Menu drawer panel: full-height dark olive ── */
+.menu-drawer {
+  background-color: var(--color-olive-dark) !important;
+  width: min(540px, 100vw) !important;
+  padding: 5.6rem 5.6rem 4rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100% !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Inner container — flex column, fills full height */
+.menu-drawer__inner-container {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+.menu-drawer__navigation-container {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* ── NAVIGATION label ─────────────────────────── */
+.menu-drawer__nav-label {
+  font-family: var(--font-body-family);
+  font-size: 1.0rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 220, 0.4);
+  margin: 0 0 3.6rem 0;
+  padding: 0;
+}
+
+/* ── Nav link list ────────────────────────────── */
+.menu-drawer__menu.has-submenu {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Each li has a thin cream divider below */
+.menu-drawer__menu.has-submenu > li {
+  border-bottom: 1px solid rgba(245, 245, 220, 0.1) !important;
+}
+
+/* Top border on first item */
+.menu-drawer__menu.has-submenu > li:first-child {
+  border-top: 1px solid rgba(245, 245, 220, 0.1) !important;
+}
+
+/* Large Playfair link text */
+.menu-drawer__menu-item.list-menu__item {
+  font-family: var(--font-heading-family) !important;
+  font-size: clamp(2.8rem, 5vw, 4.0rem) !important;
+  font-weight: 400 !important;
+  color: var(--color-cream) !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1 !important;
+  padding: 2.2rem 0 !important;
+  text-decoration: none !important;
+  background: none !important;
+  border: 0 !important;
+  display: block !important;
+  transition: color 200ms ease !important;
+}
+
+.menu-drawer__menu-item.list-menu__item:hover,
+.menu-drawer__menu-item.list-menu__item:focus {
+  color: var(--color-terracotta) !important;
+  opacity: 1 !important;
+}
+
+/* Arrow icons — hide in this minimal design */
+.menu-drawer__menu-item .icon-arrow,
+.menu-drawer__menu-item .icon-caret {
+  display: none !important;
+}
+
+/* ── Certifications at bottom ─────────────────── */
+.menu-drawer__certifications {
+  margin-top: auto;
+  padding-top: 4rem;
+}
+
+.menu-drawer__certifications p {
+  font-family: var(--font-body-family);
+  font-size: 1.0rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 220, 0.3);
+  margin: 0.3rem 0;
+  padding: 0;
+}
+
+/* ── Hide social/utility clutter in drawer ─────── */
+.menu-drawer__utility-links {
+  display: none !important;
+}
+
+/* ── Close (×) button ─────────────────────────── */
+.menu-drawer-container[open] > summary .icon-close,
+.menu-drawer-container[open] > summary svg {
+  color: var(--color-cream) !important;
+  fill: var(--color-cream) !important;
+}
+
+/* ── Overlay backdrop ─────────────────────────── */
+.menu-drawer-container::before {
+  background-color: rgba(0, 0, 0, 0.55) !important;
+}
+
+/* ── Sub-menu items (smaller) ─────────────────── */
+.menu-drawer__submenu .menu-drawer__menu-item {
+  font-size: 2.2rem !important;
+  padding: 1.4rem 0 !important;
+  color: rgba(245, 245, 220, 0.75) !important;
+}
+
+/* ── Mobile: full-width drawer ────────────────── */
+@media screen and (max-width: 749px) {
+  .menu-drawer {
+    width: 100vw !important;
+    padding: 4.8rem 3.2rem 3.2rem !important;
+  }
+}

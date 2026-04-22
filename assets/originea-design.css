@@ -1,0 +1,303 @@
+/* ═══════════════════════════════════════════════
+   The Originea Design System — v2
+   Translated from Claude.ai Design prototype
+   Colors: terracotta #c8855a · olive #151605 · cream #f5f5dc · rose #f1ebe8
+   Fonts: Playfair Display (headings) · Cormorant Garamond (body) · Juliette (display script)
+═══════════════════════════════════════════════ */
+
+/* ── Juliette display script font (commercial licence) ─ */
+@font-face {
+  font-family: 'Juliette';
+  src: url('Juliette-Regular.otf') format('opentype'),
+       url('Juliette-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Brand CSS custom properties ─────────────── */
+:root {
+  --color-terracotta: #c8855a;
+  --color-olive-dark: #151605;
+  --color-cream: #f5f5dc;
+  --color-rose-poudre: #f1ebe8;
+  --color-gold: #b07d42;
+
+  /* Juliette loaded via @font-face above */
+  --font-display-family: 'Juliette', 'Playfair Display', cursive;
+}
+
+/* ── Global typography enhancements ──────────── */
+body {
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .h1, .h2, .h3 {
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+/* ── Display / script headline class ─────────── */
+/* Usage: add class "display-script" to any element for Pinyon Script */
+.display-script {
+  font-family: var(--font-display-family);
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* ── Transparent header (homepage only) ──────── */
+/* JS in theme.liquid adds .header-at-top class to <body> */
+.header-at-top .header-wrapper {
+  background-color: transparent !important;
+  border-bottom-color: rgba(245, 245, 220, 0.15) !important;
+  transition: background-color 300ms ease, border-color 300ms ease;
+}
+
+.header-at-top .header-wrapper .header__heading-link,
+.header-at-top .header-wrapper .header__icon,
+.header-at-top .header-wrapper .header__menu-item,
+.header-at-top .header-wrapper a {
+  color: var(--color-cream) !important;
+  fill: var(--color-cream) !important;
+}
+
+/* Smooth transition back to solid on scroll */
+.header-wrapper {
+  transition: background-color 300ms ease, border-color 300ms ease;
+}
+
+/* ── Product card hover reveal ────────────────── */
+/* Matches the design's "dark overlay + single CTA reveal on hover" */
+.card-wrapper {
+  overflow: hidden;
+}
+
+.card__media img {
+  transition: transform 400ms cubic-bezier(0, 0, 0.3, 1);
+}
+
+.card-wrapper:hover .card__media img {
+  transform: scale(1.04);
+}
+
+/* Quick-add button fade-in on hover */
+.card__content .quick-add {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.card-wrapper:hover .card__content .quick-add {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Scroll reveal animation ─────────────────── */
+/* Works with Shopify's built-in animations_reveal_on_scroll */
+.scroll-trigger.animate--slide-in {
+  transition-timing-function: cubic-bezier(0, 0, 0.3, 1);
+}
+
+/* ── Section rhythm: alternating warm tones ──── */
+/* Terracotta accent for banners / rich-text sections with accent-1 scheme */
+.color-accent-1 {
+  background-color: var(--color-terracotta);
+  color: #fff;
+}
+
+/* Deep olive for inverse scheme */
+.color-inverse {
+  background-color: var(--color-olive-dark);
+  color: var(--color-cream);
+}
+
+/* ── Buttons: no radius, uppercase, editorial ── */
+.button,
+.btn {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 400;
+  border-radius: 0;
+}
+
+.button--primary {
+  background-color: var(--color-olive-dark);
+  color: var(--color-cream);
+}
+
+.button--primary:hover {
+  background-color: var(--color-terracotta);
+  color: #fff;
+}
+
+/* ── Mobile nav drawer: dark olive ───────────── */
+/* Shopify's menu-drawer gets olive background when open */
+.menu-drawer {
+  background-color: var(--color-olive-dark) !important;
+  color: var(--color-cream) !important;
+}
+
+.menu-drawer__navigation a,
+.menu-drawer__navigation summary {
+  color: var(--color-cream) !important;
+  font-size: 2.2rem;
+  letter-spacing: 0.06em;
+}
+
+.menu-drawer__navigation a:hover {
+  color: var(--color-terracotta) !important;
+  transition: color 200ms ease;
+}
+
+/* ── Product grid: editorial 2-col spacing ───── */
+@media screen and (min-width: 750px) {
+  .grid--2-col-tablet-down.collection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem 2rem;
+  }
+}
+
+/* ── Grain texture overlay on image placeholders ─ */
+/* Applied via SVG filter; used on .placeholder-svg */
+.placeholder-svg {
+  opacity: 0.6;
+  filter: url(#grain);
+}
+
+/* ── Footer: full Originea v2 design ─────────── */
+
+/* Force dark olive background on the entire footer */
+footer.footer {
+  background-color: var(--color-olive-dark) !important;
+  color: var(--color-cream) !important;
+  margin-top: 0 !important;
+}
+
+/* Column headings: NAVIGATION / INFORMATIONS / SUIVEZ-NOUS */
+.footer-block__heading,
+h2.footer-block__heading {
+  font-family: var(--font-body-family) !important;
+  font-size: 1.05rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: rgba(245, 245, 220, 0.45) !important;
+  margin-bottom: 2.4rem !important;
+}
+
+/* Brand name heading (THE ORIGINEA) — override above for brand col */
+.footer-block__brand-info h2.footer-block__heading,
+.footer-block__brand-info .footer-block__heading {
+  font-family: var(--font-heading-family) !important;
+  font-size: 1.6rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--color-cream) !important;
+  margin-bottom: 0.6rem !important;
+}
+
+/* First <p> in brand description = "ARTISANAL PRODUCTS · FRANCE" subtitle */
+.footer-block__brand-info .rte p:first-child {
+  font-size: 0.95rem !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: rgba(245, 245, 220, 0.4) !important;
+  margin-bottom: 2rem !important;
+  font-style: normal !important;
+}
+
+/* Second <p> = italic tagline */
+.footer-block__brand-info .rte p:nth-child(2) {
+  font-style: italic;
+  font-size: 1.45rem;
+  line-height: 1.65;
+  color: rgba(245, 245, 220, 0.7) !important;
+  margin-top: 1.6rem;
+}
+
+/* Footer navigation links */
+.footer-block__details-content a,
+.footer-block__details-content .link {
+  font-family: var(--font-body-family);
+  font-size: 1.45rem;
+  font-weight: 400;
+  color: rgba(245, 245, 220, 0.75) !important;
+  letter-spacing: 0.02em;
+  line-height: 2.2;
+  text-decoration: none;
+}
+
+.footer-block__details-content a:hover,
+.footer-block__details-content .link:hover {
+  color: var(--color-terracotta) !important;
+  transition: color 200ms ease;
+}
+
+/* Remove default list spacing */
+.footer-block__details-content.list-unstyled li {
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Bottom bar: thin divider + 2-col layout ─── */
+.footer__content-bottom {
+  border-top: 1px solid rgba(245, 245, 220, 0.1) !important;
+  background-color: var(--color-olive-dark) !important;
+  padding: 2.4rem 0 !important;
+}
+
+/* Make copyright a flex row: left text | right certifications */
+.footer__copyright--originea {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer__copyright--originea .copyright__content,
+.footer__copyright--originea .footer__certifications {
+  font-size: 1.0rem !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: rgba(245, 245, 220, 0.3) !important;
+  font-family: var(--font-body-family);
+}
+
+.footer__copyright--originea a {
+  color: rgba(245, 245, 220, 0.3) !important;
+  text-decoration: none;
+}
+
+/* Top content area padding */
+.footer__content-top {
+  padding-bottom: 4rem !important;
+}
+
+/* ── Badge: terracotta pill ──────────────────── */
+.badge--sale {
+  background-color: var(--color-terracotta) !important;
+  color: #fff !important;
+  border-radius: 2px;
+}
+
+/* ── Sensory typography: large section titles ── */
+.rich-text__heading,
+.section-heading {
+  font-size: clamp(3rem, 6vw, 7.2rem);
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* ── Terracotta horizontal rule ──────────────── */
+.section-divider {
+  border: 0;
+  height: 1px;
+  background: var(--color-terracotta);
+  opacity: 0.35;
+  margin: 0;
+}

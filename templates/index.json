@@ -1,0 +1,203 @@
+{
+  "sections": {
+    "originea-hero": {
+      "type": "originea-hero",
+      "settings": {
+        "eyebrow": "Provence · France · Fait à la main",
+        "line1": "L'art des",
+        "line2": "agrumes",
+        "line3": "séchés",
+        "tagline": "Chaque tranche, un objet sensoriel — séché à la main en petites séries.",
+        "cta1_label": "Découvrir la boutique",
+        "cta1_link": "shopify://collections/notre-collection-originea",
+        "cta2_label": "Notre histoire",
+        "cta2_link": "shopify://pages/notre-histoire-the-originea",
+        "certification_text": "Vegan · Sans gluten · Sans additifs · 100% naturel"
+      }
+    },
+    "originea-quote": {
+      "type": "originea-quote",
+      "settings": {
+        "line1": "« Nous ne faisons pas des produits alimentaires.",
+        "prefix": "Nous faisons des",
+        "script_word": "moments",
+        "suffix": ". »"
+      }
+    },
+    "originea-collections-list": {
+      "type": "originea-collections-list",
+      "blocks": {
+        "coll-row-1": {
+          "type": "collection_row",
+          "settings": {
+            "number": "01",
+            "name": "Collection Solare",
+            "subtitle": "Agrumes & Chocolat Valrhona",
+            "note": "Pièces uniques · Coffrets gastronomiques",
+            "link": "shopify://collections/notre-collection-originea"
+          }
+        },
+        "coll-row-2": {
+          "type": "collection_row",
+          "settings": {
+            "number": "02",
+            "name": "Agrumes Séchés",
+            "subtitle": "6 variétés de Méditerranée",
+            "note": "Menton · Corse · Japon · Provence",
+            "link": "shopify://collections/notre-collection-originea"
+          }
+        },
+        "coll-row-3": {
+          "type": "collection_row",
+          "settings": {
+            "number": "03",
+            "name": "Botaniques & Herbes",
+            "subtitle": "Lavande, Rose, Verveine, Hibiscus",
+            "note": "Infusions · Cocktails · Table",
+            "link": "shopify://collections/notre-collection-originea"
+          }
+        },
+        "coll-row-4": {
+          "type": "collection_row",
+          "settings": {
+            "number": "04",
+            "name": "Mariage & Décoration",
+            "subtitle": "Confettis, Coffrets, Marque-places",
+            "note": "Biodégradable · Sur mesure",
+            "link": "shopify://collections/cotillons-mariage-fruits-seches-provence-the-originea"
+          }
+        }
+      },
+      "block_order": ["coll-row-1", "coll-row-2", "coll-row-3", "coll-row-4"],
+      "settings": {
+        "eyebrow": "Nos collections"
+      }
+    },
+    "featured-bestsellers": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Nos best-sellers",
+        "heading_size": "h1",
+        "description": "<p>Sélection</p>",
+        "show_description": true,
+        "description_style": "body",
+        "collection": "notre-collection-originea",
+        "products_to_show": 4,
+        "columns_desktop": 2,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "link",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "originea-about": {
+      "type": "originea-about",
+      "settings": {
+        "eyebrow": "À PROPOS DE NOUS",
+        "heading_line1": "Nés en Provence",
+        "heading_line2": "portés par la Méditerranée",
+        "body_text": "Chaque tranche est séchée à la main, en petites séries, pour préserver le goût, la couleur et le parfum des terroirs du Sud. Ce n'est pas de la production — c'est de l'intention.",
+        "badge_1": "Vegan",
+        "badge_2": "Sans gluten",
+        "badge_3": "Sans additifs",
+        "badge_4": "100% naturel",
+        "cta_label": "Notre histoire",
+        "cta_link": "shopify://pages/notre-histoire-the-originea",
+        "caption_label": "Atelier",
+        "caption_text": "Drôme Provençale"
+      }
+    },
+    "originea-callout": {
+      "type": "originea-callout",
+      "settings": {
+        "bg_color": "#c8855a",
+        "script_word": "sensoriel",
+        "heading": "Le fruit. La lumière. La main.",
+        "heading_color": "#151605",
+        "body_text": "Déshydraté lentement à basse température. Sans additifs. Sans sucres ajoutés. Rien que le fruit — dans toute sa vérité.",
+        "body_color": "rgba(21,22,5,0.65)"
+      }
+    },
+    "scrolling-marquee": {
+      "type": "Scrolling-Text",
+      "blocks": {
+        "block_a": {
+          "type": "block",
+          "settings": { "text": "Artisanat · Provence · France · Fait à la main" }
+        },
+        "block_b": {
+          "type": "block",
+          "settings": { "text": "Vegan · Sans gluten · Sans additifs · 100% naturel" }
+        },
+        "block_c": {
+          "type": "block",
+          "settings": { "text": "Artisanat · Provence · France · Fait à la main" }
+        },
+        "block_d": {
+          "type": "block",
+          "settings": { "text": "Vegan · Sans gluten · Sans additifs · 100% naturel" }
+        }
+      },
+      "block_order": ["block_a", "block_b", "block_c", "block_d"],
+      "settings": {
+        "bg_color": "#151605",
+        "font_color": "#f5f5dc",
+        "scroll_time": "60",
+        "font_size": 13,
+        "scroll_text_move": "marquee--left",
+        "pause_text": "initial",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "nl-heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "La newsletter Originea",
+            "heading_size": "h1"
+          }
+        },
+        "nl-paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Recettes de cocktails, nouveautés artisanales et moments de Provence — directement dans votre boîte mail.</p>"
+          }
+        },
+        "nl-email": {
+          "type": "email_form"
+        }
+      },
+      "block_order": ["nl-heading", "nl-paragraph", "nl-email"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    }
+  },
+  "order": [
+    "originea-hero",
+    "originea-quote",
+    "originea-collections-list",
+    "featured-bestsellers",
+    "originea-about",
+    "originea-callout",
+    "scrolling-marquee",
+    "newsletter"
+  ]
+}
