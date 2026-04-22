@@ -1,0 +1,116 @@
+<style>
+  .originea-policy {
+    background-color: var(--color-background);
+    min-height: 60vh;
+    padding: 60px 0 80px;
+  }
+
+  .originea-policy__inner {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Headings */
+  .originea-policy__inner h1 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #C4845A;
+    border-bottom: 1px solid rgba(196,132,90,0.35);
+    padding-bottom: 16px;
+    margin-bottom: 32px;
+  }
+
+  .originea-policy__inner h2 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-foreground);
+    border-left: 2px solid #C4845A;
+    padding-left: 14px;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    opacity: 0.9;
+  }
+
+  /* Body text */
+  .originea-policy__inner p,
+  .originea-policy__inner li {
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--color-foreground);
+    opacity: 0.7;
+  }
+
+  .originea-policy__inner ul {
+    padding-left: 20px;
+    margin-bottom: 16px;
+  }
+
+  .originea-policy__inner li {
+    margin-bottom: 4px;
+  }
+
+  .originea-policy__inner strong {
+    color: var(--color-foreground);
+    opacity: 1;
+    font-weight: 600;
+  }
+
+  .originea-policy__inner a {
+    color: #C4845A;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196,132,90,0.3);
+    transition: border-color 0.2s;
+  }
+
+  .originea-policy__inner a:hover {
+    border-color: #C4845A;
+  }
+
+  /* Info box (div with background) */
+  .originea-policy__inner div {
+    background: rgba(196,132,90,0.07) !important;
+    border: 1px solid rgba(196,132,90,0.22) !important;
+    border-radius: 3px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+
+  .originea-policy__inner div p {
+    opacity: 0.85;
+  }
+
+  /* Footer note */
+  .originea-policy__inner p:last-child {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+    margin-top: 40px;
+    font-style: italic;
+    font-size: 13px;
+    opacity: 0.45;
+  }
+</style>
+
+<section class="originea-policy color-{{ section.settings.color_scheme }} gradient">
+  <div class="originea-policy__inner">
+    {{ policy.body }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Policy",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ]
+}
+{% endschema %}
