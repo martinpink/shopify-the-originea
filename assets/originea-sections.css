@@ -1,4 +1,84 @@
 /* ═══════════════════════════════════════════════
+   Originea Product Card — Branded Style
+   Cream background · Dark badge · Hover overlay
+═══════════════════════════════════════════════ */
+
+/* Cream card background */
+.card--standard .card__inner {
+  background-color: var(--color-rose-poudre) !important;
+}
+
+/* Product type badge — top left, dark olive pill */
+.originea-card__badge {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  background-color: var(--color-olive-dark);
+  color: var(--color-cream);
+  font-family: var(--font-body-family);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  z-index: 4;
+  pointer-events: none;
+  line-height: 1.6;
+}
+
+/* "VOIR LE PRODUIT" hover overlay */
+.originea-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(21, 22, 5, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 240ms ease;
+  z-index: 3;
+  text-decoration: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card-wrapper:hover .originea-card__overlay {
+  opacity: 1;
+}
+
+.originea-card__overlay-btn {
+  color: var(--color-cream);
+  border: 1px solid rgba(245, 245, 220, 0.65);
+  font-family: var(--font-body-family);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 1.1rem 2.4rem;
+  background: transparent;
+  display: block;
+}
+
+/* Product title */
+.card__information .card__heading a {
+  font-family: var(--font-heading-family) !important;
+  font-size: 1.35rem !important;
+  font-weight: 400 !important;
+  line-height: 1.25 !important;
+  color: var(--color-olive-dark) !important;
+  text-decoration: none !important;
+}
+
+/* Price */
+.card__information .price__container {
+  font-family: var(--font-body-family) !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* ═══════════════════════════════════════════════
    The Originea — Homepage Sections Styles
    Matches Claude.ai Design v2 prototype
 ═══════════════════════════════════════════════ */
