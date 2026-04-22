@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "nos-collections-page",
+      "settings": {
+        "heading": "Nos Collections",
+        "subtitle": "Explorez l'univers The Originea — chaque collection raconte une histoire",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": ["main"]
+}
