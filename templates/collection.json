@@ -8,6 +8,14 @@
         "color_scheme": "scheme-1"
       }
     },
+    "boutique-filter": {
+      "type": "boutique-filter-header",
+      "settings": {
+        "heading": "Tous nos produits",
+        "subtitle": "Agrumes et fruits artisanaux déshydratés · Provence, France",
+        "color_scheme": "scheme-2"
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -27,6 +35,7 @@
   },
   "order": [
     "banner",
+    "boutique-filter",
     "product-grid"
   ]
 }
