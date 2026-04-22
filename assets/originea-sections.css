@@ -78,6 +78,19 @@
   letter-spacing: 0.04em !important;
 }
 
+/* ── Judge.me badge override — product cards ─── */
+.originea-jdgm-badge {
+  margin: 0.3rem 0 0.1rem;
+}
+.originea-jdgm-badge .jdgm-prev-badge__stars {
+  font-size: 0.85rem !important;
+}
+.originea-jdgm-badge .jdgm-prev-badge__text {
+  font-family: var(--font-body-family) !important;
+  font-size: 0.78rem !important;
+  color: var(--color-olive-dark) !important;
+}
+
 /* ── Trust Badges — Product page ─────────────── */
 .originea-trust-badges {
   display: flex;
