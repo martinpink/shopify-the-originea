@@ -21,9 +21,7 @@
       "block_order": ["eyebrow", "heading"],
       "settings": {
         "image": "shopify://shop_images/Copy_of_That_Girl_Academy_Desktop_banners_2.png",
-        "image_2": "shopify://shop_images/11_e106d939-5a60-44c0-a920-aa724d1767e3.png",
         "image_overlay_opacity": 20,
-        "banner_link": "",
         "image_height": "large",
         "desktop_content_position": "bottom-left",
         "show_text_box": false,
@@ -153,7 +151,6 @@
       "settings": {
         "image": "shopify://shop_images/18_0aa00f79-0cb6-405a-b940-7425da4ba62f.png",
         "image_overlay_opacity": 30,
-        "banner_link": "",
         "image_height": "small",
         "desktop_content_position": "middle-center",
         "show_text_box": false,
