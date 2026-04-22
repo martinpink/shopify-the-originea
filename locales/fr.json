@@ -280,10 +280,13 @@
       "announcement": "Annonce",
       "menu": "Menu",
       "cart_count": {
-        "one": "{{ count }} article",
-        "other": "{{ count }} articles",
-        "many": "{{ count }} articles"
-      }
+        "one": "{{ count }} article",
+        "other": "{{ count }} articles",
+        "many": "{{ count }} articles"
+      },
+      "nav_boutique": "BOUTIQUE",
+      "nav_collections": "NOS COLLECTIONS",
+      "nav_histoire": "NOTRE HISTOIRE"
     },
     "cart": {
       "title": "Votre panier",

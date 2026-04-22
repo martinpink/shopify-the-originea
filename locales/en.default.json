@@ -281,7 +281,10 @@
       "cart_count": {
         "one": "{{ count }} item",
         "other": "{{ count }} items"
-      }
+      },
+      "nav_boutique": "SHOP",
+      "nav_collections": "OUR COLLECTIONS",
+      "nav_histoire": "OUR STORY"
     },
     "cart": {
       "title": "Your cart",

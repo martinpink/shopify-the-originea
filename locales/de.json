@@ -273,7 +273,10 @@
       "cart_count": {
         "one": "{{ count }} Artikel",
         "other": "{{ count }} Artikel"
-      }
+      },
+      "nav_boutique": "SHOP",
+      "nav_collections": "UNSERE KOLLEKTIONEN",
+      "nav_histoire": "UNSERE GESCHICHTE"
     },
     "cart": {
       "title": "Dein Warenkorb",
