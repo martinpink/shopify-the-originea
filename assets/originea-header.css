@@ -32,10 +32,25 @@
 }
 
 /* Transparent header: background override for .gradient class */
-.header-at-top .header-wrapper {
+.header-at-top .header-wrapper,
+.header-at-top sticky-header {
   background: transparent !important;
   background-color: transparent !important;
+  border-color: transparent !important;
 }
+
+/* ── Hamburger icon sizing ─────────────────────── */
+.header__icon--menu .icon-hamburger,
+.header__icon--menu .icon-close {
+  width: 2.2rem;
+  height: 2.2rem;
+  display: block;
+}
+
+/* Hide close icon when drawer is closed, hamburger when open */
+.menu-drawer-container .icon-close { display: none; }
+.menu-drawer-container[open] .icon-hamburger { display: none; }
+.menu-drawer-container[open] .icon-close { display: block; }
 
 /* ── Hamburger icon alignment ─────────────────── */
 /* Push hamburger to far right inside the icons area */
