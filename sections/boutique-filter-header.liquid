@@ -1,6 +1,6 @@
 {{ 'originea-sections.css' | asset_url | stylesheet_tag }}
 
-{%- if collection.handle == 'all-collection-theoriginea' -%}
+{%- if collection.handle == 'all' or collection.handle == 'all-collection-theoriginea' -%}
 
 {%- assign active_tag = current_tags | first | downcase -%}
 
@@ -10,27 +10,27 @@
     <p class="boutique-header__subtitle">{{ section.settings.subtitle }}</p>
 
     <div class="boutique-header__filters" role="navigation" aria-label="Filtrer par catégorie">
-      <a href="/collections/all-collection-theoriginea"
+      <a href="/collections/all"
          class="boutique-filter-chip{% if active_tag == blank %} boutique-filter-chip--active{% endif %}">
         Tout
       </a>
-      <a href="/collections/all-collection-theoriginea/solare"
+      <a href="/collections/all/solare"
          class="boutique-filter-chip{% if active_tag == 'solare' %} boutique-filter-chip--active{% endif %}">
         Solare
       </a>
-      <a href="/collections/all-collection-theoriginea/agrumes"
+      <a href="/collections/all/agrumes"
          class="boutique-filter-chip{% if active_tag == 'agrumes' %} boutique-filter-chip--active{% endif %}">
         Agrumes
       </a>
-      <a href="/collections/all-collection-theoriginea/botaniques"
+      <a href="/collections/all/botaniques"
          class="boutique-filter-chip{% if active_tag == 'botaniques' %} boutique-filter-chip--active{% endif %}">
         Botaniques
       </a>
-      <a href="/collections/all-collection-theoriginea/herbes-fleurs"
+      <a href="/collections/all/herbes-fleurs"
          class="boutique-filter-chip{% if active_tag == 'herbes-fleurs' %} boutique-filter-chip--active{% endif %}">
         Herbes &amp; Fleurs
       </a>
-      <a href="/collections/all-collection-theoriginea/mariage"
+      <a href="/collections/all/mariage"
          class="boutique-filter-chip{% if active_tag == 'mariage' %} boutique-filter-chip--active{% endif %}">
         Mariage
       </a>
