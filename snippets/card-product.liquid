@@ -175,7 +175,42 @@
             <span class="caption-large light">{{ block.settings.description | escape }}</span>
 
             {%- if show_rating -%}
-              <div class="jdgm-widget jdgm-preview-badge originea-jdgm-badge" data-id="{{ card_product.id }}"></div>
+              {%- liquid
+                assign jdgm_rating = card_product.metafields.judgeme.rating
+                assign jdgm_count  = card_product.metafields.judgeme.reviews_count
+                assign rev_rating  = card_product.metafields.reviews.rating.value.rating
+                assign rev_count   = card_product.metafields.reviews.rating_count
+                if jdgm_rating != blank
+                  assign display_rating = jdgm_rating | plus: 0
+                  assign display_count  = jdgm_count
+                elsif rev_rating != blank
+                  assign display_rating = rev_rating | plus: 0
+                  assign display_count  = rev_count
+                else
+                  assign display_rating = nil
+                endif
+              -%}
+              {%- if display_rating != nil -%}
+                <div class="originea-stars" aria-label="{{ display_rating | round: 1 }} out of 5 stars">
+                  {%- assign full_stars  = display_rating | floor -%}
+                  {%- assign half_star   = false -%}
+                  {%- assign decimal     = display_rating | modulo: 1 -%}
+                  {%- if decimal >= 0.3 and decimal < 0.8 -%}{%- assign half_star = true -%}{%- endif -%}
+                  {%- if decimal >= 0.8 -%}{%- assign full_stars = full_stars | plus: 1 -%}{%- endif -%}
+                  {%- for i in (1..5) -%}
+                    {%- if i <= full_stars -%}
+                      <span class="originea-star originea-star--full" aria-hidden="true">★</span>
+                    {%- elsif half_star and i == full_stars | plus: 1 -%}
+                      <span class="originea-star originea-star--half" aria-hidden="true">★</span>
+                    {%- else -%}
+                      <span class="originea-star originea-star--empty" aria-hidden="true">★</span>
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if display_count != blank and display_count != '0' and display_count != 0 -%}
+                    <span class="originea-star-count">({{ display_count }})</span>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
             {%- endif -%}
 
             {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
