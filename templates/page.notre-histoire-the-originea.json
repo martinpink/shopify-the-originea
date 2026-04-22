@@ -1,0 +1,172 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-banner",
+      "blocks": {
+        "eyebrow": {
+          "type": "text",
+          "settings": {
+            "text": "Notre histoire",
+            "text_style": "subtitle"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "L'art du fruit, né en Provence",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": ["eyebrow", "heading"],
+      "settings": {
+        "image": "shopify://shop_images/Copy_of_That_Girl_Academy_Desktop_banners_2.png",
+        "image_overlay_opacity": 20,
+        "image_height": "large",
+        "desktop_content_position": "bottom-left",
+        "show_text_box": false,
+        "desktop_content_alignment": "left",
+        "color_scheme": "scheme-3",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "stack_images_on_mobile": true,
+        "show_text_below": false
+      }
+    },
+    "story-intro": {
+      "type": "rich-text",
+      "blocks": {
+        "eyebrow": {
+          "type": "heading",
+          "settings": {
+            "heading": "Je m'appelle Isabella",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Diplômée d'un Master en Commerce et Entrepreneuriat, j'ai construit mon parcours dans la finance — un monde où l'exigence et le souci du détail sont une seconde nature. Mais ma vraie école, c'est celle de mes parents, restaurateurs de métier, qui m'ont transmis une chose essentielle : le goût du vrai.</p><p>Gourmande de nature, j'ai toujours eu un faible pour les fruits séchés — les agrumes séchés, les fruits enrobés de chocolat, ces petites douceurs simples que l'on grignote sans culpabilité. Mais aussi pour la façon dont un fruit bien séché peut sublimer un cocktail, habiller une assiette, ou transformer un simple dressage de table en quelque chose d'élégant. Sauf qu'en France, impossible de trouver ce que je cherchais.</p><p>Tout a basculé lors de mon voyage de noces en Crète, en 2021. Là-bas, un simple fruit séché — solaire, intense, sans artifice — m'a rappelé ce que le fruit peut être quand on le respecte. En rentrant, j'ai cherché à retrouver cette sensation. En vain.</p><p>C'est alors que j'ai levé les yeux vers ce que j'avais déjà sous la main : notre Drôme, ses vergers, ses terres généreuses, au cœur de la Provence. Et The Originea est née.</p>"
+          }
+        }
+      },
+      "block_order": ["eyebrow", "text"],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 96,
+        "padding_bottom": 80
+      }
+    },
+    "content-rows": {
+      "type": "multirow",
+      "blocks": {
+        "row-idee": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/u9432777993_well-groomed_female_hands_of_a_modern_woman_in_he_15bd528f-15e7-4889-b444-217378cee560_2.png",
+            "caption": "L'idée",
+            "heading": "Revenir à l'essentiel",
+            "text": "<p>L'idée de The Originea est née d'un constat simple : le fruit est souvent transformé, sucré, standardisé — alors qu'il possède déjà, à l'état brut, une richesse et une élégance naturelles.</p><p>Nous avons voulu redonner au fruit sa place, son temps, son identité. Basés dans la vallée de la Drôme, en Provence, au cœur du Sud de la France, The Originea crée des fruits déshydratés artisanaux qui célèbrent les produits d'exception de la région.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "row-choix": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/pexels-freestocks-370014.jpg",
+            "caption": "Le choix",
+            "heading": "Lentement, à basse température",
+            "text": "<p>Tout commence par une sélection rigoureuse, avec une attention particulière portée aux fruits issus de la Drôme — territoire solaire et généreux, propice aux cultures de caractère et de qualité exceptionnelle. Chaque fruit est ensuite tranché à la main, puis déshydraté lentement à basse température, selon un procédé artisanal qui respecte avant tout la matière première.</p><p>Chez The Originea, rien n'est ajouté. Pas de sucres — Pas d'additifs — Pas de conservateurs — Pas de raccourcis.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "row-inspiration": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/rn-image_picker_lib_temp_a4a2c4cc-6b07-4117-9400-2ec0ba905034.png",
+            "caption": "L'inspiration",
+            "heading": "Du snack au cocktail, à la table",
+            "text": "<p>Notre collection comprend des agrumes séchés — citrons, citrons verts, oranges, pomelos et clémentines — ainsi que des fruits de saison déshydratés, des mélanges botaniques signature et des parfums naturels d'intérieur inspirés du paysage provençal.</p><p>Nos garnitures de cocktails à base de fruits séchés sont devenues un incontournable pour les bartenders, les amateurs de mixologie et les passionnés de gastronomie à travers l'Europe — une alternative naturelle et élégante aux décorations artificielles.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "row-exigence": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/rn-image_picker_lib_temp_ce3b1082-6075-44cb-b12c-509b070d2d44.png",
+            "caption": "L'exigence",
+            "heading": "Fait en Provence. Livré partout en Europe.",
+            "text": "<p>Notre approche se situe à la croisée de deux univers : la chaleur de la Provence et l'exigence contemporaine. Un premium discret, sincère, loin de l'ostentation, proche de la terre.</p><p>The Originea s'adresse à celles et ceux qui aiment comprendre ce qu'ils consomment, qui apprécient le détail, et qui savent que le vrai luxe réside souvent dans la simplicité bien faite.</p>",
+            "button_label": "Découvrir la boutique",
+            "button_link": "shopify://collections/notre-collection-originea"
+          }
+        }
+      },
+      "block_order": ["row-idee", "row-choix", "row-inspiration", "row-exigence"],
+      "settings": {
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "image_layout": "alternate-left",
+        "section_color_scheme": "scheme-1",
+        "row_color_scheme": "scheme-2",
+        "mobile_content_alignment": "left",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "shop-cta": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Découvrir la collection",
+            "heading_size": "h1"
+          }
+        },
+        "cta": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Voir la boutique",
+            "button_link_1": "shopify://collections/notre-collection-originea",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": ["heading", "cta"],
+      "settings": {
+        "image": "shopify://shop_images/18_0aa00f79-0cb6-405a-b940-7425da4ba62f.png",
+        "image_overlay_opacity": 30,
+        "image_height": "small",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-3",
+        "image_behavior": "fixed",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": false
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "story-intro",
+    "content-rows",
+    "shop-cta"
+  ]
+}
