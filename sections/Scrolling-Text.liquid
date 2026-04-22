@@ -65,10 +65,16 @@
 <section class="marquee-text-wrapper" id=id-{{ section.id }}>
 <div class="marquee marquee--borders {{ section.settings.scroll_text_move }}" style="--duration: {{ section.settings.scroll_time }}s">
   <div class="marquee__group">
+        {%- assign current_lang = localization.language.iso_code | downcase -%}
         {% for block in section.blocks %}
-            {%- assign current_lang = localization.language.iso_code | downcase -%}
-            {%- if current_lang contains 'fr' and block.settings.text_fr != blank -%}
-              <p>{{ block.settings.text_fr }}</p>
+            {%- if current_lang contains 'fr' -%}
+              {%- if block.settings.text contains 'France' -%}
+                <p>Livraison offerte en France dès 45 €</p>
+              {%- elsif block.settings.text contains 'Europe' -%}
+                <p>Livraison offerte en Europe dès 65 €</p>
+              {%- else -%}
+                <p>{{ block.settings.text }}</p>
+              {%- endif -%}
             {%- else -%}
               <p>{{ block.settings.text }}</p>
             {%- endif -%}
@@ -76,10 +82,16 @@
   </div>
 
   <div class="marquee__group">
+        {%- assign current_lang = localization.language.iso_code | downcase -%}
         {% for block in section.blocks %}
-            {%- assign current_lang = localization.language.iso_code | downcase -%}
-            {%- if current_lang contains 'fr' and block.settings.text_fr != blank -%}
-              <p>{{ block.settings.text_fr }}</p>
+            {%- if current_lang contains 'fr' -%}
+              {%- if block.settings.text contains 'France' -%}
+                <p>Livraison offerte en France dès 45 €</p>
+              {%- elsif block.settings.text contains 'Europe' -%}
+                <p>Livraison offerte en Europe dès 65 €</p>
+              {%- else -%}
+                <p>{{ block.settings.text }}</p>
+              {%- endif -%}
             {%- else -%}
               <p>{{ block.settings.text }}</p>
             {%- endif -%}
@@ -184,14 +196,9 @@
       "settings": [
         {
           "type": "text",
-          "label": "Text (English)",
+          "label": "Add Text",
           "id": "text",
           "default":"Marquee"
-        },
-        {
-          "type": "text",
-          "label": "Text (French)",
-          "id": "text_fr"
         }
       ]
     }
