@@ -286,6 +286,10 @@
       "nav_collections": "OUR COLLECTIONS",
       "nav_histoire": "OUR STORY"
     },
+    "scrolling_text": {
+      "shipping_france": "Free shipping in France on orders over €45",
+      "shipping_europe": "Free shipping on orders over €65 in Europe"
+    },
     "cart": {
       "title": "Your cart",
       "caption": "Cart items",

@@ -288,6 +288,10 @@
       "nav_collections": "NOS COLLECTIONS",
       "nav_histoire": "NOTRE HISTOIRE"
     },
+    "scrolling_text": {
+      "shipping_france": "Livraison offerte en France dès 45 €",
+      "shipping_europe": "Livraison offerte en Europe dès 65 €"
+    },
     "cart": {
       "title": "Votre panier",
       "caption": "Articles du panier",

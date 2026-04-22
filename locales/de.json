@@ -278,6 +278,10 @@
       "nav_collections": "UNSERE KOLLEKTIONEN",
       "nav_histoire": "UNSERE GESCHICHTE"
     },
+    "scrolling_text": {
+      "shipping_france": "Kostenloser Versand in Frankreich ab 45 €",
+      "shipping_europe": "Kostenloser Versand in Europa ab 65 €"
+    },
     "cart": {
       "title": "Dein Warenkorb",
       "caption": "Artikel im Warenkorb",
