@@ -22,7 +22,7 @@
       "settings": {
         "image": "shopify://shop_images/Copy_of_That_Girl_Academy_Desktop_banners_2.png",
         "image_2": "shopify://shop_images/11_e106d939-5a60-44c0-a920-aa724d1767e3.png",
-        "image_overlay_opacity": 25,
+        "image_overlay_opacity": 20,
         "banner_link": "",
         "image_height": "large",
         "desktop_content_position": "bottom-left",
@@ -32,9 +32,7 @@
         "image_behavior": "none",
         "mobile_content_alignment": "left",
         "stack_images_on_mobile": true,
-        "show_text_below": false,
-        "padding_top": 0,
-        "padding_bottom": 0
+        "show_text_below": false
       }
     },
     "story-intro": {
