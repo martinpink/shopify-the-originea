@@ -66,13 +66,21 @@
 <div class="marquee marquee--borders {{ section.settings.scroll_text_move }}" style="--duration: {{ section.settings.scroll_time }}s">
   <div class="marquee__group">
         {% for block in section.blocks %}
-            <p>{{ block.settings.text }}</p>
+            {%- if request.locale.iso_code == 'fr' and block.settings.text_fr != blank -%}
+              <p>{{ block.settings.text_fr }}</p>
+            {%- else -%}
+              <p>{{ block.settings.text }}</p>
+            {%- endif -%}
         {% endfor %}
   </div>
 
   <div class="marquee__group">
         {% for block in section.blocks %}
-            <p>{{ block.settings.text }}</p>
+            {%- if request.locale.iso_code == 'fr' and block.settings.text_fr != blank -%}
+              <p>{{ block.settings.text_fr }}</p>
+            {%- else -%}
+              <p>{{ block.settings.text }}</p>
+            {%- endif -%}
         {% endfor %}
   </div>
 </div>
@@ -174,9 +182,15 @@
       "settings": [
         {
           "type": "text",
-          "label": "Add Text",
+          "label": "Text (English)",
           "id": "text",
           "default":"Marquee"
+        },
+        {
+          "type": "text",
+          "label": "Text (French)",
+          "id": "text_fr",
+          "default": ""
         }
       ]
     }

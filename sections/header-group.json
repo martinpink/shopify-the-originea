@@ -17,37 +17,43 @@
         "block_bAiw8P": {
           "type": "block",
           "settings": {
-            "text": "Free shipping in France on orders over €45"
+            "text": "Free shipping in France on orders over €45",
+            "text_fr": "Livraison offerte en France dès 45 €"
           }
         },
         "block_YjBz38": {
           "type": "block",
           "settings": {
-            "text": "Free shipping on orders over €65 in Europe"
+            "text": "Free shipping on orders over €65 in Europe",
+            "text_fr": "Livraison offerte en Europe dès 65 €"
           }
         },
         "block_nGzrXi": {
           "type": "block",
           "settings": {
-            "text": "Free shipping in France on orders over €45"
+            "text": "Free shipping in France on orders over €45",
+            "text_fr": "Livraison offerte en France dès 45 €"
           }
         },
         "block_6ybJ6x": {
           "type": "block",
           "settings": {
-            "text": "Free shipping on orders over €65 in Europe"
+            "text": "Free shipping on orders over €65 in Europe",
+            "text_fr": "Livraison offerte en Europe dès 65 €"
           }
         },
         "block_amegHx": {
           "type": "block",
           "settings": {
-            "text": "Free shipping in France on orders over €45"
+            "text": "Free shipping in France on orders over €45",
+            "text_fr": "Livraison offerte en France dès 45 €"
           }
         },
         "block_aGY4E8": {
           "type": "block",
           "settings": {
-            "text": "Free shipping on orders over €65 in Europe"
+            "text": "Free shipping on orders over €65 in Europe",
+            "text_fr": "Livraison offerte en Europe dès 65 €"
           }
         }
       },
