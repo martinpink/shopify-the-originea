@@ -2,10 +2,7 @@
 
 {%- if collection.handle == 'all-collection-theoriginea' -%}
 
-{%- assign current_type = '' -%}
-{%- if request.query_string contains 'filter.p.product_type' -%}
-  {%- assign current_type = request.query_string | split: 'filter.p.product_type=' | last | split: '&' | first | url_decode -%}
-{%- endif -%}
+{%- assign active_tag = current_tags | first | downcase -%}
 
 <div class="boutique-header color-{{ section.settings.color_scheme }}">
   <div class="page-width boutique-header__inner">
@@ -14,27 +11,27 @@
 
     <div class="boutique-header__filters" role="navigation" aria-label="Filtrer par catégorie">
       <a href="/collections/all-collection-theoriginea"
-         class="boutique-filter-chip{% if current_type == '' %} boutique-filter-chip--active{% endif %}">
+         class="boutique-filter-chip{% if active_tag == blank %} boutique-filter-chip--active{% endif %}">
         Tout
       </a>
-      <a href="/collections/all-collection-theoriginea?filter.p.product_type=Solare"
-         class="boutique-filter-chip{% if current_type == 'Solare' %} boutique-filter-chip--active{% endif %}">
+      <a href="/collections/all-collection-theoriginea/solare"
+         class="boutique-filter-chip{% if active_tag == 'solare' %} boutique-filter-chip--active{% endif %}">
         Solare
       </a>
-      <a href="/collections/all-collection-theoriginea?filter.p.product_type=Agrumes"
-         class="boutique-filter-chip{% if current_type == 'Agrumes' %} boutique-filter-chip--active{% endif %}">
+      <a href="/collections/all-collection-theoriginea/agrumes"
+         class="boutique-filter-chip{% if active_tag == 'agrumes' %} boutique-filter-chip--active{% endif %}">
         Agrumes
       </a>
-      <a href="/collections/all-collection-theoriginea?filter.p.product_type=Botaniques"
-         class="boutique-filter-chip{% if current_type == 'Botaniques' %} boutique-filter-chip--active{% endif %}">
+      <a href="/collections/all-collection-theoriginea/botaniques"
+         class="boutique-filter-chip{% if active_tag == 'botaniques' %} boutique-filter-chip--active{% endif %}">
         Botaniques
       </a>
-      <a href="/collections/all-collection-theoriginea?filter.p.product_type=Herbes+%26+Fleurs"
-         class="boutique-filter-chip{% if current_type == 'Herbes & Fleurs' %} boutique-filter-chip--active{% endif %}">
+      <a href="/collections/all-collection-theoriginea/herbes-fleurs"
+         class="boutique-filter-chip{% if active_tag == 'herbes-fleurs' %} boutique-filter-chip--active{% endif %}">
         Herbes &amp; Fleurs
       </a>
-      <a href="/collections/all-collection-theoriginea?filter.p.product_type=Mariage"
-         class="boutique-filter-chip{% if current_type == 'Mariage' %} boutique-filter-chip--active{% endif %}">
+      <a href="/collections/all-collection-theoriginea/mariage"
+         class="boutique-filter-chip{% if active_tag == 'mariage' %} boutique-filter-chip--active{% endif %}">
         Mariage
       </a>
     </div>
