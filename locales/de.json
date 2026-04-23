@@ -288,6 +288,9 @@
     "originea_about": {
       "cta_label": "Unsere Geschichte"
     },
+    "breadcrumb": {
+      "home": "Startseite"
+    },
     "cart": {
       "title": "Dein Warenkorb",
       "caption": "Artikel im Warenkorb",

@@ -74,6 +74,16 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
+    {%- assign breadcrumb_collection = collection | default: product.collections.first -%}
+    <nav class="originea-breadcrumb">
+      <a href="/">{{ 'sections.breadcrumb.home' | t }}</a>
+      {%- if breadcrumb_collection -%}
+        <span class="originea-breadcrumb__sep">›</span>
+        <a href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title }}</a>
+      {%- endif -%}
+      <span class="originea-breadcrumb__sep">›</span>
+      <span class="originea-breadcrumb__current">{{ product.title }}</span>
+    </nav>
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}

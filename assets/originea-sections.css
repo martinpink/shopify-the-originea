@@ -1,4 +1,43 @@
 /* ═══════════════════════════════════════════════
+   Breadcrumb
+═══════════════════════════════════════════════ */
+.originea-breadcrumb {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: #7a7568;
+  margin-bottom: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(196,132,90,0.2);
+}
+
+.originea-breadcrumb a {
+  color: #C4845A;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.originea-breadcrumb a:hover {
+  opacity: 0.75;
+}
+
+.originea-breadcrumb__sep {
+  margin: 0 6px;
+  opacity: 0.5;
+}
+
+.originea-breadcrumb__current {
+  color: var(--color-foreground);
+  opacity: 0.6;
+}
+
+/* Policy pages: no border, more top space */
+.originea-breadcrumb--policy {
+  border-bottom: none;
+  margin-bottom: 24px;
+  padding-top: 0;
+}
+
+/* ═══════════════════════════════════════════════
    Nos Collections Page
 ═══════════════════════════════════════════════ */
 .nos-collections-page {

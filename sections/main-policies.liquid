@@ -95,8 +95,13 @@
   }
 </style>
 
-<section class="originea-policy color-inverse gradient">
+<section class="originea-policy color-{{ section.settings.color_scheme }} gradient">
   <div class="originea-policy__inner">
+    <nav class="originea-breadcrumb originea-breadcrumb--policy">
+      <a href="/">{{ 'sections.breadcrumb.home' | t }}</a>
+      <span class="originea-breadcrumb__sep">›</span>
+      <span class="originea-breadcrumb__current">{{ policy.title }}</span>
+    </nav>
     {{ policy.body }}
   </div>
 </section>

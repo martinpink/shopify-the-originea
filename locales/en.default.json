@@ -296,6 +296,9 @@
     "originea_about": {
       "cta_label": "Our Story"
     },
+    "breadcrumb": {
+      "home": "Home"
+    },
     "cart": {
       "title": "Your cart",
       "caption": "Cart items",
