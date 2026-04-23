@@ -43,6 +43,7 @@
             "name": "Collection Solare",
             "subtitle": "Agrumes & Chocolat Valrhona",
             "note": "Pièces uniques · Coffrets gastronomiques",
+            "boutique_tag": "solare",
             "link": "shopify://collections/notre-collection-originea"
           }
         },
@@ -53,6 +54,7 @@
             "name": "Agrumes Séchés",
             "subtitle": "6 variétés de Méditerranée",
             "note": "Menton · Corse · Japon · Provence",
+            "boutique_tag": "agrumes",
             "link": "shopify://collections/notre-collection-originea"
           }
         },
@@ -63,6 +65,7 @@
             "name": "Botaniques & Herbes",
             "subtitle": "Lavande, Rose, Verveine, Hibiscus",
             "note": "Infusions · Cocktails · Table",
+            "boutique_tag": "botaniques",
             "link": "shopify://collections/notre-collection-originea"
           }
         },
@@ -73,6 +76,7 @@
             "name": "Mariage & Décoration",
             "subtitle": "Confettis, Coffrets, Marque-places",
             "note": "Biodégradable · Sur mesure",
+            "boutique_tag": "mariage",
             "link": "shopify://collections/cotillons-mariage-fruits-seches-provence-the-originea"
           }
         }
