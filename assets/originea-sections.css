@@ -4,7 +4,7 @@
 .originea-breadcrumb {
   font-size: 12px;
   letter-spacing: 0.04em;
-  color: #7a7568;
+  color: #9e9a91;
   margin-bottom: 16px;
   padding: 8px 0;
   border-bottom: 1px solid rgba(196,132,90,0.2);
@@ -22,12 +22,12 @@
 
 .originea-breadcrumb__sep {
   margin: 0 6px;
-  opacity: 0.5;
+  opacity: 0.65;
 }
 
 .originea-breadcrumb__current {
   color: var(--color-foreground);
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 /* Policy pages: no border, more top space */
@@ -400,7 +400,7 @@
   font-size: 1.1rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(245, 245, 220, 0.4);
+  color: rgba(245, 245, 220, 0.65);
   margin-bottom: 3.2rem;
 }
 
@@ -537,7 +537,7 @@
   font-size: 0.9rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(245, 245, 220, 0.3);
+  color: rgba(245, 245, 220, 0.55);
   writing-mode: vertical-rl;
 }
 
@@ -586,7 +586,7 @@
   font-size: 1.1rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.55);
   padding: 7.2rem 4rem 4.8rem;
 }
 
@@ -621,7 +621,7 @@
   font-family: var(--font-body-family);
   font-size: 1.1rem;
   letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .originea-coll-list__name {
@@ -636,7 +636,7 @@
 .originea-coll-list__sub {
   font-family: var(--font-body-family);
   font-size: 1.4rem;
-  color: rgba(245, 245, 220, 0.4);
+  color: rgba(245, 245, 220, 0.65);
   letter-spacing: 0.08em;
 }
 
@@ -644,7 +644,7 @@
   font-family: var(--font-body-family);
   font-style: italic;
   font-size: 1.4rem;
-  color: rgba(245, 245, 220, 0.35);
+  color: rgba(245, 245, 220, 0.6);
   letter-spacing: 0.06em;
 }
 
@@ -728,7 +728,7 @@
   font-size: 1.1rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(245, 245, 220, 0.35);
+  color: rgba(245, 245, 220, 0.6);
   margin-bottom: 2.8rem;
 }
 
@@ -771,9 +771,9 @@
   font-family: var(--font-body-family);
   font-size: 1.1rem;
   letter-spacing: 0.1em;
-  border: 1px solid rgba(245, 245, 220, 0.18);
+  border: 1px solid rgba(245, 245, 220, 0.35);
   padding: 4px 12px;
-  color: rgba(245, 245, 220, 0.4);
+  color: rgba(245, 245, 220, 0.65);
   text-transform: uppercase;
 }
 
@@ -804,7 +804,7 @@
   font-size: 1.1rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(245, 245, 220, 0.5);
+  color: rgba(245, 245, 220, 0.75);
   margin-bottom: 4px;
 }
 
