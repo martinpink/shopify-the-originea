@@ -10,9 +10,9 @@
   box-shadow: none !important;
 }
 
-/* Center the media container and add padding for oval effect */
+/* Center the media container and add padding for portrait oval effect */
 .product-card-wrapper .card__inner {
-  padding: 10% 15% !important;
+  padding: 6% 22% !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
