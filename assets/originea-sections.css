@@ -2,7 +2,8 @@
    Header Logo
 ═══════════════════════════════════════════════ */
 .header__heading-logo {
-  filter: brightness(1.8);
+  /* Invert dark-brown logo to warm white/cream for dark header background */
+  filter: brightness(0) invert(1) sepia(0.25);
 }
 
 /* ═══════════════════════════════════════════════
