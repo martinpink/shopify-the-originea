@@ -3,6 +3,22 @@
 
 <section class="originea-hero">
 
+  {% comment %} Full-screen background video {% endcomment %}
+  <video
+    class="originea-hero__video-bg"
+    autoplay
+    muted
+    loop
+    playsinline
+    aria-hidden="true"
+    preload="auto"
+  >
+    <source src="{{ 'originea-hero-bg.mp4' | asset_url }}" type="video/mp4">
+  </video>
+
+  {% comment %} Dark overlay so text stays legible over video {% endcomment %}
+  <div class="originea-hero__video-overlay" aria-hidden="true"></div>
+
   {% comment %} Warm radial glow overlay {% endcomment %}
   <div class="originea-hero__glow" aria-hidden="true"></div>
 
