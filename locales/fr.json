@@ -554,5 +554,13 @@
       "expanded": "Formulaire de destinataire de carte-cadeau agrandi",
       "collapsed": "Formulaire de destinataire de carte-cadeau réduit"
     }
+  },
+  "product_tabs": {
+    "materials": "Ingrédients",
+    "shipping": "Livraison & Retours",
+    "care": "Conservation",
+    "materials_content": "<p>100% fruits naturels. Sans additifs, sans conservateurs, sans sucre ajouté. Déshydratés artisanalement à basse température en Provence.</p>",
+    "shipping_content": "<p><strong>Livraison :</strong> France 2–4 jours ouvrés (offerte dès 35€). Europe 3–6 jours ouvrés. Expédition sous 24h.</p><p><strong>Retours :</strong> En tant que produits alimentaires, les retours ne sont pas acceptés sauf en cas de dommage ou d'erreur de commande. Contactez-nous dans les 48h suivant la réception à hello@theoriginea.com.</p>",
+    "care_content": "<p><strong>Conservation :</strong> Conserver dans un endroit frais et sec, à l'abri de la lumière directe. Refermer soigneusement après chaque utilisation. DLUO : 12 mois.</p>"
   }
 }

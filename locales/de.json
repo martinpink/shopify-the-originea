@@ -1111,5 +1111,13 @@
         }
       }
     }
+  },
+  "product_tabs": {
+    "materials": "Zutaten",
+    "shipping": "Versand & Rückgabe",
+    "care": "Lagerung",
+    "materials_content": "<p>100% natürliche Früchte. Ohne Zusatzstoffe, ohne Konservierungsmittel, ohne Zuckerzusatz. Handwerklich bei niedriger Temperatur in der Provence getrocknet.</p>",
+    "shipping_content": "<p><strong>Lieferung:</strong> Frankreich 2–4 Werktage (kostenlos ab 35€). Europa 3–6 Werktage. Versand innerhalb von 24h.</p><p><strong>Rückgabe:</strong> Als Lebensmittel sind Rückgaben nicht möglich, außer bei Beschädigung oder Falschlieferung. Bitte kontaktieren Sie uns innerhalb von 48h nach Erhalt unter hello@theoriginea.com.</p>",
+    "care_content": "<p><strong>Lagerung:</strong> Kühl und trocken lagern, vor direktem Licht schützen. Nach jeder Verwendung sorgfältig verschließen. MHD: 12 Monate.</p>"
   }
 }

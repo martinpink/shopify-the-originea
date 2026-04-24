@@ -220,19 +220,34 @@
               {%- when 'custom_liquid' -%}
                 {{ block.settings.custom_liquid }}
               {%- when 'collapsible_tab' -%}
+                {%- comment -%} Resolve heading and content from locale if it's a known tab key {%- endcomment -%}
+                {%- assign raw_heading = block.settings.heading -%}
+                {%- if raw_heading == 'Materials' -%}
+                  {%- assign tab_heading = 'product_tabs.materials' | t -%}
+                  {%- assign tab_content = 'product_tabs.materials_content' | t -%}
+                {%- elsif raw_heading == 'Shipping & Returns' -%}
+                  {%- assign tab_heading = 'product_tabs.shipping' | t -%}
+                  {%- assign tab_content = 'product_tabs.shipping_content' | t -%}
+                {%- elsif raw_heading == 'Care Instructions' -%}
+                  {%- assign tab_heading = 'product_tabs.care' | t -%}
+                  {%- assign tab_content = 'product_tabs.care_content' | t -%}
+                {%- else -%}
+                  {%- assign tab_heading = raw_heading | default: block.settings.page.title -%}
+                  {%- assign tab_content = block.settings.content -%}
+                {%- endif -%}
                 <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
                   <details id="Details-{{ block.id }}-{{ section.id }}">
                     <summary>
                       <div class="summary__title">
                         {% render 'icon-accordion', icon: block.settings.icon %}
                         <h2 class="h4 accordion__title inline-richtext">
-                          {{ block.settings.heading | default: block.settings.page.title | escape }}
+                          {{ tab_heading | escape }}
                         </h2>
                       </div>
                       {{- 'icon-caret.svg' | inline_asset_content -}}
                     </summary>
                     <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
-                      {{ block.settings.content }}
+                      {{ tab_content }}
                       {{ block.settings.page.content }}
                     </div>
                   </details>
