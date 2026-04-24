@@ -220,20 +220,16 @@
               {%- when 'custom_liquid' -%}
                 {{ block.settings.custom_liquid }}
               {%- when 'collapsible_tab' -%}
-                {%- comment -%} Resolve heading and content from locale if it's a known tab key {%- endcomment -%}
+                {%- comment -%} Resolve heading from locale for known tabs; content output directly to preserve HTML-safe rendering {%- endcomment -%}
                 {%- assign raw_heading = block.settings.heading -%}
                 {%- if raw_heading == 'Materials' -%}
                   {%- assign tab_heading = 'product_tabs.materials' | t -%}
-                  {%- assign tab_content = 'product_tabs.materials_content_html' | t -%}
                 {%- elsif raw_heading == 'Shipping & Returns' -%}
                   {%- assign tab_heading = 'product_tabs.shipping' | t -%}
-                  {%- assign tab_content = 'product_tabs.shipping_content_html' | t -%}
                 {%- elsif raw_heading == 'Care Instructions' -%}
                   {%- assign tab_heading = 'product_tabs.care' | t -%}
-                  {%- assign tab_content = 'product_tabs.care_content_html' | t -%}
                 {%- else -%}
                   {%- assign tab_heading = raw_heading | default: block.settings.page.title -%}
-                  {%- assign tab_content = block.settings.content -%}
                 {%- endif -%}
                 <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
                   <details id="Details-{{ block.id }}-{{ section.id }}">
@@ -247,7 +243,15 @@
                       {{- 'icon-caret.svg' | inline_asset_content -}}
                     </summary>
                     <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
-                      {{ tab_content }}
+                      {%- if raw_heading == 'Materials' -%}
+                        {{ 'product_tabs.materials_content_html' | t }}
+                      {%- elsif raw_heading == 'Shipping & Returns' -%}
+                        {{ 'product_tabs.shipping_content_html' | t }}
+                      {%- elsif raw_heading == 'Care Instructions' -%}
+                        {{ 'product_tabs.care_content_html' | t }}
+                      {%- else -%}
+                        {{ block.settings.content }}
+                      {%- endif -%}
                       {{ block.settings.page.content }}
                     </div>
                   </details>
