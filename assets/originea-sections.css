@@ -10,24 +10,30 @@
   box-shadow: none !important;
 }
 
-/* Center the media container and add padding for portrait oval effect */
+/* Keep card__inner as ratio container — no extra padding */
 .product-card-wrapper .card__inner {
-  padding: 6% 22% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  padding: 0 !important;
 }
 
-/* Oval image container */
+/* Portrait oval: narrow left/right, full height → taller than wide */
 .product-card-wrapper .card__media {
+  position: absolute !important;
+  top: 4% !important;
+  bottom: 4% !important;
+  left: 18% !important;
+  right: 18% !important;
+  width: auto !important;
+  height: auto !important;
   border-radius: 50% !important;
   overflow: hidden !important;
-  width: 100% !important;
   box-shadow: 0 0 0 1.5px rgba(196, 132, 90, 0.35) !important;
 }
 
 /* Make the image fill the oval cleanly */
+.product-card-wrapper .card__media .media,
 .product-card-wrapper .card__media .media img {
+  width: 100% !important;
+  height: 100% !important;
   border-radius: 50% !important;
   object-fit: cover !important;
 }
