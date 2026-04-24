@@ -414,15 +414,23 @@
   pointer-events: none;
 }
 
-/* Content container: right half of the hero */
+/* Content container: centered at bottom, buttons only */
 .originea-hero__content {
   position: absolute;
   z-index: 1;
+  left: 0;
   right: 0;
   bottom: 0;
-  width: 50%;
-  padding: 0 5vw 8rem 2rem;
-  text-align: right;
+  width: 100%;
+  padding: 0 2rem 8rem;
+  text-align: center;
+}
+
+/* Hide text — show only CTAs */
+.originea-hero__eyebrow,
+.originea-hero__headline,
+.originea-hero__body > .originea-hero__tagline {
+  display: none;
 }
 
 .originea-hero__eyebrow {
@@ -482,6 +490,7 @@
   color: rgba(245, 245, 220, 0.6);
   max-width: 380px;
   margin-left: auto;
+  margin-right: auto;
   letter-spacing: 0.04em;
   font-style: italic;
   margin-bottom: 2.8rem;
@@ -491,7 +500,7 @@
   display: flex;
   gap: 1.2rem;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 /* Shared button base */
@@ -511,29 +520,30 @@
 }
 
 .originea-btn--cream {
-  background: #C4845A;
-  color: #ffffff;
+  background: #151605;
+  color: #f5f5dc;
   padding: 0 3.6rem;
   font-weight: 500;
+  border: 1.5px solid #151605;
 }
 
 .originea-btn--cream:hover {
-  opacity: 0.88;
-  color: #ffffff;
+  background: #2d2e1a;
+  color: #f5f5dc;
   text-decoration: none;
 }
 
 .originea-btn--ghost {
-  background: rgba(255,255,255,0.1);
+  background: rgba(21, 22, 5, 0.75);
   color: #f5f5dc;
-  border: 1.5px solid rgba(245, 245, 220, 0.7);
+  border: 1.5px solid #151605;
   padding: 0 3.2rem;
   backdrop-filter: blur(4px);
 }
 
 .originea-btn--ghost:hover {
-  background: rgba(255,255,255,0.18);
-  border-color: #f5f5dc;
+  background: rgba(21, 22, 5, 0.9);
+  border-color: #151605;
   color: #f5f5dc;
   text-decoration: none;
 }
@@ -928,18 +938,11 @@
 
 @media screen and (max-width: 749px) {
   .originea-hero__content {
-    position: relative;
-    width: 100%;
-    text-align: left;
-    padding: 0 2rem 6rem;
-  }
-
-  .originea-hero__tagline {
-    margin-left: 0;
+    padding-bottom: 6rem;
   }
 
   .originea-hero__ctas {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .originea-hero__bottom-bar {
