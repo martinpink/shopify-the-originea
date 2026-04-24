@@ -1,4 +1,4 @@
-<style>
+{%- style -%}
 #id-{{ section.id }}.marquee-text-wrapper {
   --space: 2rem;
   display: grid;
@@ -61,7 +61,7 @@
 }
 
 
-</style>
+{%- endstyle -%}
 <section class="marquee-text-wrapper" id=id-{{ section.id }}>
 <div class="marquee marquee--borders {{ section.settings.scroll_text_move }}" style="--duration: {{ section.settings.scroll_time }}s">
   <div class="marquee__group">

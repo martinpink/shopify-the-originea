@@ -14,7 +14,7 @@
 
 <script src="{{ 'main-search.js' | asset_url }}" defer="defer"></script>
 
-<style>
+{%- style -%}
   .template-search__header {
     margin-bottom: 3rem;
   }
@@ -41,7 +41,7 @@
   .search__button .icon {
     height: 1.8rem;
   }
-</style>
+{%- endstyle -%}
 
 {%- liquid
   assign sort_by = search.sort_by | default: search.default_sort_by
