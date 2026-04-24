@@ -506,26 +506,29 @@
 }
 
 .originea-btn--cream {
-  background: #f5f5dc;
-  color: #151605;
+  background: #C4845A;
+  color: #ffffff;
   padding: 0 3.6rem;
+  font-weight: 500;
 }
 
 .originea-btn--cream:hover {
   opacity: 0.88;
-  color: #151605;
+  color: #ffffff;
   text-decoration: none;
 }
 
 .originea-btn--ghost {
-  background: transparent;
-  color: rgba(245, 245, 220, 0.8);
-  border: 1px solid rgba(245, 245, 220, 0.25);
+  background: rgba(255,255,255,0.1);
+  color: #f5f5dc;
+  border: 1.5px solid rgba(245, 245, 220, 0.7);
   padding: 0 3.2rem;
+  backdrop-filter: blur(4px);
 }
 
 .originea-btn--ghost:hover {
-  border-color: rgba(245, 245, 220, 0.5);
+  background: rgba(255,255,255,0.18);
+  border-color: #f5f5dc;
   color: #f5f5dc;
   text-decoration: none;
 }
