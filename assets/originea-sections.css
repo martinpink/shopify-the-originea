@@ -15,30 +15,32 @@
   padding: 0 !important;
 }
 
-/* Portrait oval: narrow left/right, full height → taller than wide */
+/* Blob shape: irregular organic clip-path — alternates per position */
 .product-card-wrapper .card__media {
   position: absolute !important;
-  top: 4% !important;
-  bottom: 4% !important;
-  left: 12% !important;
-  right: 12% !important;
+  inset: 0 !important;
   width: auto !important;
   height: auto !important;
-  border-radius: 50% !important;
+  clip-path: polygon(var(--shape--blob-1)) !important;
+  border-radius: 0 !important;
   overflow: hidden !important;
-  box-shadow: 0 0 0 1.5px rgba(196, 132, 90, 0.35) !important;
 }
 
-/* Make the image fill the oval cleanly */
-.product-card-wrapper .card__media .media,
-.product-card-wrapper .card__media .media img {
-  width: 100% !important;
-  height: 100% !important;
-  border-radius: 50% !important;
-  object-fit: cover !important;
+/* Alternate blob shapes per card position for organic variety */
+.grid__item:nth-child(2n) .product-card-wrapper .card__media {
+  clip-path: polygon(var(--shape--blob-2)) !important;
+}
+.grid__item:nth-child(3n) .product-card-wrapper .card__media {
+  clip-path: polygon(var(--shape--blob-3)) !important;
+}
+.grid__item:nth-child(4n) .product-card-wrapper .card__media {
+  clip-path: polygon(var(--shape--blob-4)) !important;
+}
+.grid__item:nth-child(5n) .product-card-wrapper .card__media {
+  clip-path: polygon(var(--shape--blob-5)) !important;
 }
 
-/* Remove card hover border/outline that clashes with oval */
+/* Remove card hover border/outline */
 .product-card-wrapper:hover .card__inner {
   box-shadow: none !important;
   outline: none !important;
