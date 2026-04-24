@@ -3,7 +3,7 @@
 ═══════════════════════════════════════════════ */
 .header__heading-logo {
   /* Invert dark-brown logo to warm white/cream for dark header background */
-  filter: brightness(0) invert(1) sepia(0.25);
+  filter: brightness(0) invert(1) sepia(0.6);
 }
 
 /* ═══════════════════════════════════════════════
