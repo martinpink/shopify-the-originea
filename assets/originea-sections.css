@@ -1,4 +1,44 @@
 /* ═══════════════════════════════════════════════
+   Oval Product Card Design
+═══════════════════════════════════════════════ */
+
+/* Cream card background */
+.product-card-wrapper .card__inner,
+.product-card-wrapper .card {
+  background-color: #f4ede4 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Center the media container and add padding for oval effect */
+.product-card-wrapper .card__inner {
+  padding: 10% 15% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Oval image container */
+.product-card-wrapper .card__media {
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  width: 100% !important;
+  box-shadow: 0 0 0 1.5px rgba(196, 132, 90, 0.35) !important;
+}
+
+/* Make the image fill the oval cleanly */
+.product-card-wrapper .card__media .media img {
+  border-radius: 50% !important;
+  object-fit: cover !important;
+}
+
+/* Remove card hover border/outline that clashes with oval */
+.product-card-wrapper:hover .card__inner {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* ═══════════════════════════════════════════════
    Header Logo
 ═══════════════════════════════════════════════ */
 .header__heading-logo {
