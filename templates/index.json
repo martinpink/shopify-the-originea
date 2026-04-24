@@ -108,7 +108,7 @@
         "view_all_style": "link",
         "color_scheme": "scheme-1",
         "image_ratio": "portrait",
-        "image_shape": "default",
+        "image_shape": "blob",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": true,
