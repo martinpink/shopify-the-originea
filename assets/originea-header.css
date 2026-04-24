@@ -37,7 +37,7 @@
 .header__inline-menu .list-menu__item--link,
 .header__inline-menu a.list-menu__item {
   font-family: var(--font-body-family) !important;
-  font-size: 1.1rem !important;
+  font-size: 1.35rem !important;
   font-weight: 400 !important;
   letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
