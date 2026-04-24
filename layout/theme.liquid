@@ -16,10 +16,12 @@
     {%- endunless -%}
 
     <title>
-      {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- assign title_lower = page_title | downcase -%}
+      {%- if current_tags %}{{ page_title }} &ndash; tagged "{{ current_tags | join: ', ' }}"
+      {%- elsif current_page != 1 %}{{ page_title }} &ndash; Page {{ current_page }}
+      {%- elsif title_lower contains 'originea' %}{{ page_title }}
+      {%- else %}{{ page_title }} &ndash; {{ shop.name }}
+      {%- endif -%}
     </title>
 
     {% if page_description %}
