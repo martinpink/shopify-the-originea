@@ -414,12 +414,15 @@
   pointer-events: none;
 }
 
-/* Content container, sits at bottom-left */
+/* Content container: right half of the hero */
 .originea-hero__content {
-  position: relative;
+  position: absolute;
   z-index: 1;
-  padding-bottom: 8rem;
-  padding-top: 12rem;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  padding: 0 5vw 8rem 2rem;
+  text-align: right;
 }
 
 .originea-hero__eyebrow {
@@ -478,6 +481,7 @@
   line-height: 1.65;
   color: rgba(245, 245, 220, 0.6);
   max-width: 380px;
+  margin-left: auto;
   letter-spacing: 0.04em;
   font-style: italic;
   margin-bottom: 2.8rem;
@@ -487,6 +491,7 @@
   display: flex;
   gap: 1.2rem;
   flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 /* Shared button base */
@@ -923,8 +928,18 @@
 
 @media screen and (max-width: 749px) {
   .originea-hero__content {
-    padding-bottom: 6rem;
-    padding-top: 10rem;
+    position: relative;
+    width: 100%;
+    text-align: left;
+    padding: 0 2rem 6rem;
+  }
+
+  .originea-hero__tagline {
+    margin-left: 0;
+  }
+
+  .originea-hero__ctas {
+    justify-content: flex-start;
   }
 
   .originea-hero__bottom-bar {
