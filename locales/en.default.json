@@ -1114,8 +1114,8 @@
     "materials": "Materials",
     "shipping": "Shipping & Returns",
     "care": "Care & Storage",
-    "materials_content": "<p>100% natural fruits. No additives, no preservatives, no added sugar. Artisanally dehydrated at low temperature in Provence.</p>",
-    "shipping_content": "<p><strong>Delivery:</strong> France 2–4 business days (free from €35). Europe 3–6 business days. Orders dispatched within 24h.</p><p><strong>Returns:</strong> As food products, returns are not accepted unless the item is damaged or incorrect. Please contact us within 48h of receipt at hello@theoriginea.com.</p>",
-    "care_content": "<p><strong>Storage:</strong> Keep in a cool, dry place, away from direct light. Seal carefully after each use. Best before: 12 months.</p>"
+    "materials_content_html": "100% natural fruits. No additives, no preservatives, no added sugar. Artisanally dehydrated at low temperature in Provence.",
+    "shipping_content_html": "<strong>Delivery:</strong> France 2–4 business days (free from €35). Europe 3–6 business days. Orders dispatched within 24h.<br><br>For any question about your order, contact us at <a href='mailto:hello@theoriginea.com'>hello@theoriginea.com</a>.",
+    "care_content_html": "Keep in a cool, dry place, away from direct light. Seal carefully after each use. Best before: 12 months."
   }
 }

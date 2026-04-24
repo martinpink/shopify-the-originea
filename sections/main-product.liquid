@@ -224,13 +224,13 @@
                 {%- assign raw_heading = block.settings.heading -%}
                 {%- if raw_heading == 'Materials' -%}
                   {%- assign tab_heading = 'product_tabs.materials' | t -%}
-                  {%- assign tab_content = 'product_tabs.materials_content' | t -%}
+                  {%- assign tab_content = 'product_tabs.materials_content_html' | t -%}
                 {%- elsif raw_heading == 'Shipping & Returns' -%}
                   {%- assign tab_heading = 'product_tabs.shipping' | t -%}
-                  {%- assign tab_content = 'product_tabs.shipping_content' | t -%}
+                  {%- assign tab_content = 'product_tabs.shipping_content_html' | t -%}
                 {%- elsif raw_heading == 'Care Instructions' -%}
                   {%- assign tab_heading = 'product_tabs.care' | t -%}
-                  {%- assign tab_content = 'product_tabs.care_content' | t -%}
+                  {%- assign tab_content = 'product_tabs.care_content_html' | t -%}
                 {%- else -%}
                   {%- assign tab_heading = raw_heading | default: block.settings.page.title -%}
                   {%- assign tab_content = block.settings.content -%}
@@ -241,7 +241,7 @@
                       <div class="summary__title">
                         {% render 'icon-accordion', icon: block.settings.icon %}
                         <h2 class="h4 accordion__title inline-richtext">
-                          {{ tab_heading | escape }}
+                          {{ tab_heading }}
                         </h2>
                       </div>
                       {{- 'icon-caret.svg' | inline_asset_content -}}
