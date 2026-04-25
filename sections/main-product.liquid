@@ -220,16 +220,39 @@
               {%- when 'custom_liquid' -%}
                 {{ block.settings.custom_liquid }}
               {%- when 'collapsible_tab' -%}
-                {%- comment -%} Resolve heading from locale for known tabs; content output directly to preserve HTML-safe rendering {%- endcomment -%}
+                {%- comment -%} Resolve heading and content per language using localization to avoid _html key issues in auto-generated locale files {%- endcomment -%}
                 {%- assign raw_heading = block.settings.heading -%}
+                {%- assign lang = localization.language.iso_code -%}
                 {%- if raw_heading == 'Materials' -%}
                   {%- assign tab_heading = 'product_tabs.materials' | t -%}
+                  {%- if lang == 'fr' -%}
+                    {%- assign tab_content = '100% fruits naturels. Sans additifs, sans conservateurs, sans sucre ajouté. Déshydratés artisanalement à basse température en Provence.' -%}
+                  {%- elsif lang == 'de' -%}
+                    {%- assign tab_content = '100% natürliche Früchte. Ohne Zusatzstoffe, ohne Konservierungsmittel, ohne Zuckerzusatz. Handwerklich bei niedriger Temperatur in der Provence getrocknet.' -%}
+                  {%- else -%}
+                    {%- assign tab_content = '100% natural fruits. No additives, no preservatives, no added sugar. Artisanally dehydrated at low temperature in Provence.' -%}
+                  {%- endif -%}
                 {%- elsif raw_heading == 'Shipping & Returns' -%}
                   {%- assign tab_heading = 'product_tabs.shipping' | t -%}
+                  {%- if lang == 'fr' -%}
+                    {%- assign tab_content = '<strong>Livraison :</strong> France 2–4 jours ouvrés (offerte dès 35€). Europe 3–6 jours ouvrés. Expédition sous 24h.<br><br>Pour toute question, contactez-nous à <a href="mailto:support@theoriginea.com">support@theoriginea.com</a>.' -%}
+                  {%- elsif lang == 'de' -%}
+                    {%- assign tab_content = '<strong>Lieferung:</strong> Frankreich 2–4 Werktage (kostenlos ab 35€). Europa 3–6 Werktage. Versand innerhalb von 24h.<br><br>Bei Fragen kontaktieren Sie uns unter <a href="mailto:support@theoriginea.com">support@theoriginea.com</a>.' -%}
+                  {%- else -%}
+                    {%- assign tab_content = '<strong>Delivery:</strong> France 2–4 business days (free from €35). Europe 3–6 business days. Orders dispatched within 24h.<br><br>For any question, contact us at <a href="mailto:support@theoriginea.com">support@theoriginea.com</a>.' -%}
+                  {%- endif -%}
                 {%- elsif raw_heading == 'Care Instructions' -%}
                   {%- assign tab_heading = 'product_tabs.care' | t -%}
+                  {%- if lang == 'fr' -%}
+                    {%- assign tab_content = 'Conserver dans un endroit frais et sec, à l\'abri de la lumière directe. Refermer soigneusement après chaque utilisation. DLUO : 12 mois.' -%}
+                  {%- elsif lang == 'de' -%}
+                    {%- assign tab_content = 'Kühl und trocken lagern, vor direktem Licht schützen. Nach jeder Verwendung sorgfältig verschließen. MHD: 12 Monate.' -%}
+                  {%- else -%}
+                    {%- assign tab_content = 'Keep in a cool, dry place, away from direct light. Seal carefully after each use. Best before: 12 months.' -%}
+                  {%- endif -%}
                 {%- else -%}
                   {%- assign tab_heading = raw_heading | default: block.settings.page.title -%}
+                  {%- assign tab_content = block.settings.content -%}
                 {%- endif -%}
                 <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
                   <details id="Details-{{ block.id }}-{{ section.id }}">
@@ -243,15 +266,7 @@
                       {{- 'icon-caret.svg' | inline_asset_content -}}
                     </summary>
                     <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
-                      {%- if raw_heading == 'Materials' -%}
-                        {{ 'product_tabs.materials_content_html' | t }}
-                      {%- elsif raw_heading == 'Shipping & Returns' -%}
-                        {{ 'product_tabs.shipping_content_html' | t }}
-                      {%- elsif raw_heading == 'Care Instructions' -%}
-                        {{ 'product_tabs.care_content_html' | t }}
-                      {%- else -%}
-                        {{ block.settings.content }}
-                      {%- endif -%}
+                      {{ tab_content }}
                       {{ block.settings.page.content }}
                     </div>
                   </details>
