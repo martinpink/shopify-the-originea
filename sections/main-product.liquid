@@ -223,10 +223,24 @@
                 {%- comment -%} Multilingual tab headings and content — output directly to avoid Liquid variable escaping issues {%- endcomment -%}
                 {%- assign raw_heading = block.settings.heading -%}
                 {%- assign lang = localization.language.iso_code -%}
+                {%- comment -%} Headings per language — no locale file dependency {%- endcomment -%}
                 {%- assign tab_heading = raw_heading | default: block.settings.page.title -%}
-                {%- if raw_heading == 'Materials' -%}{%- assign tab_heading = 'product_tabs.materials' | t -%}{%- endif -%}
-                {%- if raw_heading == 'Shipping & Returns' -%}{%- assign tab_heading = 'product_tabs.shipping' | t -%}{%- endif -%}
-                {%- if raw_heading == 'Care Instructions' -%}{%- assign tab_heading = 'product_tabs.care' | t -%}{%- endif -%}
+                {%- if raw_heading == 'Materials' -%}
+                  {%- if lang == 'fr' -%}{%- assign tab_heading = 'Ingrédients' -%}
+                  {%- elsif lang == 'de' -%}{%- assign tab_heading = 'Zutaten' -%}
+                  {%- else -%}{%- assign tab_heading = 'Materials' -%}
+                  {%- endif -%}
+                {%- elsif raw_heading == 'Shipping & Returns' -%}
+                  {%- if lang == 'fr' -%}{%- assign tab_heading = 'Livraison & Retours' -%}
+                  {%- elsif lang == 'de' -%}{%- assign tab_heading = 'Versand & Rückgabe' -%}
+                  {%- else -%}{%- assign tab_heading = 'Shipping & Returns' -%}
+                  {%- endif -%}
+                {%- elsif raw_heading == 'Care Instructions' -%}
+                  {%- if lang == 'fr' -%}{%- assign tab_heading = 'Conservation' -%}
+                  {%- elsif lang == 'de' -%}{%- assign tab_heading = 'Lagerung' -%}
+                  {%- else -%}{%- assign tab_heading = 'Care & Storage' -%}
+                  {%- endif -%}
+                {%- endif -%}
                 <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
                   <details id="Details-{{ block.id }}-{{ section.id }}">
                     <summary>
