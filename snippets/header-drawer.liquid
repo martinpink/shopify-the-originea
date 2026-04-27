@@ -17,26 +17,21 @@
       </span>
     </summary>
     <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
-      {%- comment -%} Language selector at top of mobile drawer — always visible, no dropdown needed {%- endcomment -%}
+      {%- comment -%} Language selector at top of mobile drawer — one form per language, no web component needed {%- endcomment -%}
       {%- if localization.available_languages and localization.available_languages.size > 1 -%}
         <div class="menu-drawer__mobile-lang">
-          <localization-form>
-            {%- form 'localization', id: 'MobileDrawerTopLangForm', class: 'localization-form' -%}
-              <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
-              {%- for language in localization.available_languages -%}
-                <a
-                  href="#"
-                  class="menu-drawer__mobile-lang-link{% if language.iso_code == localization.language.iso_code %} active{% endif %}"
-                  hreflang="{{ language.iso_code }}"
-                  lang="{{ language.iso_code }}"
-                  data-value="{{ language.iso_code }}"
-                  {% if language.iso_code == localization.language.iso_code %}aria-current="true"{% endif %}
-                >
-                  {{ language.endonym_name | capitalize }}
-                </a>
-              {%- endfor -%}
+          {%- for language in localization.available_languages -%}
+            {%- form 'localization', id: 'MobileLangForm-{{ language.iso_code }}' -%}
+              <input type="hidden" name="locale_code" value="{{ language.iso_code }}">
+              <button
+                type="submit"
+                class="menu-drawer__mobile-lang-link{% if language.iso_code == localization.language.iso_code %} active{% endif %}"
+                {% if language.iso_code == localization.language.iso_code %}aria-current="true"{% endif %}
+              >
+                {{ language.endonym_name | capitalize }}
+              </button>
             {%- endform -%}
-          </localization-form>
+          {%- endfor -%}
         </div>
       {%- endif -%}
       <div class="menu-drawer__inner-container">
