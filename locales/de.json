@@ -292,7 +292,7 @@
         "other": "{{ count }} Artikel",
         "many": "{{ count }} Artikel"
       },
-      "nav_boutique": "SHOP",
+      "nav_boutique": "Produkte",
       "nav_collections": "UNSERE KOLLEKTIONEN",
       "nav_histoire": "UNSERE GESCHICHTE"
     },
