@@ -802,6 +802,35 @@
     <script type="application/ld+json">
       {{ product | structured_data }}
     </script>
+
+    <script>
+      /* Scroll to Judge.me reviews when stars are clicked — tries all known selectors */
+      document.addEventListener('DOMContentLoaded', function() {
+        var starsLink = document.querySelector('.originea-stars-link');
+        if (!starsLink) return;
+
+        starsLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          /* Judge.me uses different containers depending on install method */
+          var selectors = [
+            '#jdgm-widget',
+            '#judgeme_product_reviews',
+            '.jdgm-widget',
+            '.jdgm-rev-widg',
+            '[data-id="jdgm-widget"]',
+            '.shopify-app-block'
+          ];
+          var target = null;
+          for (var i = 0; i < selectors.length; i++) {
+            target = document.querySelector(selectors[i]);
+            if (target) break;
+          }
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    </script>
   </div>
 </product-info>
 
