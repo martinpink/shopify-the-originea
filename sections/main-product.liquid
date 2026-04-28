@@ -566,26 +566,29 @@
                   endif
                 -%}
                 {%- if p_display_rating != nil -%}
-                  <div class="originea-stars originea-stars--product" aria-label="{{ p_display_rating | round: 1 }} out of 5 stars">
-                    {%- assign p_full  = p_display_rating | floor -%}
-                    {%- assign p_half  = false -%}
-                    {%- assign p_dec   = p_display_rating | modulo: 1 -%}
-                    {%- if p_dec >= 0.3 and p_dec < 0.8 -%}{%- assign p_half = true -%}{%- endif -%}
-                    {%- if p_dec >= 0.8 -%}{%- assign p_full = p_full | plus: 1 -%}{%- endif -%}
-                    {%- assign p_half_pos = p_full | plus: 1 -%}
-                    {%- for i in (1..5) -%}
-                      {%- if i <= p_full -%}
-                        <span class="originea-star originea-star--full" aria-hidden="true">★</span>
-                      {%- elsif p_half and i == p_half_pos -%}
-                        <span class="originea-star originea-star--half" aria-hidden="true">★</span>
-                      {%- else -%}
-                        <span class="originea-star originea-star--empty" aria-hidden="true">★</span>
+                  {%- comment -%} Link scrolls to Judge.me review widget on click {%- endcomment -%}
+                  <a href="#jdgm-widget" class="originea-stars-link" aria-label="Voir les avis clients">
+                    <div class="originea-stars originea-stars--product" aria-label="{{ p_display_rating | round: 1 }} out of 5 stars">
+                      {%- assign p_full  = p_display_rating | floor -%}
+                      {%- assign p_half  = false -%}
+                      {%- assign p_dec   = p_display_rating | modulo: 1 -%}
+                      {%- if p_dec >= 0.3 and p_dec < 0.8 -%}{%- assign p_half = true -%}{%- endif -%}
+                      {%- if p_dec >= 0.8 -%}{%- assign p_full = p_full | plus: 1 -%}{%- endif -%}
+                      {%- assign p_half_pos = p_full | plus: 1 -%}
+                      {%- for i in (1..5) -%}
+                        {%- if i <= p_full -%}
+                          <span class="originea-star originea-star--full" aria-hidden="true">★</span>
+                        {%- elsif p_half and i == p_half_pos -%}
+                          <span class="originea-star originea-star--half" aria-hidden="true">★</span>
+                        {%- else -%}
+                          <span class="originea-star originea-star--empty" aria-hidden="true">★</span>
+                        {%- endif -%}
+                      {%- endfor -%}
+                      {%- if p_display_count != blank and p_display_count != '0' and p_display_count != 0 -%}
+                        <span class="originea-star-count">({{ p_display_count }})</span>
                       {%- endif -%}
-                    {%- endfor -%}
-                    {%- if p_display_count != blank and p_display_count != '0' and p_display_count != 0 -%}
-                      <span class="originea-star-count">({{ p_display_count }})</span>
-                    {%- endif -%}
-                  </div>
+                    </div>
+                  </a>
                 {%- endif -%}
               {%- when 'complementary' -%}
                 <product-recommendations

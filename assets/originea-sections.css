@@ -310,6 +310,18 @@
 }
 
 /* ── Star ratings (Liquid-rendered from Judge.me / reviews metafields) ─ */
+/* Smooth scroll for all anchor links (e.g. stars → reviews) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Stars link — scrolls to reviews section on click */
+.originea-stars-link {
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .originea-stars {
   display: flex;
   align-items: center;
