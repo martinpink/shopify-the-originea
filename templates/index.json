@@ -36,21 +36,10 @@
     "originea-collections-list": {
       "type": "originea-collections-list",
       "blocks": {
-        "coll-row-1": {
-          "type": "collection_row",
-          "settings": {
-            "number": "01",
-            "name": "Collection Solare",
-            "subtitle": "Agrumes & Chocolat Valrhona",
-            "note": "Pièces uniques · Coffrets gastronomiques",
-            "boutique_tag": "solare",
-            "link": "shopify://collections/notre-collection-originea"
-          }
-        },
         "coll-row-2": {
           "type": "collection_row",
           "settings": {
-            "number": "02",
+            "number": "01",
             "name": "Agrumes Séchés",
             "subtitle": "6 variétés de Méditerranée",
             "note": "Menton · Corse · Japon · Provence",
@@ -61,7 +50,7 @@
         "coll-row-3": {
           "type": "collection_row",
           "settings": {
-            "number": "03",
+            "number": "02",
             "name": "Botaniques & Herbes",
             "subtitle": "Lavande, Rose, Verveine, Hibiscus",
             "note": "Infusions · Cocktails · Table",
@@ -72,7 +61,7 @@
         "coll-row-4": {
           "type": "collection_row",
           "settings": {
-            "number": "04",
+            "number": "03",
             "name": "Mariage & Décoration",
             "subtitle": "Confettis, Coffrets, Marque-places",
             "note": "Biodégradable · Sur mesure",
@@ -82,7 +71,6 @@
         }
       },
       "block_order": [
-        "coll-row-1",
         "coll-row-2",
         "coll-row-3",
         "coll-row-4"
