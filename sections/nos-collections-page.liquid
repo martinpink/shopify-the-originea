@@ -1,4 +1,5 @@
 {{ 'originea-sections.css' | asset_url | stylesheet_tag }}
+{{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
 
 <div class="nos-collections-page color-{{ section.settings.color_scheme }}">
   <div class="page-width">
@@ -12,7 +13,7 @@
       {%- for collection in collections -%}
         {%- unless collection.handle == 'all' or collection.handle == 'all-collection-theoriginea' or collection.all_products_count == 0 -%}
           <a href="{{ collection.url }}" class="nos-collections-page__card">
-            <div class="nos-collections-page__card-image">
+            <div class="nos-collections-page__card-image shape--blob">
               {%- if collection.image -%}
                 <img
                   src="{{ collection.image | image_url: width: 600 }}"
