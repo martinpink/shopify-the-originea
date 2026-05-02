@@ -9,6 +9,13 @@
     <h1 class="boutique-header__title">{{ section.settings.heading }}</h1>
     <p class="boutique-header__subtitle">{{ section.settings.subtitle }}</p>
 
+    {%- comment -%} Breadcrumb moved from collection banner {%- endcomment -%}
+    <nav class="originea-breadcrumb boutique-header__breadcrumb">
+      <a href="/">{{ 'sections.breadcrumb.home' | t }}</a>
+      <span class="originea-breadcrumb__sep">›</span>
+      <span class="originea-breadcrumb__current">{{ collection.title }}</span>
+    </nav>
+
     <div class="boutique-header__filters" role="navigation" aria-label="Filtrer par catégorie">
       <a href="/collections/all"
          class="boutique-filter-chip{% if active_tag == blank %} boutique-filter-chip--active{% endif %}">
