@@ -36,7 +36,8 @@
 }
 
 .collection-hero__title {
-  margin: 2.5rem 0;
+  /* Extra bottom margin compensates for Juliette's tall descenders */
+  margin: 2.5rem 0 4.5rem;
   font-family: var(--font-display-family);
   font-weight: 400;
   font-style: normal;
