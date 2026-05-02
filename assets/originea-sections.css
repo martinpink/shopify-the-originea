@@ -1016,6 +1016,15 @@ html {
 }
 
 /* ═══════════════════════════════════════════════
+   Featured Collection — Best-sellers title
+═══════════════════════════════════════════════ */
+.collection__title .title {
+  font-family: var(--font-display-family) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+
+/* ═══════════════════════════════════════════════
    Footer — font size overrides
 ═══════════════════════════════════════════════ */
 /* Block headings (e.g. "Liens rapides") */
