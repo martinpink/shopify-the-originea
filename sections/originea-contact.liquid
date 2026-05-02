@@ -1,0 +1,174 @@
+{{ 'originea-sections.css' | asset_url | stylesheet_tag }}
+
+<div class="originea-contact color-{{ section.settings.color_scheme }}">
+  <div class="page-width originea-contact__inner">
+
+    {%- comment -%} Left column: intro & contact info {%- endcomment -%}
+    <div class="originea-contact__left">
+      <p class="originea-contact__eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1 class="originea-contact__title">{{ section.settings.heading }}</h1>
+      <p class="originea-contact__intro">{{ section.settings.intro }}</p>
+
+      <div class="originea-contact__details">
+        {%- if section.settings.email != blank -%}
+          <div class="originea-contact__detail-row">
+            <span class="originea-contact__detail-label">Email</span>
+            <a href="mailto:{{ section.settings.email }}" class="originea-contact__detail-value">{{ section.settings.email }}</a>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.response_time != blank -%}
+          <div class="originea-contact__detail-row">
+            <span class="originea-contact__detail-label">Réponse</span>
+            <span class="originea-contact__detail-value">{{ section.settings.response_time }}</span>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} Right column: the contact form {%- endcomment -%}
+    <div class="originea-contact__right">
+
+      {%- form 'contact', id: 'OrigineaContactForm' -%}
+
+        {%- if form.posted_successfully? -%}
+          <div class="originea-contact__success">
+            <p>{{ section.settings.success_message }}</p>
+          </div>
+        {%- endif -%}
+
+        {%- if form.errors -%}
+          <div class="originea-contact__error">
+            <p>{{ 'templates.contact.form.error_heading' | t }}</p>
+          </div>
+        {%- endif -%}
+
+        <div class="originea-contact__row">
+          {%- comment -%} Name field {%- endcomment -%}
+          <div class="originea-contact__field">
+            <label for="OC-name" class="originea-contact__label">{{ 'templates.contact.form.name' | t }}</label>
+            <input
+              type="text"
+              id="OC-name"
+              name="contact[{{ 'templates.contact.form.name' | t }}]"
+              class="originea-contact__input"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              autocomplete="name"
+            >
+          </div>
+
+          {%- comment -%} Email field {%- endcomment -%}
+          <div class="originea-contact__field">
+            <label for="OC-email" class="originea-contact__label">{{ 'templates.contact.form.email' | t }} <span aria-hidden="true">*</span></label>
+            <input
+              type="email"
+              id="OC-email"
+              name="contact[email]"
+              class="originea-contact__input{% if form.errors contains 'email' %} originea-contact__input--error{% endif %}"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              autocomplete="email"
+              aria-required="true"
+            >
+          </div>
+        </div>
+
+        {%- comment -%} Subject field {%- endcomment -%}
+        <div class="originea-contact__field">
+          <label for="OC-subject" class="originea-contact__label">{{ section.settings.subject_label }}</label>
+          <input
+            type="text"
+            id="OC-subject"
+            name="contact[{{ section.settings.subject_label }}]"
+            class="originea-contact__input"
+          >
+        </div>
+
+        {%- comment -%} Message field {%- endcomment -%}
+        <div class="originea-contact__field">
+          <label for="OC-body" class="originea-contact__label">{{ 'templates.contact.form.comment' | t }}</label>
+          <textarea
+            id="OC-body"
+            name="contact[{{ 'templates.contact.form.comment' | t }}]"
+            class="originea-contact__textarea"
+            rows="7"
+          >{{- form.body -}}</textarea>
+        </div>
+
+        {%- comment -%} Submit button {%- endcomment -%}
+        <button type="submit" class="originea-contact__submit">
+          {{ section.settings.submit_label }}
+        </button>
+
+      {%- endform -%}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact Originea",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "The Originea"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Nous contacter"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro text",
+      "default": "Une question sur une commande, un projet sur mesure ou simplement l'envie d'échanger ? Nous vous répondons avec plaisir."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Contact email (display only)",
+      "default": "contact@theoriginea.com"
+    },
+    {
+      "type": "text",
+      "id": "response_time",
+      "label": "Response time",
+      "default": "Sous 24–48h ouvrées"
+    },
+    {
+      "type": "text",
+      "id": "subject_label",
+      "label": "Subject field label",
+      "default": "Sujet"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button label",
+      "default": "Envoyer le message"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Merci pour votre message — nous vous répondrons très bientôt."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Originea"
+    }
+  ]
+}
+{% endschema %}
