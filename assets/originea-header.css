@@ -12,7 +12,7 @@
 
 .originea-nav-link {
   font-family: var(--font-body-family);
-  font-size: 1.17rem;
+  font-size: 1.52rem;
   font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -58,6 +58,11 @@
 .header__icon .icon {
   height: 3.1rem;
   width: 3.1rem;
+}
+/* Cart icon needs explicit override as base.css sets it separately */
+.header__icon--cart .icon {
+  height: 3.1rem !important;
+  width: 3.1rem !important;
 }
 
 /* ── Hamburger icon sizing ─────────────────────── */
