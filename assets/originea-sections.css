@@ -73,9 +73,9 @@
   margin-bottom: 3.2rem;
 }
 .nos-collections-page__title {
-  font-family: var(--font-heading-family);
+  font-family: var(--font-display-family);
   font-size: clamp(2.8rem, 7vw, 5rem);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   color: var(--color-olive-dark);
   line-height: 1.1;

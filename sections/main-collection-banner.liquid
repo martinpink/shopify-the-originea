@@ -9,6 +9,9 @@
   }
 {%- endstyle -%}
 
+{%- comment -%} Hide this banner on the boutique/all page — it has its own boutique-filter-header {%- endcomment -%}
+{%- unless collection.handle == 'all' or collection.handle == 'all-collection-theoriginea' -%}
+
 <div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
   <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="collection-hero__text-wrapper">
@@ -53,6 +56,8 @@
     <span class="originea-breadcrumb__current">{{ collection.title }}</span>
   </nav>
 </div>
+
+{%- endunless -%}
 
 {% schema %}
 {

@@ -37,7 +37,10 @@
 
 .collection-hero__title {
   margin: 2.5rem 0;
-  text-transform: uppercase;
+  font-family: var(--font-display-family);
+  font-weight: 400;
+  font-style: normal;
+  text-transform: none;
 }
 
 .collection-hero__title + .collection-hero__description {

@@ -7,6 +7,12 @@
     <div class="nos-collections-page__header">
       <h1 class="nos-collections-page__title">{{ section.settings.heading }}</h1>
       <p class="nos-collections-page__subtitle">{{ section.settings.subtitle }}</p>
+      {%- comment -%} Breadcrumb below page header {%- endcomment -%}
+      <nav class="originea-breadcrumb nos-collections-page__breadcrumb">
+        <a href="/">{{ 'sections.breadcrumb.home' | t }}</a>
+        <span class="originea-breadcrumb__sep">›</span>
+        <span class="originea-breadcrumb__current">{{ section.settings.heading }}</span>
+      </nav>
     </div>
 
     <div class="nos-collections-page__grid">
