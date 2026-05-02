@@ -12,7 +12,7 @@
 
 .originea-nav-link {
   font-family: var(--font-body-family);
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -54,11 +54,17 @@
   display: block;
 }
 
+/* ── Header icons (cart, account, search) — larger for readability ── */
+.header__icon .icon {
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
 /* ── Hamburger icon sizing ─────────────────────── */
 .header__icon--menu .icon-hamburger,
 .header__icon--menu .icon-close {
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.4rem;
+  height: 2.4rem;
   display: block;
 }
 
