@@ -936,6 +936,9 @@
           },
           "pick_them_up_in_store": {
             "many": "sie im Laden abholen"
+          },
+          "remove_item_only": {
+            "many": "Artikel entfernen"
           }
         },
         "pickup_items_count": {
