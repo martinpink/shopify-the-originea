@@ -84,7 +84,7 @@ AGR-CITRON-40G         (dried citrus)
 - **Orders:** orders@theoriginea.com
 - **Support:** support@theoriginea.com
 - **Email platform:** Klaviyo (sending domain: send.theoriginea.com)
-- **Discount codes:** ORIGINEA5 (5% — newsletter welcome), ORIGINEA10 (10% — thank you card), MERCI10 (15% — VIP outreach)
+- **Discount codes:** ORIGINEA10 (10% — thank you card), MERCI10 (15% — VIP outreach)
 
 ---
 
