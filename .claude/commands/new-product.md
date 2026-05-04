@@ -56,6 +56,18 @@ Examples:
 
 - **NEVER include prices in the "Choisissez votre format" section.** List only the volume/size and a short description. Prices are shown automatically by Shopify via variants — do not repeat them in the description.
 
+- **SKU format for variants:** The 0.5L variant always uses the base SKU only (no size suffix) — this is the Etsy sync workaround (Etsy supports only one SKU per product). All other variants get the size suffix appended.
+
+Example for a product with code `CONF-HORTBLEU`:
+```
+0.5L  → CONF-HORTBLEU        ← no suffix (Etsy default SKU)
+1L    → CONF-HORTBLEU-1L
+2L    → CONF-HORTBLEU-2L
+5L    → CONF-HORTBLEU-5L
+8L    → CONF-HORTBLEU-8L
+24L   → CONF-HORTBLEU-24L
+```
+
 Example of CORRECT format section:
 ```html
 <p><strong>Choisissez votre format</strong></p>

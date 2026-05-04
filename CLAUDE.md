@@ -55,6 +55,17 @@ CONF-PETALESHORT-1L    (confetti cones - hydrangea petals)
 AGR-CITRON-40G         (dried citrus)
 ```
 
+**SKU variant rule (Etsy sync workaround):**
+Etsy supports only one SKU per product. The 0.5L variant always uses the base SKU with NO size suffix — all other variants get the suffix appended:
+```
+0.5L  → CONF-HORTBLEU        ← no suffix (Etsy default SKU)
+1L    → CONF-HORTBLEU-1L
+2L    → CONF-HORTBLEU-2L
+5L    → CONF-HORTBLEU-5L
+8L    → CONF-HORTBLEU-8L
+24L   → CONF-HORTBLEU-24L
+```
+
 ### Key product lines:
 - Fruits séchés artisanaux (agrumes, figues, etc.)
 - Confettis mariage (pétales d'hortensia, roses)
