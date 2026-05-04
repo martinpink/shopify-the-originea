@@ -83,6 +83,40 @@ Etsy supports only one SKU per product. The 0.5L variant always uses the base SK
 
 ---
 
+## Product Setup Standards (apply to every new product)
+
+### Sales Channels — always publish to ALL 6:
+| Channel | Publication ID |
+|---|---|
+| Online Store | `gid://shopify/Publication/322003239176` |
+| Point of Sale | `gid://shopify/Publication/322003271944` |
+| Shop | `gid://shopify/Publication/322003337480` |
+| Inbox | `gid://shopify/Publication/322130510088` |
+| Google & YouTube | `gid://shopify/Publication/323019604232` |
+| The Originea Headless | `gid://shopify/Publication/326695813384` |
+
+### Collections — always add:
+| Collection | ID |
+|---|---|
+| All Collection — TheOriginea | `gid://shopify/Collection/567848730888` |
+| Celebrate Me – Weddings & events | `gid://shopify/Collection/574620762376` (confetti/petal/wedding products) |
+
+### Category (Shopify Taxonomy):
+- Confetti/petal/wedding products → `gid://shopify/TaxonomyCategory/rc-3` (Wedding Ceremony Supplies)
+
+### Product Type examples:
+- `Confettis mariage`
+- `Fruits secs`
+- `Botaniques`
+
+### Vendor: always `The Originea`
+
+### SEO Standard:
+- **Title:** `[Short product name] | Originea` (max 70 chars)
+- **Description:** max 160 chars, French, include: naturel, biodégradable, artisanal, Provence
+
+---
+
 ## Shipping & Pricing
 - Free shipping: **€45+ France / €65+ Europe**
 - Primary markets: France, Belgium, Switzerland

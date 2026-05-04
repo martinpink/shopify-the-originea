@@ -51,6 +51,22 @@ Examples:
 
 5. **Tags** to add in Shopify (include `personnalisable` if applicable)
 6. **Collections** it should belong to
+7. **Product type:** always set to the relevant type (e.g. `Confettis mariage`, `Fruits secs`, `Botaniques`)
+8. **Vendor:** always `The Originea`
+9. **Category:** use the correct Shopify taxonomy (e.g. `gid://shopify/TaxonomyCategory/rc-3` = Wedding Ceremony Supplies for confetti/petal products)
+10. **Sales channels:** always publish to ALL 6 channels:
+    - Online Store (`gid://shopify/Publication/322003239176`)
+    - Point of Sale (`gid://shopify/Publication/322003271944`)
+    - Shop (`gid://shopify/Publication/322003337480`)
+    - Inbox (`gid://shopify/Publication/322130510088`)
+    - Google & YouTube (`gid://shopify/Publication/323019604232`)
+    - The Originea Headless (`gid://shopify/Publication/326695813384`)
+11. **Collections to join:**
+    - All Collection — TheOriginea (`gid://shopify/Collection/567848730888`) — always
+    - Celebrate Me – Weddings & events (`gid://shopify/Collection/574620762376`) — for confetti/petal/wedding products
+12. **SEO standard:**
+    - Title: `[Product name short] | Originea` (max 70 chars)
+    - Description: max 160 chars, French, mentions key terms (naturel, biodégradable, artisanal, Provence)
 
 ## ⚠️ IMPORTANT RULES
 
