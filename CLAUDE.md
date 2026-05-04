@@ -112,7 +112,7 @@ Etsy supports only one SKU per product. The 0.5L variant always uses the base SK
 ### Vendor: always `The Originea`
 
 ### SEO Standard:
-- **Title:** `[Short product name] | Originea` (max 70 chars)
+- **Title:** `[Short product name] | The Originea` (max 70 chars)
 - **Description:** max 160 chars, French, include: naturel, biodégradable, artisanal, Provence
 
 ---

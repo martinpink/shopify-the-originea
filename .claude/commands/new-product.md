@@ -65,7 +65,7 @@ Examples:
     - All Collection — TheOriginea (`gid://shopify/Collection/567848730888`) — always
     - Celebrate Me – Weddings & events (`gid://shopify/Collection/574620762376`) — for confetti/petal/wedding products
 12. **SEO standard:**
-    - Title: `[Product name short] | Originea` (max 70 chars)
+    - Title: `[Product name short] | The Originea` (max 70 chars)
     - Description: max 160 chars, French, mentions key terms (naturel, biodégradable, artisanal, Provence)
 
 ## ⚠️ IMPORTANT RULES
