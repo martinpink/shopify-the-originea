@@ -51,3 +51,18 @@ Examples:
 
 5. **Tags** to add in Shopify (include `personnalisable` if applicable)
 6. **Collections** it should belong to
+
+## ⚠️ IMPORTANT RULES
+
+- **NEVER include prices in the "Choisissez votre format" section.** List only the volume/size and a short description. Prices are shown automatically by Shopify via variants — do not repeat them in the description.
+
+Example of CORRECT format section:
+```html
+<p><strong>Choisissez votre format</strong></p>
+<ul>
+  <li><strong>0.5L :</strong> Un aperçu délicat — idéal pour une décoration de table intime.</li>
+  <li><strong>1L :</strong> Pour une petite cérémonie ou décoration de table poétique.</li>
+  <li><strong>2L :</strong> Pour 10 à 20 invités — mariage intime ou événement privé.</li>
+  <li><strong>5L :</strong> Pour 30 à 50 invités — le format polyvalent de la cérémonie.</li>
+</ul>
+```
