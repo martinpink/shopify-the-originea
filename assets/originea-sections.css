@@ -1647,3 +1647,16 @@ a.originea-contact__detail-value:hover {
   margin: 0;
   font-style: italic;
 }
+
+/* ═══════════════════════════════════════════════
+   Paper specs line — between quantity & personalisation
+═══════════════════════════════════════════════ */
+
+.originea-papier-specs {
+  font-family: var(--font-body-family);
+  font-size: 0.9rem;
+  color: #888;
+  letter-spacing: 0.02em;
+  margin: 0.4rem 0 1.2rem;
+  padding: 0;
+}
