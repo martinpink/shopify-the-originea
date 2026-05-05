@@ -1294,3 +1294,67 @@ a.originea-contact__detail-value:hover {
   color: #777;
   line-height: 1.6;
 }
+
+/* Dynamic rows header */
+.originea-personalisation__rows-header {
+  display: grid;
+  grid-template-columns: 2rem 1fr 1fr 1fr;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  padding: 0 0.2rem;
+}
+
+.originea-personalisation__rows-header span {
+  font-family: var(--font-body-family);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.originea-personalisation__rows-header span:first-child {
+  visibility: hidden; /* spacer for row number */
+}
+
+/* Individual rows */
+.originea-personalisation__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 0.4rem;
+}
+
+.originea-personalisation__row {
+  display: grid;
+  grid-template-columns: 2rem 1fr 1fr 1fr;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.originea-personalisation__row-num {
+  font-family: var(--font-body-family);
+  font-size: 0.78rem;
+  color: #aaa;
+  text-align: right;
+  padding-right: 0.2rem;
+  line-height: 1;
+}
+
+.originea-personalisation__row .originea-personalisation__input {
+  padding: 0.7rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+/* Scrollbar styling */
+.originea-personalisation__rows::-webkit-scrollbar {
+  width: 4px;
+}
+.originea-personalisation__rows::-webkit-scrollbar-track {
+  background: #f0ede9;
+}
+.originea-personalisation__rows::-webkit-scrollbar-thumb {
+  background: #c8c2bb;
+  border-radius: 2px;
+}

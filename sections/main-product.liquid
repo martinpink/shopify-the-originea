@@ -74,12 +74,30 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
-    {%- assign breadcrumb_collection = collection | default: product.collections.first -%}
+    {%- comment -%}
+      Breadcrumb: prefer the collection the customer came from (via URL).
+      Exclude catch-all collections (handle contains 'all' or 'frontpage').
+      Fall back to the first real collection, then to /collections/nos-collections.
+    {%- endcomment -%}
+    {%- assign breadcrumb_collection = nil -%}
+    {%- assign excluded_handles = 'all,frontpage,all-collection-theoriginea' | split: ',' -%}
+    {%- if collection and excluded_handles contains collection.handle == false -%}
+      {%- assign breadcrumb_collection = collection -%}
+    {%- else -%}
+      {%- for col in product.collections -%}
+        {%- unless excluded_handles contains col.handle -%}
+          {%- assign breadcrumb_collection = col -%}
+          {%- break -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endif -%}
     <nav class="originea-breadcrumb">
       <a href="/">{{ 'sections.breadcrumb.home' | t }}</a>
+      <span class="originea-breadcrumb__sep">›</span>
       {%- if breadcrumb_collection -%}
-        <span class="originea-breadcrumb__sep">›</span>
         <a href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title }}</a>
+      {%- else -%}
+        <a href="/collections/nos-collections">Nos Collections</a>
       {%- endif -%}
       <span class="originea-breadcrumb__sep">›</span>
       <span class="originea-breadcrumb__current">{{ product.title | split: ' | ' | first }}</span>
@@ -532,52 +550,20 @@
                   <div class="originea-personalisation" {{ block.shopify_attributes }}>
                     <h3 class="originea-personalisation__title">Personnalisation</h3>
 
-                    <div class="originea-personalisation__field">
-                      <label for="prenom1-{{ section.id }}" class="originea-personalisation__label">
-                        Prénom 1 <span class="originea-personalisation__required" aria-label="obligatoire">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="prenom1-{{ section.id }}"
-                        name="properties[Prénom 1]"
-                        form="{{ product_form_id }}"
-                        placeholder="Ex : Laetitia"
-                        required
-                        class="originea-personalisation__input"
-                      >
+                    <div class="originea-personalisation__rows-header">
+                      <span></span>
+                      <span>Prénom 1 *</span>
+                      <span>Prénom 2</span>
+                      <span>Date</span>
                     </div>
 
-                    <div class="originea-personalisation__field">
-                      <label for="prenom2-{{ section.id }}" class="originea-personalisation__label">
-                        Prénom 2
-                      </label>
-                      <input
-                        type="text"
-                        id="prenom2-{{ section.id }}"
-                        name="properties[Prénom 2]"
-                        form="{{ product_form_id }}"
-                        placeholder="Ex : Olivier"
-                        class="originea-personalisation__input"
-                      >
+                    <div id="originea-personalisation-rows-{{ section.id }}" class="originea-personalisation__rows">
+                      {%- comment -%} Rows injected by JS based on format selection {%- endcomment -%}
                     </div>
 
-                    <div class="originea-personalisation__field">
-                      <label for="date-{{ section.id }}" class="originea-personalisation__label">
-                        Date de l'événement
-                      </label>
-                      <input
-                        type="text"
-                        id="date-{{ section.id }}"
-                        name="properties[Date]"
-                        form="{{ product_form_id }}"
-                        placeholder="Ex : 30 Mai 2026"
-                        class="originea-personalisation__input"
-                      >
-                    </div>
-
-                    <div class="originea-personalisation__field">
+                    <div class="originea-personalisation__field" style="margin-top:1.2rem;">
                       <label for="message-{{ section.id }}" class="originea-personalisation__label">
-                        Message personnalisé <span class="originea-personalisation__optional">(optionnel)</span>
+                        Message commun <span class="originea-personalisation__optional">(optionnel)</span>
                       </label>
                       <textarea
                         id="message-{{ section.id }}"
@@ -590,10 +576,189 @@
                     </div>
 
                     <p class="originea-personalisation__note">
-                      Ces informations apparaîtront sur votre étiquette personnalisée.
+                      Ces informations apparaîtront sur vos étiquettes personnalisées.
                       Délai de fabrication : <strong>4 jours ouvrés</strong>.
                     </p>
                   </div>
+
+                  <script>
+                    (function() {
+                      var formId = {{ product_form_id | json }};
+                      var sectionId = {{ section.id | json }};
+                      var containerId = 'originea-personalisation-rows-' + sectionId;
+                      var product = {{ product | json }};
+
+                      // --- Helpers ---
+
+                      function getOptionIndex(name) {
+                        return product.options.map(function(o) { return o.toLowerCase(); }).indexOf(name.toLowerCase());
+                      }
+
+                      // Get row count: from Format option value, or fixed per product
+                      function getCountFromVariant(variant) {
+                        var formatIdx = getOptionIndex('Format');
+                        if (formatIdx >= 0 && variant && variant.options) {
+                          var val = parseInt(variant.options[formatIdx]);
+                          if (val) return val;
+                        }
+                        return null;
+                      }
+
+                      function getInitialCount() {
+                        var formatIdx = getOptionIndex('Format');
+                        if (formatIdx >= 0) {
+                          // Read currently selected Format pill
+                          var checked = document.querySelector('input[name="options[Format]"]:checked');
+                          if (checked) return parseInt(checked.value) || 10;
+                          return parseInt(product.options_with_values ? product.options_with_values[formatIdx].values[0] : 10) || 10;
+                        }
+                        // No Format option — count is fixed, try to read from variant title or default
+                        // Look for a number in the product title (e.g. "Coffret 20 Cornets")
+                        var match = product.title.match(/\b(\d+)\b/);
+                        return match ? parseInt(match[1]) : 1;
+                      }
+
+                      // --- Show/hide personalisation block ---
+
+                      function getPersonnalisationBlock() {
+                        return document.querySelector('.originea-personalisation');
+                      }
+
+                      function hasPersonnalisationOption() {
+                        return getOptionIndex('Personnalisation') >= 0;
+                      }
+
+                      function isPersonnalisationActive(variant) {
+                        var idx = getOptionIndex('Personnalisation');
+                        if (idx < 0 || !variant) return true; // no option → always show
+                        return variant.options[idx] === 'Avec personnalisation';
+                      }
+
+                      function getInitialPersonnalisationActive() {
+                        if (!hasPersonnalisationOption()) return true;
+                        var checked = document.querySelector('input[name="options[Personnalisation]"]:checked');
+                        if (checked) return checked.value === 'Avec personnalisation';
+                        // default to first variant
+                        return product.variants[0].options[getOptionIndex('Personnalisation')] === 'Avec personnalisation';
+                      }
+
+                      function toggleBlock(show) {
+                        var block = getPersonnalisationBlock();
+                        if (!block) return;
+                        block.style.display = show ? '' : 'none';
+                        // disable/enable required inputs inside so form can still submit
+                        block.querySelectorAll('input[required]').forEach(function(el) {
+                          el.disabled = !show;
+                        });
+                      }
+
+                      // --- Build rows ---
+
+                      function buildRows(count) {
+                        var container = document.getElementById(containerId);
+                        if (!container) return;
+                        container.innerHTML = '';
+                        for (var i = 1; i <= count; i++) {
+                          var row = document.createElement('div');
+                          row.className = 'originea-personalisation__row';
+
+                          // Hidden combined Noms field submitted to cart
+                          var hiddenNoms = document.createElement('input');
+                          hiddenNoms.type = 'hidden';
+                          hiddenNoms.name = 'properties[Étiquette ' + i + ' — Noms]';
+                          hiddenNoms.form = formId;
+                          row.appendChild(hiddenNoms);
+
+                          // Hidden date field submitted to cart
+                          var hiddenDate = document.createElement('input');
+                          hiddenDate.type = 'hidden';
+                          hiddenDate.name = 'properties[Étiquette ' + i + ' — Date]';
+                          hiddenDate.form = formId;
+                          row.appendChild(hiddenDate);
+
+                          // Row number
+                          var num = document.createElement('span');
+                          num.className = 'originea-personalisation__row-num';
+                          num.textContent = i;
+                          row.appendChild(num);
+
+                          // Visible: Prénom 1
+                          var p1 = document.createElement('input');
+                          p1.type = 'text';
+                          p1.placeholder = 'Ex : Camille';
+                          p1.required = true;
+                          p1.className = 'originea-personalisation__input';
+                          row.appendChild(p1);
+
+                          // Visible: Prénom 2
+                          var p2 = document.createElement('input');
+                          p2.type = 'text';
+                          p2.placeholder = 'Ex : Thomas';
+                          p2.className = 'originea-personalisation__input';
+                          row.appendChild(p2);
+
+                          // Visible: Date
+                          var dt = document.createElement('input');
+                          dt.type = 'text';
+                          dt.placeholder = 'Ex : 24.06.2025';
+                          dt.className = 'originea-personalisation__input';
+                          row.appendChild(dt);
+
+                          // Auto-combine Prénom 1 & 2 → hidden Noms
+                          (function(p1el, p2el, hidden) {
+                            function update() {
+                              var v1 = p1el.value.trim();
+                              var v2 = p2el.value.trim();
+                              hidden.value = v2 ? v1 + ' & ' + v2 : v1;
+                            }
+                            p1el.addEventListener('input', update);
+                            p2el.addEventListener('input', update);
+                          })(p1, p2, hiddenNoms);
+
+                          // Sync date → hidden
+                          (function(dtEl, hiddenDtEl) {
+                            dtEl.addEventListener('input', function() {
+                              hiddenDtEl.value = dtEl.value.trim();
+                            });
+                          })(dt, hiddenDate);
+
+                          container.appendChild(row);
+                        }
+                      }
+
+                      // --- Init ---
+
+                      function init() {
+                        var currentCount = getInitialCount();
+                        buildRows(currentCount);
+                        toggleBlock(getInitialPersonnalisationActive());
+
+                        // Subscribe to Dawn's variantChange pubsub
+                        if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
+                          subscribe(PUB_SUB_EVENTS.variantChange, function(event) {
+                            var variant = event && event.data && event.data.variant;
+                            if (!variant) return;
+
+                            // Update row count if Format changed
+                            var newCount = getCountFromVariant(variant);
+                            if (newCount && newCount !== currentCount) {
+                              currentCount = newCount;
+                              buildRows(currentCount);
+                            }
+
+                            // Show/hide based on Personnalisation
+                            toggleBlock(isPersonnalisationActive(variant));
+                          });
+                        }
+                      }
+
+                      if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', init);
+                      } else {
+                        init();
+                      }
+                    })();
+                  </script>
                 {%- endif -%}
 
                 {%- render 'buy-buttons',
