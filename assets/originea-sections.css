@@ -1216,3 +1216,81 @@ a.originea-contact__detail-value:hover {
   font-size: 0.95rem;
   color: #c0392b;
 }
+
+/* ── Personalisation fields (products tagged 'personnalisable') ──────── */
+.originea-personalisation {
+  margin: 2.4rem 0 1.6rem;
+  padding: 2rem;
+  border: 1px solid #e2ddd7;
+  background: #faf9f7;
+}
+
+.originea-personalisation__title {
+  font-family: var(--font-heading-family);
+  font-size: calc(var(--font-heading-scale) * 1.4rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  color: var(--color-foreground);
+}
+
+.originea-personalisation__field {
+  margin-bottom: 1.2rem;
+}
+
+.originea-personalisation__label {
+  display: block;
+  font-family: var(--font-body-family);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: var(--color-foreground);
+}
+
+.originea-personalisation__required {
+  color: #c0392b;
+  margin-left: 2px;
+}
+
+.originea-personalisation__optional {
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.originea-personalisation__input,
+.originea-personalisation__textarea {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 1px solid #d4cfc9;
+  background: #fff;
+  font-family: var(--font-body-family);
+  font-size: 1rem;
+  color: var(--color-foreground);
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color 0.2s ease;
+}
+
+.originea-personalisation__input:focus,
+.originea-personalisation__textarea:focus {
+  outline: none;
+  border-color: var(--color-foreground);
+}
+
+.originea-personalisation__textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.originea-personalisation__note {
+  margin-top: 1.2rem;
+  font-family: var(--font-body-family);
+  font-size: 0.85rem;
+  color: #777;
+  line-height: 1.6;
+}

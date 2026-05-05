@@ -299,7 +299,8 @@
       },
       "nav_boutique": "SHOP",
       "nav_collections": "OUR COLLECTIONS",
-      "nav_histoire": "OUR STORY"
+      "nav_histoire": "OUR STORY",
+      "nav_sur_mesure": "SUR MESURE"
     },
     "scrolling_text": {
       "shipping_france": "Free shipping in France on orders over €45",

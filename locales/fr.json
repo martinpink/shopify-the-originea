@@ -295,7 +295,8 @@
       },
       "nav_boutique": "BOUTIQUE",
       "nav_collections": "NOS COLLECTIONS",
-      "nav_histoire": "NOTRE HISTOIRE"
+      "nav_histoire": "NOTRE HISTOIRE",
+      "nav_sur_mesure": "SUR MESURE"
     },
     "scrolling_text": {
       "shipping_france": "Livraison offerte en France dès 45 €",

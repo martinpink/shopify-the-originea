@@ -527,6 +527,75 @@
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
+                {%- comment -%} Personalisation fields — only shown for products tagged 'personnalisable' {%- endcomment -%}
+                {%- if product.tags contains 'personnalisable' -%}
+                  <div class="originea-personalisation" {{ block.shopify_attributes }}>
+                    <h3 class="originea-personalisation__title">Personnalisation</h3>
+
+                    <div class="originea-personalisation__field">
+                      <label for="prenom1-{{ section.id }}" class="originea-personalisation__label">
+                        Prénom 1 <span class="originea-personalisation__required" aria-label="obligatoire">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="prenom1-{{ section.id }}"
+                        name="properties[Prénom 1]"
+                        form="{{ product_form_id }}"
+                        placeholder="Ex : Laetitia"
+                        required
+                        class="originea-personalisation__input"
+                      >
+                    </div>
+
+                    <div class="originea-personalisation__field">
+                      <label for="prenom2-{{ section.id }}" class="originea-personalisation__label">
+                        Prénom 2
+                      </label>
+                      <input
+                        type="text"
+                        id="prenom2-{{ section.id }}"
+                        name="properties[Prénom 2]"
+                        form="{{ product_form_id }}"
+                        placeholder="Ex : Olivier"
+                        class="originea-personalisation__input"
+                      >
+                    </div>
+
+                    <div class="originea-personalisation__field">
+                      <label for="date-{{ section.id }}" class="originea-personalisation__label">
+                        Date de l'événement
+                      </label>
+                      <input
+                        type="text"
+                        id="date-{{ section.id }}"
+                        name="properties[Date]"
+                        form="{{ product_form_id }}"
+                        placeholder="Ex : 30 Mai 2026"
+                        class="originea-personalisation__input"
+                      >
+                    </div>
+
+                    <div class="originea-personalisation__field">
+                      <label for="message-{{ section.id }}" class="originea-personalisation__label">
+                        Message personnalisé <span class="originea-personalisation__optional">(optionnel)</span>
+                      </label>
+                      <textarea
+                        id="message-{{ section.id }}"
+                        name="properties[Message]"
+                        form="{{ product_form_id }}"
+                        placeholder="Ex : Avec tout notre amour..."
+                        rows="3"
+                        class="originea-personalisation__textarea"
+                      ></textarea>
+                    </div>
+
+                    <p class="originea-personalisation__note">
+                      Ces informations apparaîtront sur votre étiquette personnalisée.
+                      Délai de fabrication : <strong>4 jours ouvrés</strong>.
+                    </p>
+                  </div>
+                {%- endif -%}
+
                 {%- render 'buy-buttons',
                   block: block,
                   product: product,
