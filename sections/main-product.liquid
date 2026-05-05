@@ -81,16 +81,19 @@
     {%- endcomment -%}
     {%- assign breadcrumb_collection = nil -%}
     {%- assign excluded_handles = 'all,frontpage,all-collection-theoriginea' | split: ',' -%}
-    {%- if collection and excluded_handles contains collection.handle == false -%}
-      {%- assign breadcrumb_collection = collection -%}
-    {%- else -%}
+    {%- if collection -%}
+      {%- unless excluded_handles contains collection.handle -%}
+        {%- assign breadcrumb_collection = collection -%}
+      {%- endunless -%}
+    {%- endif -%}
+    {%- unless breadcrumb_collection -%}
       {%- for col in product.collections -%}
         {%- unless excluded_handles contains col.handle -%}
           {%- assign breadcrumb_collection = col -%}
           {%- break -%}
         {%- endunless -%}
       {%- endfor -%}
-    {%- endif -%}
+    {%- endunless -%}
     <nav class="originea-breadcrumb">
       <a href="/">{{ 'sections.breadcrumb.home' | t }}</a>
       <span class="originea-breadcrumb__sep">›</span>
@@ -545,48 +548,202 @@
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
-                {%- comment -%} Personalisation fields — only shown for products tagged 'personnalisable' {%- endcomment -%}
-                {%- if product.tags contains 'personnalisable' -%}
-                  <div class="originea-personalisation" {{ block.shopify_attributes }}>
+                {%- comment -%} Personalisation — name tags (tag: personnalisable) or logo upload (tag: logo-upload) {%- endcomment -%}
+                {%- assign is_name_product = false -%}
+                {%- assign is_logo_product = false -%}
+                {%- assign is_single_name = false -%}
+                {%- if product.tags contains 'personnalisable' -%}{%- assign is_name_product = true -%}{%- endif -%}
+                {%- if product.tags contains 'logo-upload' -%}{%- assign is_logo_product = true -%}{%- endif -%}
+                {%- if product.tags contains 'single-name' -%}{%- assign is_single_name = true -%}{%- endif -%}
+
+                {%- if is_name_product or is_logo_product -%}
+                  <div class="originea-personalisation originea-personalisation-block-{{ section.id }}" {{ block.shopify_attributes }}>
                     <h3 class="originea-personalisation__title">Personnalisation</h3>
 
-                    <div class="originea-personalisation__rows-header">
-                      <span></span>
-                      <span>Prénom 1 *</span>
-                      <span>Prénom 2</span>
-                      <span>Date</span>
-                    </div>
+                    {%- if is_name_product -%}
+                      {%- comment -%} Font selector {%- endcomment -%}
+                      <div class="originea-font-selector">
+                        <p class="originea-font-selector__label">Style d'écriture</p>
+                        <div class="originea-font-selector__options">
+                          <label class="originea-font-option">
+                            <input type="radio" name="originea_font_{{ section.id }}" value="Cinzel" checked>
+                            <span class="originea-font-option__preview" style="font-family:'OrigineaCinzel',serif;">Camille</span>
+                            <span class="originea-font-option__name">Cinzel</span>
+                          </label>
+                          <label class="originea-font-option">
+                            <input type="radio" name="originea_font_{{ section.id }}" value="GreatVibes">
+                            <span class="originea-font-option__preview" style="font-family:'OrigineaGreatVibes',cursive;">Camille</span>
+                            <span class="originea-font-option__name">Great Vibes</span>
+                          </label>
+                          <label class="originea-font-option">
+                            <input type="radio" name="originea_font_{{ section.id }}" value="Corinthia">
+                            <span class="originea-font-option__preview" style="font-family:'OrigineaCorinthia',cursive;">Camille</span>
+                            <span class="originea-font-option__name">Corinthia</span>
+                          </label>
+                          <label class="originea-font-option">
+                            <input type="radio" name="originea_font_{{ section.id }}" value="Inspiration">
+                            <span class="originea-font-option__preview" style="font-family:'OrigineaInspiration',cursive;">Camille</span>
+                            <span class="originea-font-option__name">Inspiration</span>
+                          </label>
+                          <label class="originea-font-option">
+                            <input type="radio" name="originea_font_{{ section.id }}" value="PinyonScript">
+                            <span class="originea-font-option__preview" style="font-family:'OrigineaPinyonScript',cursive;">Camille</span>
+                            <span class="originea-font-option__name">Pinyon Script</span>
+                          </label>
+                          <label class="originea-font-option">
+                            <input type="radio" name="originea_font_{{ section.id }}" value="PlaylistScript">
+                            <span class="originea-font-option__preview" style="font-family:'OrigineaPlaylistScript',cursive;">Camille</span>
+                            <span class="originea-font-option__name">Playlist Script</span>
+                          </label>
+                        </div>
+                        <input type="hidden" name="properties[Style d'écriture]" form="{{ product_form_id }}" id="originea-font-hidden-{{ section.id }}" value="Cinzel">
+                      </div>
 
-                    <div id="originea-personalisation-rows-{{ section.id }}" class="originea-personalisation__rows">
-                      {%- comment -%} Rows injected by JS based on format selection {%- endcomment -%}
-                    </div>
+                      {%- comment -%} Live preview card {%- endcomment -%}
+                      <div class="originea-preview" id="originea-preview-{{ section.id }}">
+                        <div class="originea-preview__card">
+                          <div class="originea-preview__name" id="originea-preview-name-{{ section.id }}" style="font-family:'OrigineaCinzel',serif;">{% if is_single_name %}Camille{% else %}Camille & Thomas{% endif %}</div>
+                          {%- unless is_single_name -%}
+                          <div class="originea-preview__divider" id="originea-preview-divider-{{ section.id }}" style="display:none;"></div>
+                          <div class="originea-preview__date" id="originea-preview-date-{{ section.id }}" style="display:none;"></div>
+                          {%- endunless -%}
+                        </div>
+                        <p class="originea-preview__hint">Aperçu en direct — saisissez vos prénoms ci-dessous</p>
+                      </div>
 
-                    <div class="originea-personalisation__field" style="margin-top:1.2rem;">
-                      <label for="message-{{ section.id }}" class="originea-personalisation__label">
-                        Message commun <span class="originea-personalisation__optional">(optionnel)</span>
-                      </label>
-                      <textarea
-                        id="message-{{ section.id }}"
-                        name="properties[Message]"
-                        form="{{ product_form_id }}"
-                        placeholder="Ex : Avec tout notre amour..."
-                        rows="3"
-                        class="originea-personalisation__textarea"
-                      ></textarea>
-                    </div>
+                      {%- comment -%} Name rows {%- endcomment -%}
+                      {%- if is_single_name -%}
+                        <div class="originea-personalisation__rows-header" style="grid-template-columns: 2rem 1fr;">
+                          <span></span>
+                          <span>Prénom *</span>
+                        </div>
+                      {%- else -%}
+                        <div class="originea-personalisation__rows-header">
+                          <span></span>
+                          <span>Prénom 1 *</span>
+                          <span>Prénom 2</span>
+                          <span>Date</span>
+                        </div>
+                      {%- endif -%}
 
-                    <p class="originea-personalisation__note">
-                      Ces informations apparaîtront sur vos étiquettes personnalisées.
-                      Délai de fabrication : <strong>4 jours ouvrés</strong>.
-                    </p>
+                      <div id="originea-personalisation-rows-{{ section.id }}" class="originea-personalisation__rows"></div>
+
+                      <div class="originea-personalisation__field" style="margin-top:1.2rem;">
+                        <label for="message-{{ section.id }}" class="originea-personalisation__label">
+                          Message commun <span class="originea-personalisation__optional">(optionnel)</span>
+                        </label>
+                        <textarea
+                          id="message-{{ section.id }}"
+                          name="properties[Message]"
+                          form="{{ product_form_id }}"
+                          placeholder="Ex : Avec tout notre amour..."
+                          rows="3"
+                          class="originea-personalisation__textarea"
+                        ></textarea>
+                      </div>
+
+                      <p class="originea-personalisation__note">
+                        Ces informations apparaîtront sur vos étiquettes personnalisées.
+                        Délai de fabrication : <strong>4 jours ouvrés</strong>.
+                      </p>
+                    {%- endif -%}
+
+                    {%- if is_logo_product -%}
+                      {%- comment -%} Round sticker preview {%- endcomment -%}
+                      <div class="originea-sticker-preview">
+                        <div class="originea-sticker-preview__circle" id="originea-sticker-circle-{{ section.id }}">
+                          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" class="originea-sticker-preview__example">
+                            <circle cx="150" cy="150" r="140" fill="#faf8f5" stroke="#c8b99a" stroke-width="2"/>
+                            <circle cx="150" cy="150" r="128" fill="none" stroke="#c8b99a" stroke-width="1"/>
+                            <!-- Botanical left -->
+                            <g stroke="#b8a882" stroke-width="1" fill="none">
+                              <path d="M55,150 Q43,128 36,105"/>
+                              <path d="M55,150 Q40,143 30,138"/>
+                              <path d="M55,150 Q46,170 40,190"/>
+                              <ellipse cx="36" cy="105" rx="7" ry="11" transform="rotate(-30,36,105)" fill="#c8b99a" stroke="none" opacity="0.65"/>
+                              <ellipse cx="30" cy="138" rx="7" ry="10" transform="rotate(-60,30,138)" fill="#c8b99a" stroke="none" opacity="0.65"/>
+                              <ellipse cx="40" cy="190" rx="7" ry="11" transform="rotate(20,40,190)" fill="#c8b99a" stroke="none" opacity="0.65"/>
+                            </g>
+                            <!-- Botanical right -->
+                            <g stroke="#b8a882" stroke-width="1" fill="none">
+                              <path d="M245,150 Q257,128 264,105"/>
+                              <path d="M245,150 Q260,143 270,138"/>
+                              <path d="M245,150 Q254,170 260,190"/>
+                              <ellipse cx="264" cy="105" rx="7" ry="11" transform="rotate(30,264,105)" fill="#c8b99a" stroke="none" opacity="0.65"/>
+                              <ellipse cx="270" cy="138" rx="7" ry="10" transform="rotate(60,270,138)" fill="#c8b99a" stroke="none" opacity="0.65"/>
+                              <ellipse cx="260" cy="190" rx="7" ry="11" transform="rotate(-20,260,190)" fill="#c8b99a" stroke="none" opacity="0.65"/>
+                            </g>
+                            <!-- Names -->
+                            <text x="150" y="130" text-anchor="middle" font-family="'OrigineaGreatVibes', cursive" font-size="36" fill="#4a3f35">Marie &amp; Thomas</text>
+                            <!-- Divider -->
+                            <line x1="90" y1="144" x2="210" y2="144" stroke="#c8b99a" stroke-width="1"/>
+                            <!-- Date -->
+                            <text x="150" y="164" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#7a6a58" letter-spacing="3">24 . 06 . 2025</text>
+                            <!-- Slogan -->
+                            <text x="150" y="188" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#9a8a78" letter-spacing="2" font-style="italic">Pour toujours &amp; à jamais</text>
+                            <!-- Heart -->
+                            <text x="150" y="212" text-anchor="middle" font-size="14" fill="#c8b99a">♡</text>
+                          </svg>
+                          <img id="originea-sticker-img-{{ section.id }}" src="" alt="Votre logo" style="display:none; width:100%; height:100%; object-fit:contain; border-radius:50%; padding:12px;">
+                        </div>
+                        <p class="originea-sticker-preview__hint">Aperçu du sticker rond — votre logo remplacera cet exemple</p>
+                      </div>
+
+                      {%- comment -%} Logo upload via Uploadcare {%- endcomment -%}
+                      <div class="originea-logo-upload">
+                        <p class="originea-personalisation__label">Votre logo <span class="originea-personalisation__required">*</span></p>
+                        <p class="originea-logo-upload__desc">Formats acceptés : PNG, SVG, PDF. Fond transparent recommandé.</p>
+                        <div class="originea-logo-upload__zone" id="originea-logo-zone-{{ section.id }}">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                          <p>Glissez votre logo ici ou <span class="originea-logo-upload__browse">parcourir</span></p>
+                          <input type="file" id="originea-logo-file-{{ section.id }}" accept=".png,.svg,.pdf,.jpg,.jpeg,.ai,.eps" style="display:none;">
+                        </div>
+                        <div class="originea-logo-upload__file-info" id="originea-logo-preview-{{ section.id }}" style="display:none;">
+                          <div class="originea-logo-upload__preview-info">
+                            <span id="originea-logo-filename-{{ section.id }}"></span>
+                            <button type="button" class="originea-logo-upload__remove" id="originea-logo-remove-{{ section.id }}">✕ Supprimer</button>
+                          </div>
+                        </div>
+                        <div class="originea-logo-upload__status" id="originea-logo-status-{{ section.id }}"></div>
+                        <input type="hidden" name="properties[Logo URL]" form="{{ product_form_id }}" id="originea-logo-url-{{ section.id }}">
+                        <input type="hidden" name="properties[Logo fichier]" form="{{ product_form_id }}" id="originea-logo-name-{{ section.id }}">
+                      </div>
+
+                      <p class="originea-personalisation__note">
+                        Votre logo sera imprimé sur un sticker rond personnalisé.
+                        Délai de fabrication : <strong>4 jours ouvrés</strong>.
+                      </p>
+                    {%- endif -%}
+
                   </div>
+
+                  <style>
+                    @font-face { font-family: 'OrigineaCinzel'; src: url('{{ 'font-cinzel-regular.ttf' | asset_url }}') format('truetype'); font-display: swap; }
+                    @font-face { font-family: 'OrigineaGreatVibes'; src: url('{{ 'font-greatvibes-regular.ttf' | asset_url }}') format('truetype'); font-display: swap; }
+                    @font-face { font-family: 'OrigineaCorinthia'; src: url('{{ 'font-corinthia-regular.ttf' | asset_url }}') format('truetype'); font-display: swap; }
+                    @font-face { font-family: 'OrigineaInspiration'; src: url('{{ 'font-inspiration-regular.ttf' | asset_url }}') format('truetype'); font-display: swap; }
+                    @font-face { font-family: 'OrigineaPinyonScript'; src: url('{{ 'font-pinyonscript-regular.ttf' | asset_url }}') format('truetype'); font-display: swap; }
+                    @font-face { font-family: 'OrigineaPlaylistScript'; src: url('{{ 'font-playlistscript-regular.otf' | asset_url }}') format('opentype'); font-display: swap; }
+                  </style>
 
                   <script>
                     (function() {
                       var formId = {{ product_form_id | json }};
                       var sectionId = {{ section.id | json }};
-                      var containerId = 'originea-personalisation-rows-' + sectionId;
                       var product = {{ product | json }};
+                      var isSingleName = {{ is_single_name | json }};
+                      var isNameProduct = {{ is_name_product | json }};
+                      var isLogoProduct = {{ is_logo_product | json }};
+                      var UPLOADCARE_KEY = '7abc11da2e59a8bc3e3c';
+
+                      var fontFamilies = {
+                        'Cinzel': "'OrigineaCinzel', serif",
+                        'GreatVibes': "'OrigineaGreatVibes', cursive",
+                        'Corinthia': "'OrigineaCorinthia', cursive",
+                        'Inspiration': "'OrigineaInspiration', cursive",
+                        'PinyonScript': "'OrigineaPinyonScript', cursive",
+                        'PlaylistScript': "'OrigineaPlaylistScript', cursive"
+                      };
 
                       // --- Helpers ---
 
@@ -594,7 +751,6 @@
                         return product.options.map(function(o) { return o.toLowerCase(); }).indexOf(name.toLowerCase());
                       }
 
-                      // Get row count: from Format option value, or fixed per product
                       function getCountFromVariant(variant) {
                         var formatIdx = getOptionIndex('Format');
                         if (formatIdx >= 0 && variant && variant.options) {
@@ -607,147 +763,319 @@
                       function getInitialCount() {
                         var formatIdx = getOptionIndex('Format');
                         if (formatIdx >= 0) {
-                          // Read currently selected Format pill
                           var checked = document.querySelector('input[name="options[Format]"]:checked');
                           if (checked) return parseInt(checked.value) || 10;
-                          return parseInt(product.options_with_values ? product.options_with_values[formatIdx].values[0] : 10) || 10;
+                          return 10;
                         }
-                        // No Format option — count is fixed, try to read from variant title or default
-                        // Look for a number in the product title (e.g. "Coffret 20 Cornets")
                         var match = product.title.match(/\b(\d+)\b/);
                         return match ? parseInt(match[1]) : 1;
                       }
 
-                      // --- Show/hide personalisation block ---
-
-                      function getPersonnalisationBlock() {
-                        return document.querySelector('.originea-personalisation');
-                      }
-
-                      function hasPersonnalisationOption() {
-                        return getOptionIndex('Personnalisation') >= 0;
-                      }
-
                       function isPersonnalisationActive(variant) {
+                        if (!variant) return true;
+                        // Check options array by index
                         var idx = getOptionIndex('Personnalisation');
-                        if (idx < 0 || !variant) return true; // no option → always show
-                        return variant.options[idx] === 'Avec personnalisation';
+                        if (idx >= 0 && variant.options) {
+                          return variant.options[idx] === 'Avec personnalisation';
+                        }
+                        // Fallback: scan all options for Avec/Sans value
+                        if (variant.options) {
+                          for (var i = 0; i < variant.options.length; i++) {
+                            if (variant.options[i] === 'Sans personnalisation') return false;
+                            if (variant.options[i] === 'Avec personnalisation') return true;
+                          }
+                        }
+                        return true;
                       }
 
                       function getInitialPersonnalisationActive() {
-                        if (!hasPersonnalisationOption()) return true;
-                        var checked = document.querySelector('input[name="options[Personnalisation]"]:checked');
-                        if (checked) return checked.value === 'Avec personnalisation';
-                        // default to first variant
-                        return product.variants[0].options[getOptionIndex('Personnalisation')] === 'Avec personnalisation';
+                        // Dawn renders pill inputs with name="{{ option.name }}-{{ option.position }}"
+                        // Most reliable: check which variant is currently selected via the hidden id input
+                        var variantInput = document.querySelector('input[name="id"]');
+                        if (variantInput) {
+                          var vid = parseInt(variantInput.value);
+                          var v = product.variants.find(function(x) { return x.id === vid; });
+                          if (v) return isPersonnalisationActive(v);
+                        }
+                        // Fallback: scan all checked radio inputs for Avec/Sans value
+                        var allChecked = document.querySelectorAll('input[type="radio"]:checked');
+                        for (var i = 0; i < allChecked.length; i++) {
+                          if (allChecked[i].value === 'Sans personnalisation') return false;
+                          if (allChecked[i].value === 'Avec personnalisation') return true;
+                        }
+                        return true;
                       }
 
                       function toggleBlock(show) {
-                        var block = getPersonnalisationBlock();
+                        var block = document.querySelector('.originea-personalisation-block-' + sectionId)
+                                 || document.querySelector('.originea-personalisation');
                         if (!block) return;
                         block.style.display = show ? '' : 'none';
-                        // disable/enable required inputs inside so form can still submit
-                        block.querySelectorAll('input[required]').forEach(function(el) {
-                          el.disabled = !show;
+                        block.querySelectorAll('input[required]').forEach(function(el) { el.disabled = !show; });
+                      }
+
+                      // --- Font selector ---
+
+                      function initFontSelector() {
+                        var radios = document.querySelectorAll('input[name="originea_font_' + sectionId + '"]');
+                        var hidden = document.getElementById('originea-font-hidden-' + sectionId);
+                        var previewName = document.getElementById('originea-preview-name-' + sectionId);
+
+                        radios.forEach(function(radio) {
+                          radio.addEventListener('change', function() {
+                            var font = fontFamilies[this.value] || fontFamilies['Cinzel'];
+                            hidden.value = this.value;
+                            if (previewName) previewName.style.fontFamily = font;
+                          });
                         });
+                      }
+
+                      // --- Live preview ---
+
+                      function updatePreview(p1val, p2val, dtval) {
+                        var previewName = document.getElementById('originea-preview-name-' + sectionId);
+                        var previewDate = document.getElementById('originea-preview-date-' + sectionId);
+                        var previewDivider = document.getElementById('originea-preview-divider-' + sectionId);
+                        if (!previewName) return;
+
+                        var name = p1val || (isSingleName ? 'Camille' : 'Camille & Thomas');
+                        if (!isSingleName && p2val) name += ' & ' + p2val;
+                        previewName.textContent = name;
+
+                        if (previewDate) {
+                          var hasDate = dtval && dtval.trim() !== '';
+                          previewDate.textContent = hasDate ? dtval : '';
+                          previewDate.style.display = hasDate ? '' : 'none';
+                          if (previewDivider) previewDivider.style.display = hasDate ? '' : 'none';
+                        }
                       }
 
                       // --- Build rows ---
 
                       function buildRows(count) {
-                        var container = document.getElementById(containerId);
+                        var container = document.getElementById('originea-personalisation-rows-' + sectionId);
                         if (!container) return;
                         container.innerHTML = '';
+
                         for (var i = 1; i <= count; i++) {
                           var row = document.createElement('div');
-                          row.className = 'originea-personalisation__row';
+                          row.className = 'originea-personalisation__row' + (isSingleName ? ' originea-personalisation__row--single' : '');
 
-                          // Hidden combined Noms field submitted to cart
                           var hiddenNoms = document.createElement('input');
                           hiddenNoms.type = 'hidden';
                           hiddenNoms.name = 'properties[Étiquette ' + i + ' — Noms]';
                           hiddenNoms.form = formId;
                           row.appendChild(hiddenNoms);
 
-                          // Hidden date field submitted to cart
-                          var hiddenDate = document.createElement('input');
-                          hiddenDate.type = 'hidden';
-                          hiddenDate.name = 'properties[Étiquette ' + i + ' — Date]';
-                          hiddenDate.form = formId;
-                          row.appendChild(hiddenDate);
-
-                          // Row number
                           var num = document.createElement('span');
                           num.className = 'originea-personalisation__row-num';
                           num.textContent = i;
                           row.appendChild(num);
 
-                          // Visible: Prénom 1
                           var p1 = document.createElement('input');
                           p1.type = 'text';
-                          p1.placeholder = 'Ex : Camille';
+                          p1.placeholder = isSingleName ? 'Ex : Camille' : 'Ex : Camille';
                           p1.required = true;
                           p1.className = 'originea-personalisation__input';
                           row.appendChild(p1);
 
-                          // Visible: Prénom 2
-                          var p2 = document.createElement('input');
-                          p2.type = 'text';
-                          p2.placeholder = 'Ex : Thomas';
-                          p2.className = 'originea-personalisation__input';
-                          row.appendChild(p2);
+                          var p2, dt, hiddenDate;
 
-                          // Visible: Date
-                          var dt = document.createElement('input');
-                          dt.type = 'text';
-                          dt.placeholder = 'Ex : 24.06.2025';
-                          dt.className = 'originea-personalisation__input';
-                          row.appendChild(dt);
+                          if (!isSingleName) {
+                            p2 = document.createElement('input');
+                            p2.type = 'text';
+                            p2.placeholder = 'Ex : Thomas';
+                            p2.className = 'originea-personalisation__input';
+                            row.appendChild(p2);
 
-                          // Auto-combine Prénom 1 & 2 → hidden Noms
-                          (function(p1el, p2el, hidden) {
-                            function update() {
+                            hiddenDate = document.createElement('input');
+                            hiddenDate.type = 'hidden';
+                            hiddenDate.name = 'properties[Étiquette ' + i + ' — Date]';
+                            hiddenDate.form = formId;
+                            row.appendChild(hiddenDate);
+
+                            dt = document.createElement('input');
+                            dt.type = 'text';
+                            dt.placeholder = 'JJ.MM.AAAA';
+                            dt.maxLength = 10;
+                            dt.inputMode = 'numeric';
+                            dt.className = 'originea-personalisation__input';
+                            row.appendChild(dt);
+                          }
+
+                          // Combine names + update preview on row 1
+                          (function(p1el, p2el, dtEl, hiddenNomsEl, hiddenDateEl, rowIndex) {
+                            function updateNoms() {
                               var v1 = p1el.value.trim();
-                              var v2 = p2el.value.trim();
-                              hidden.value = v2 ? v1 + ' & ' + v2 : v1;
+                              var v2 = p2el ? p2el.value.trim() : '';
+                              hiddenNomsEl.value = v2 ? v1 + ' & ' + v2 : v1;
+                              if (rowIndex === 1) updatePreview(v1, v2, dtEl ? dtEl.value.trim() : '');
                             }
-                            p1el.addEventListener('input', update);
-                            p2el.addEventListener('input', update);
-                          })(p1, p2, hiddenNoms);
+                            p1el.addEventListener('input', updateNoms);
+                            if (p2el) p2el.addEventListener('input', updateNoms);
 
-                          // Sync date → hidden
-                          (function(dtEl, hiddenDtEl) {
-                            dtEl.addEventListener('input', function() {
-                              hiddenDtEl.value = dtEl.value.trim();
-                            });
-                          })(dt, hiddenDate);
+                            if (dtEl && hiddenDateEl) {
+                              // Date mask: auto-insert dots after DD and MM
+                              dtEl.addEventListener('keydown', function(e) {
+                                // Allow: backspace, delete, tab, arrows
+                                if ([8, 9, 37, 38, 39, 40, 46].indexOf(e.keyCode) !== -1) return;
+                                // Block non-numeric keys
+                                if (e.key && !/^\d$/.test(e.key)) e.preventDefault();
+                              });
+
+                              dtEl.addEventListener('input', function() {
+                                var digits = this.value.replace(/\D/g, '').slice(0, 8);
+                                var masked = '';
+                                if (digits.length <= 2) {
+                                  masked = digits;
+                                } else if (digits.length <= 4) {
+                                  masked = digits.slice(0, 2) + '.' + digits.slice(2);
+                                } else {
+                                  masked = digits.slice(0, 2) + '.' + digits.slice(2, 4) + '.' + digits.slice(4);
+                                }
+                                this.value = masked;
+                                hiddenDateEl.value = masked;
+                                if (rowIndex === 1) updatePreview(p1el.value.trim(), p2el ? p2el.value.trim() : '', masked);
+                              });
+                            }
+                          })(p1, p2, dt, hiddenNoms, hiddenDate, i);
 
                           container.appendChild(row);
+                        }
+                      }
+
+                      // --- Logo upload via Uploadcare ---
+
+                      function initLogoUpload() {
+                        var zone = document.getElementById('originea-logo-zone-' + sectionId);
+                        var fileInput = document.getElementById('originea-logo-file-' + sectionId);
+                        var preview = document.getElementById('originea-logo-preview-' + sectionId);
+                        var stickerImg = document.getElementById('originea-sticker-img-' + sectionId);
+                        var stickerSvg = zone ? (zone.closest('.originea-personalisation') || document).querySelector('.originea-sticker-preview__example') : null;
+                        var filenameEl = document.getElementById('originea-logo-filename-' + sectionId);
+                        var removeBtn = document.getElementById('originea-logo-remove-' + sectionId);
+                        var statusEl = document.getElementById('originea-logo-status-' + sectionId);
+                        var urlInput = document.getElementById('originea-logo-url-' + sectionId);
+                        var nameInput = document.getElementById('originea-logo-name-' + sectionId);
+
+                        if (!zone) return;
+
+                        zone.addEventListener('click', function() { fileInput.click(); });
+                        zone.querySelector('.originea-logo-upload__browse').addEventListener('click', function(e) {
+                          e.stopPropagation();
+                          fileInput.click();
+                        });
+
+                        // Drag & drop
+                        zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('originea-logo-upload__zone--drag'); });
+                        zone.addEventListener('dragleave', function() { zone.classList.remove('originea-logo-upload__zone--drag'); });
+                        zone.addEventListener('drop', function(e) {
+                          e.preventDefault();
+                          zone.classList.remove('originea-logo-upload__zone--drag');
+                          if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+                        });
+
+                        fileInput.addEventListener('change', function() {
+                          if (this.files[0]) handleFile(this.files[0]);
+                        });
+
+                        removeBtn.addEventListener('click', function() {
+                          preview.style.display = 'none';
+                          zone.style.display = '';
+                          urlInput.value = '';
+                          nameInput.value = '';
+                          fileInput.value = '';
+                          statusEl.textContent = '';
+                          if (stickerImg) { stickerImg.style.display = 'none'; stickerImg.src = ''; }
+                          if (stickerSvg) { stickerSvg.style.display = ''; }
+                        });
+
+                        function handleFile(file) {
+                          statusEl.textContent = 'Envoi en cours...';
+                          statusEl.className = 'originea-logo-upload__status originea-logo-upload__status--loading';
+
+                          // Show local preview in round sticker circle
+                          if (file.type.startsWith('image/')) {
+                            var reader = new FileReader();
+                            reader.onload = function(e) {
+                              if (stickerImg) {
+                                stickerImg.src = e.target.result;
+                                stickerImg.style.display = '';
+                              }
+                              if (stickerSvg) { stickerSvg.style.display = 'none'; }
+                            };
+                            reader.readAsDataURL(file);
+                          } else {
+                            if (stickerSvg) { stickerSvg.style.display = 'none'; }
+                          }
+                          filenameEl.textContent = file.name;
+                          preview.style.display = '';
+                          zone.style.display = 'none';
+                          nameInput.value = file.name;
+
+                          // Upload to Uploadcare
+                          var formData = new FormData();
+                          formData.append('UPLOADCARE_PUB_KEY', UPLOADCARE_KEY);
+                          formData.append('UPLOADCARE_STORE', '1');
+                          formData.append('file', file);
+
+                          fetch('https://upload.uploadcare.com/base/', {
+                            method: 'POST',
+                            body: formData
+                          })
+                          .then(function(r) { return r.json(); })
+                          .then(function(data) {
+                            if (data.file) {
+                              var fileUrl = 'https://ucarecdn.com/' + data.file + '/';
+                              urlInput.value = fileUrl;
+                              statusEl.textContent = '✓ Logo téléchargé avec succès';
+                              statusEl.className = 'originea-logo-upload__status originea-logo-upload__status--success';
+                            } else {
+                              throw new Error('Upload failed');
+                            }
+                          })
+                          .catch(function() {
+                            statusEl.textContent = '✗ Erreur lors du téléchargement. Veuillez réessayer.';
+                            statusEl.className = 'originea-logo-upload__status originea-logo-upload__status--error';
+                          });
                         }
                       }
 
                       // --- Init ---
 
                       function init() {
-                        var currentCount = getInitialCount();
-                        buildRows(currentCount);
-                        toggleBlock(getInitialPersonnalisationActive());
+                        if (isNameProduct) {
+                          var currentCount = getInitialCount();
+                          buildRows(currentCount);
+                          initFontSelector();
+                          toggleBlock(getInitialPersonnalisationActive());
 
-                        // Subscribe to Dawn's variantChange pubsub
-                        if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
-                          subscribe(PUB_SUB_EVENTS.variantChange, function(event) {
-                            var variant = event && event.data && event.data.variant;
-                            if (!variant) return;
+                          if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
+                            subscribe(PUB_SUB_EVENTS.variantChange, function(event) {
+                              var variant = event && event.data && event.data.variant;
+                              if (!variant) return;
+                              var newCount = getCountFromVariant(variant);
+                              if (newCount && newCount !== currentCount) {
+                                currentCount = newCount;
+                                buildRows(currentCount);
+                              }
+                              toggleBlock(isPersonnalisationActive(variant));
+                            });
+                          }
+                        }
 
-                            // Update row count if Format changed
-                            var newCount = getCountFromVariant(variant);
-                            if (newCount && newCount !== currentCount) {
-                              currentCount = newCount;
-                              buildRows(currentCount);
+                        if (isLogoProduct) {
+                          initLogoUpload();
+
+                          // Run on load
+                          toggleBlock(getInitialPersonnalisationActive());
+
+                          // Event delegation — fires on radio click before Dawn re-renders DOM
+                          document.addEventListener('change', function(e) {
+                            if (e.target && e.target.type === 'radio') {
+                              if (e.target.value === 'Sans personnalisation') toggleBlock(false);
+                              else if (e.target.value === 'Avec personnalisation') toggleBlock(true);
                             }
-
-                            // Show/hide based on Personnalisation
-                            toggleBlock(isPersonnalisationActive(variant));
                           });
                         }
                       }
