@@ -1690,67 +1690,15 @@ a.originea-contact__detail-value:hover {
 }
 
 /* ═══════════════════════════════════════════════
-   Product gallery — overlaid arrows on main image
+   Fix: allow arrows to overflow the slider wrapper
 ═══════════════════════════════════════════════ */
 
-/* Make the main slider a positioning context */
-[id^="GalleryViewer-"] {
-  position: relative;
+/* Remove overflow clipping so absolute arrows aren't cut off */
+.product--thumbnail_slider [id^="GalleryViewer-"].slider-mobile-gutter {
+  overflow: visible !important;
 }
 
-/* Move the slider-buttons bar out of flow and overlay it on the image */
-[id^="GalleryViewer-"] .slider-buttons {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  display: flex !important;
-  justify-content: space-between;
-  align-items: center;
-  pointer-events: none;
-  padding: 0 1rem;
-  z-index: 10;
-}
-
-/* Hide the counter — keep arrows only */
-[id^="GalleryViewer-"] .slider-counter {
-  display: none;
-}
-
-/* Style each arrow button */
-[id^="GalleryViewer-"] .slider-button {
-  pointer-events: all;
-  width: 2.8rem;
-  height: 2.8rem;
-  border-radius: 50%;
-  background: rgba(180, 175, 170, 0.75);
-  border: none;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  padding: 0;
-}
-
-[id^="GalleryViewer-"] .slider-button:hover {
-  background: rgba(150, 145, 140, 0.9);
-}
-
-[id^="GalleryViewer-"] .slider-button .svg-wrapper svg {
-  width: 1.2rem;
-  height: 1.2rem;
-  color: #fff;
-  fill: #fff;
-}
-
-/* Rotate the caret icon for prev/next directions */
-[id^="GalleryViewer-"] .slider-button--prev .svg-wrapper {
-  transform: rotate(90deg);
-}
-
-[id^="GalleryViewer-"] .slider-button--next .svg-wrapper {
-  transform: rotate(-90deg);
+/* Ensure the media list itself clips its content (images) */
+.product--thumbnail_slider [id^="GalleryViewer-"] .product__media-list {
+  overflow: hidden;
 }
