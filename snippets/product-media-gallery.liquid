@@ -333,13 +333,13 @@
       var slider = wrap.querySelector('[id^="Slider-Gallery-"]');
       if (!prev || !next || !slider) return;
 
+      // Only count slides that are visible (not hidden by hide_variants CSS)
       function getSlides() {
         return Array.from(slider.querySelectorAll('[data-media-id]')).filter(function(s) {
-          return s.offsetParent !== null && !s.classList.contains('hidden') && getComputedStyle(s).display !== 'none';
+          return getComputedStyle(s).display !== 'none';
         });
       }
 
-      // Track current index in closure to avoid reading unreliable is-active during transitions
       var currentIndex = 0;
 
       function syncIndexFromDOM() {
@@ -352,19 +352,31 @@
         var slides = getSlides();
         var newIndex = currentIndex + delta;
         if (newIndex < 0 || newIndex >= slides.length) return;
-        var target = slides[newIndex];
-        var mediaId = target.dataset.mediaId;
         currentIndex = newIndex;
-        if (mediaGallery && mediaGallery.setActiveMedia) {
-          mediaGallery.setActiveMedia(mediaId, false);
-        } else {
-          slides.forEach(function(s) { s.classList.remove('is-active'); });
-          target.classList.add('is-active');
-          slider.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
+        var target = slides[newIndex];
+        // Directly manage is-active only on visible slides, bypassing setActiveMedia
+        // which operates on all DOM slides including hidden ones
+        slider.querySelectorAll('[data-media-id]').forEach(function(s) {
+          s.classList.remove('is-active');
+        });
+        target.classList.add('is-active');
+        slider.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
+        // Also sync the thumbnail highlight
+        if (mediaGallery && mediaGallery.elements && mediaGallery.elements.thumbnails) {
+          var mediaId = target.dataset.mediaId;
+          mediaGallery.elements.thumbnails.querySelectorAll('button').forEach(function(btn) {
+            btn.removeAttribute('aria-current');
+          });
+          var thumb = mediaGallery.elements.thumbnails.querySelector('[data-target="' + mediaId + '"] button');
+          if (thumb) {
+            thumb.setAttribute('aria-current', 'true');
+            var thumbItem = thumb.closest('.thumbnail-list__item');
+            if (thumbItem) thumbItem.parentElement.scrollTo({ left: thumbItem.offsetLeft, behavior: 'smooth' });
+          }
         }
       }
 
-      // Keep currentIndex in sync when thumbnails or variant changes trigger a slide change
+      // Sync when variant selection changes the active slide externally
       var observer = new MutationObserver(function() {
         var slides = getSlides();
         var idx = slides.findIndex(function(s) { return s.classList.contains('is-active'); });
@@ -372,7 +384,6 @@
       });
       observer.observe(slider, { subtree: true, attributeFilter: ['class'], attributes: true });
 
-      // Initialise from DOM after a short delay to let Dawn set is-active
       setTimeout(syncIndexFromDOM, 200);
 
       prev.addEventListener('click', function() { goTo(-1); });
