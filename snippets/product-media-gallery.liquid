@@ -53,7 +53,7 @@
 >
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
   <div class="originea-gallery-viewer-wrap">
-  <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
+  <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter" style="touch-action:pan-y">
     <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
       {{ 'accessibility.skip_to_product_info' | t }}
     </a>
@@ -127,24 +127,6 @@
       {%- endfor -%}
     </ul>
   </slider-component>
-  {%- if media_count > 1 -%}
-    <button
-      type="button"
-      class="originea-gallery-arrow originea-gallery-arrow--prev"
-      aria-label="{{ 'general.slider.previous_slide' | t }}"
-      aria-controls="Slider-Gallery-{{ section.id }}"
-    >
-      <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
-    </button>
-    <button
-      type="button"
-      class="originea-gallery-arrow originea-gallery-arrow--next"
-      aria-label="{{ 'general.slider.next_slide' | t }}"
-      aria-controls="Slider-Gallery-{{ section.id }}"
-    >
-      <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
-    </button>
-  {%- endif -%}
   </div>{{- '<!-- /originea-gallery-viewer-wrap -->' -}}
   {%- if first_3d_model -%}
     <button
@@ -323,78 +305,3 @@
   {%- endif -%}
 </media-gallery>
 
-<script>
-(function() {
-  function initGalleryArrows() {
-    document.querySelectorAll('.originea-gallery-viewer-wrap').forEach(function(wrap) {
-      var prev = wrap.querySelector('.originea-gallery-arrow--prev');
-      var next = wrap.querySelector('.originea-gallery-arrow--next');
-      var mediaGallery = wrap.closest('media-gallery');
-      var slider = wrap.querySelector('[id^="Slider-Gallery-"]');
-      if (!prev || !next || !slider) return;
-
-      // Only count slides that are visible (not hidden by hide_variants CSS)
-      function getSlides() {
-        return Array.from(slider.querySelectorAll('[data-media-id]')).filter(function(s) {
-          return getComputedStyle(s).display !== 'none';
-        });
-      }
-
-      var currentIndex = 0;
-
-      function syncIndexFromDOM() {
-        var slides = getSlides();
-        var idx = slides.findIndex(function(s) { return s.classList.contains('is-active'); });
-        if (idx >= 0) currentIndex = idx;
-      }
-
-      function goTo(delta) {
-        var slides = getSlides();
-        var newIndex = currentIndex + delta;
-        if (newIndex < 0 || newIndex >= slides.length) return;
-        currentIndex = newIndex;
-        var target = slides[newIndex];
-        // Directly manage is-active only on visible slides, bypassing setActiveMedia
-        // which operates on all DOM slides including hidden ones
-        slider.querySelectorAll('[data-media-id]').forEach(function(s) {
-          s.classList.remove('is-active');
-        });
-        target.classList.add('is-active');
-        slider.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
-        // Also sync the thumbnail highlight
-        if (mediaGallery && mediaGallery.elements && mediaGallery.elements.thumbnails) {
-          var mediaId = target.dataset.mediaId;
-          mediaGallery.elements.thumbnails.querySelectorAll('button').forEach(function(btn) {
-            btn.removeAttribute('aria-current');
-          });
-          var thumb = mediaGallery.elements.thumbnails.querySelector('[data-target="' + mediaId + '"] button');
-          if (thumb) {
-            thumb.setAttribute('aria-current', 'true');
-            var thumbItem = thumb.closest('.thumbnail-list__item');
-            if (thumbItem) thumbItem.parentElement.scrollTo({ left: thumbItem.offsetLeft, behavior: 'smooth' });
-          }
-        }
-      }
-
-      // Sync when variant selection changes the active slide externally
-      var observer = new MutationObserver(function() {
-        var slides = getSlides();
-        var idx = slides.findIndex(function(s) { return s.classList.contains('is-active'); });
-        if (idx >= 0 && idx !== currentIndex) currentIndex = idx;
-      });
-      observer.observe(slider, { subtree: true, attributeFilter: ['class'], attributes: true });
-
-      setTimeout(syncIndexFromDOM, 200);
-
-      prev.addEventListener('click', function() { goTo(-1); });
-      next.addEventListener('click', function() { goTo(1); });
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initGalleryArrows);
-  } else {
-    initGalleryArrows();
-  }
-})();
-</script>
