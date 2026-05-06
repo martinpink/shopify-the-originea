@@ -334,7 +334,9 @@
       if (!prev || !next || !slider) return;
 
       function getSlides() {
-        return Array.from(slider.querySelectorAll('[data-media-id]'));
+        return Array.from(slider.querySelectorAll('[data-media-id]')).filter(function(s) {
+          return s.offsetParent !== null && !s.classList.contains('hidden') && getComputedStyle(s).display !== 'none';
+        });
       }
 
       // Track current index in closure to avoid reading unreliable is-active during transitions
