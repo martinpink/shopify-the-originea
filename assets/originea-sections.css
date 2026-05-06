@@ -1763,7 +1763,18 @@ a.originea-contact__detail-value:hover {
   transform: rotate(-90deg);
 }
 
-/* Hide the old slider-buttons bar in the gallery viewer */
+/* Hide the old slider-buttons bar visually but keep buttons in DOM for SliderComponent */
 [id^="GalleryViewer-"] .slider-buttons {
-  display: none !important;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* Keep actual buttons pointer-accessible so SliderComponent JS can trigger them */
+[id^="GalleryViewer-"] .slider-buttons .slider-button {
+  pointer-events: all;
+  display: block !important;
 }
