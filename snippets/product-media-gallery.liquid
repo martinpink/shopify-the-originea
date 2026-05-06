@@ -305,3 +305,87 @@
   {%- endif -%}
 </media-gallery>
 
+{%- comment -%} Thumbnail → variant option sync {%- endcomment -%}
+{%- if product.options.size > 1 -%}
+<script>
+(function() {
+  var mediaOptions = {};
+  {%- for variant in product.variants -%}
+    {%- if variant.featured_media -%}
+    mediaOptions[{{ variant.featured_media.id | json }}] = {
+      {%- for option in product.options -%}
+        {{ option.name | json }}: {{ variant['option' | append: option.position] | json }}{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    };
+    {%- endif -%}
+  {%- endfor -%}
+
+  function syncOptionsFromMedia(mediaId) {
+    var opts = mediaOptions[mediaId];
+    if (!opts) return;
+    var form = document.querySelector('form[action*="/cart/add"]');
+    if (!form) return;
+    Object.keys(opts).forEach(function(optionName) {
+      var value = opts[optionName];
+      // Try button-style variant picker first
+      var btn = form.querySelector('input[type="radio"][value="' + value + '"]');
+      if (btn && !btn.checked) {
+        btn.checked = true;
+        btn.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      // Also try select-style
+      var sel = form.querySelector('select[id*="' + optionName.replace(/\s/g,'') + '"], select[name="' + optionName + '"]');
+      if (sel && sel.value !== value) {
+        sel.value = value;
+        sel.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+    });
+  }
+
+  function getMediaIdFromSlide(slide) {
+    var dataId = slide.getAttribute('data-media-id') || '';
+    // data-media-id is "sectionId-mediaId"
+    var parts = dataId.split('-');
+    return parts[parts.length - 1];
+  }
+
+  function attachListeners() {
+    // Listen on thumbnail buttons
+    var thumbnails = document.querySelectorAll('#GalleryThumbnails-{{ section.id }} .thumbnail');
+    thumbnails.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var li = btn.closest('[data-target]');
+        if (!li) return;
+        var target = li.getAttribute('data-target') || '';
+        var mediaId = target.split('-').pop();
+        syncOptionsFromMedia(mediaId);
+      });
+    });
+
+    // Also observe slider for active slide changes (covers arrow nav / swipe)
+    var slider = document.getElementById('Slider-Gallery-{{ section.id }}');
+    if (!slider) return;
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        if (m.type === 'attributes' && m.attributeName === 'class') {
+          var slide = m.target;
+          if (slide.classList.contains('is-active')) {
+            syncOptionsFromMedia(getMediaIdFromSlide(slide));
+          }
+        }
+      });
+    });
+    slider.querySelectorAll('.slider__slide').forEach(function(slide) {
+      observer.observe(slide, { attributes: true });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attachListeners);
+  } else {
+    attachListeners();
+  }
+})();
+</script>
+{%- endif -%}
+
