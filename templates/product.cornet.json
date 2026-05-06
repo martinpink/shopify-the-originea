@@ -141,29 +141,6 @@
     },
     "logo-gallery": {
       "type": "logo-gallery",
-      "blocks": {
-        "logo-1": {
-          "type": "image",
-          "settings": {}
-        },
-        "logo-2": {
-          "type": "image",
-          "settings": {}
-        },
-        "logo-3": {
-          "type": "image",
-          "settings": {}
-        },
-        "logo-4": {
-          "type": "image",
-          "settings": {}
-        },
-        "logo-5": {
-          "type": "image",
-          "settings": {}
-        }
-      },
-      "block_order": ["logo-1", "logo-2", "logo-3", "logo-4", "logo-5"],
       "settings": {
         "title": "Exemples de logos personnalisés",
         "padding_top": 36,

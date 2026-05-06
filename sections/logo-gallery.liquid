@@ -1,17 +1,42 @@
+{%- liquid
+  comment
+    Collect images not assigned to any variant (logo examples).
+    Build a set of variant image IDs first, then exclude them.
+  endcomment
+  assign variant_image_ids = ''
+  for variant in product.variants
+    if variant.image
+      assign variant_image_ids = variant_image_ids | append: variant.image.id | append: ','
+    endif
+  endfor
+
+  assign logo_images = ''
+  assign logo_count = 0
+  for image in product.images
+    assign id_str = image.id | append: ','
+    unless variant_image_ids contains id_str
+      assign logo_count = logo_count | plus: 1
+      assign logo_images = logo_images | append: image.id | append: ','
+    endunless
+  endfor
+-%}
+
+{%- if logo_count > 0 -%}
 <style>
   .logo-gallery {
     padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    border-top: 1px solid rgba(var(--color-foreground), 0.1);
   }
   .logo-gallery__title {
     text-align: center;
-    margin-bottom: 1.6rem;
-    font-size: 1.8rem;
-    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+    font-size: 1.6rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
   }
   .logo-gallery__track-wrapper {
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
   }
   .logo-gallery__track {
     display: flex;
@@ -20,11 +45,9 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding: 0 2rem 1.2rem;
+    padding: 0 2rem 1rem;
   }
-  .logo-gallery__track::-webkit-scrollbar {
-    display: none;
-  }
+  .logo-gallery__track::-webkit-scrollbar { display: none; }
   .logo-gallery__item {
     flex: 0 0 calc(25% - 1.2rem);
     scroll-snap-align: start;
@@ -37,7 +60,7 @@
     height: auto;
     display: block;
     object-fit: cover;
-    aspect-ratio: 3/4;
+    aspect-ratio: 1/1;
   }
   .logo-gallery__nav {
     display: flex;
@@ -62,9 +85,7 @@
   }
   .logo-gallery__btn:hover { opacity: 1; }
   @media (max-width: 749px) {
-    .logo-gallery__item {
-      flex: 0 0 calc(70% - 0.8rem);
-    }
+    .logo-gallery__item { flex: 0 0 calc(65% - 0.8rem); }
   }
 </style>
 
@@ -75,23 +96,27 @@
 
   <div class="logo-gallery__track-wrapper">
     <div class="logo-gallery__track" id="logo-gallery-track-{{ section.id }}">
-      {%- for block in section.blocks -%}
-        {%- if block.settings.image != blank -%}
+      {%- for image in product.images -%}
+        {%- assign id_str = image.id | append: ',' -%}
+        {%- unless variant_image_ids contains id_str -%}
           <div class="logo-gallery__item">
-            {{- block.settings.image | image_url: width: 600 | image_tag:
+            {{- image | image_url: width: 600 | image_tag:
               loading: 'lazy',
-              alt: block.settings.image.alt | default: section.settings.title
+              alt: image.alt | default: section.settings.title,
+              widths: '300, 600'
             -}}
           </div>
-        {%- endif -%}
+        {%- endunless -%}
       {%- endfor -%}
     </div>
   </div>
 
+  {%- if logo_count > 1 -%}
   <div class="logo-gallery__nav">
     <button class="logo-gallery__btn" id="logo-gallery-prev-{{ section.id }}" aria-label="Précédent">&#8592;</button>
     <button class="logo-gallery__btn" id="logo-gallery-next-{{ section.id }}" aria-label="Suivant">&#8594;</button>
   </div>
+  {%- endif -%}
 </div>
 
 <script>
@@ -99,19 +124,19 @@
   var track = document.getElementById('logo-gallery-track-{{ section.id }}');
   var prev  = document.getElementById('logo-gallery-prev-{{ section.id }}');
   var next  = document.getElementById('logo-gallery-next-{{ section.id }}');
-  if (!track || !prev || !next) return;
+  if (!track) return;
 
   function scrollBy(dir) {
     var item = track.querySelector('.logo-gallery__item');
     if (!item) return;
-    var amount = (item.offsetWidth + 16) * dir;
-    track.scrollBy({ left: amount, behavior: 'smooth' });
+    track.scrollBy({ left: (item.offsetWidth + 16) * dir, behavior: 'smooth' });
   }
 
-  prev.addEventListener('click', function() { scrollBy(-1); });
-  next.addEventListener('click', function() { scrollBy(1); });
+  if (prev) prev.addEventListener('click', function() { scrollBy(-1); });
+  if (next) next.addEventListener('click', function() { scrollBy(1); });
 })();
 </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -145,19 +170,7 @@
       "default": 36
     }
   ],
-  "blocks": [
-    {
-      "type": "image",
-      "name": "Image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        }
-      ]
-    }
-  ],
+  "blocks": [],
   "presets": [
     {
       "name": "Logo Gallery"
