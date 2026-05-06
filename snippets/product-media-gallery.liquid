@@ -52,6 +52,7 @@
   data-desktop-layout="{{ section.settings.gallery_layout }}"
 >
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
+  <div class="originea-gallery-viewer-wrap">
   <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
     <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
       {{ 'accessibility.skip_to_product_info' | t }}
@@ -125,35 +126,26 @@
         {%- endunless -%}
       {%- endfor -%}
     </ul>
-    <div class="slider-buttons quick-add-hidden{% if hide_mobile_slider %} small-hide{% endif %}">
-      <button
-        type="button"
-        class="slider-button slider-button--prev"
-        name="previous"
-        aria-label="{{ 'general.slider.previous_slide' | t }}"
-      >
-        <span class="svg-wrapper">
-          {{- 'icon-caret.svg' | inline_asset_content -}}
-        </span>
-      </button>
-      <div class="slider-counter caption">
-        <span class="slider-counter--current">1</span>
-        <span aria-hidden="true"> / </span>
-        <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
-        <span class="slider-counter--total">{{ media_count }}</span>
-      </div>
-      <button
-        type="button"
-        class="slider-button slider-button--next"
-        name="next"
-        aria-label="{{ 'general.slider.next_slide' | t }}"
-      >
-        <span class="svg-wrapper">
-          {{- 'icon-caret.svg' | inline_asset_content -}}
-        </span>
-      </button>
-    </div>
   </slider-component>
+  {%- if media_count > 1 -%}
+    <button
+      type="button"
+      class="originea-gallery-arrow originea-gallery-arrow--prev"
+      aria-label="{{ 'general.slider.previous_slide' | t }}"
+      aria-controls="Slider-Gallery-{{ section.id }}"
+    >
+      <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+    </button>
+    <button
+      type="button"
+      class="originea-gallery-arrow originea-gallery-arrow--next"
+      aria-label="{{ 'general.slider.next_slide' | t }}"
+      aria-controls="Slider-Gallery-{{ section.id }}"
+    >
+      <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+    </button>
+  {%- endif -%}
+  </div>{{- '<!-- /originea-gallery-viewer-wrap -->' -}}
   {%- if first_3d_model -%}
     <button
       class="button button--full-width product__xr-button"
@@ -330,3 +322,31 @@
     </slider-component>
   {%- endif -%}
 </media-gallery>
+
+<script>
+(function() {
+  function initGalleryArrows() {
+    var wraps = document.querySelectorAll('.originea-gallery-viewer-wrap');
+    wraps.forEach(function(wrap) {
+      var prev = wrap.querySelector('.originea-gallery-arrow--prev');
+      var next = wrap.querySelector('.originea-gallery-arrow--next');
+      var sliderComponent = wrap.querySelector('slider-component');
+      if (!prev || !next || !sliderComponent) return;
+
+      prev.addEventListener('click', function() {
+        var btn = sliderComponent.querySelector('.slider-button--prev');
+        if (btn) btn.click();
+      });
+      next.addEventListener('click', function() {
+        var btn = sliderComponent.querySelector('.slider-button--next');
+        if (btn) btn.click();
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGalleryArrows);
+  } else {
+    initGalleryArrows();
+  }
+})();
+</script>
