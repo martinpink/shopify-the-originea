@@ -3595,3 +3595,41 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+/* ── Judge.me review widget sizing ── */
+#judgeme_product_reviews {
+  padding: 40px 0 60px;
+}
+
+.jdgm-widget .jdgm-review-widget__title,
+.jdgm-widget .jdgm-rev-widg__title {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+}
+
+.jdgm-widget .jdgm-no-reviews-msg,
+.jdgm-widget [class*="no-review"] {
+  font-size: 1.6rem;
+  padding: 40px 0;
+}
+
+.jdgm-widget .jdgm-write-rev-link,
+.jdgm-widget .jdgm-first-to-write-review {
+  font-size: 1.5rem;
+  padding: 1.4rem 3rem;
+  margin-top: 1.5rem;
+}
+
+.jdgm-rev__body {
+  font-size: 1.5rem;
+  line-height: 1.7;
+}
+
+.jdgm-rev__author {
+  font-size: 1.4rem;
+}
+
+.jdgm-summary {
+  font-size: 1.5rem;
+  padding: 20px 0;
+}
