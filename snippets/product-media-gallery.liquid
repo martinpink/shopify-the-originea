@@ -313,10 +313,9 @@
   {%- for variant in product.variants -%}
     {%- if variant.featured_media -%}
     mediaOptions[{{ variant.featured_media.id | json }}] = {
-      {%- for option in product.options -%}
-        {%- assign option_key = 'option' | append: option.position -%}
-        {{ option.name | json }}: {{ variant[option_key] | json }}{%- unless forloop.last -%},{%- endunless -%}
-      {%- endfor -%}
+      {{ product.options[0].name | json }}: {{ variant.option1 | json }},
+      {{ product.options[1].name | json }}: {{ variant.option2 | json }}
+      {%- if product.options.size > 2 -%},{{ product.options[2].name | json }}: {{ variant.option3 | json }}{%- endif -%}
     };
     {%- endif -%}
   {%- endfor -%}
