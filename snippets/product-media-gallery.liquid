@@ -322,23 +322,24 @@
   {%- endfor -%}
 
   function syncOptionsFromMedia(mediaId) {
-    var opts = mediaOptions[mediaId];
+    var opts = mediaOptions[String(mediaId)];
     if (!opts) return;
-    var form = document.querySelector('form[action*="/cart/add"]');
-    if (!form) return;
-    Object.keys(opts).forEach(function(optionName) {
+    var formId = 'product-form-{{ section.id }}';
+    Object.keys(opts).forEach(function(optionName, idx) {
       var value = opts[optionName];
-      // Try button-style variant picker first
-      var btn = form.querySelector('input[type="radio"][value="' + value + '"]');
-      if (btn && !btn.checked) {
-        btn.checked = true;
-        btn.dispatchEvent(new Event('change', { bubbles: true }));
+      var position = idx + 1;
+      // Radio name is "{optionName}-{position}" per product-variant-options.liquid
+      var inputName = optionName + '-' + position;
+      var radio = document.querySelector('input[type="radio"][name="' + inputName + '"][value="' + value + '"]');
+      if (radio && !radio.checked) {
+        radio.checked = true;
+        radio.dispatchEvent(new Event('change', { bubbles: true }));
       }
-      // Also try select-style
-      var sel = form.querySelector('select[id*="' + optionName.replace(/\s/g,'') + '"], select[name="' + optionName + '"]');
-      if (sel && sel.value !== value) {
-        sel.value = value;
-        sel.dispatchEvent(new Event('change', { bubbles: true }));
+      // Dropdown fallback
+      var sel = document.querySelector('select[form="' + formId + '"] option[value="' + value + '"]');
+      if (sel) {
+        sel.parentElement.value = value;
+        sel.parentElement.dispatchEvent(new Event('change', { bubbles: true }));
       }
     });
   }
