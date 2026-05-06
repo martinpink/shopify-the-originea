@@ -329,7 +329,8 @@
       var position = idx + 1;
       var inputName = optionName + '-' + position;
       // Find by name, then match value via .value property (avoids HTML-escape mismatch)
-      var radios = document.querySelectorAll('input[type="radio"][name="' + inputName + '"]');
+      var radios = document.querySelectorAll('input[type="radio"]');
+      radios = Array.prototype.filter.call(radios, function(r) { return r.name.trim() === inputName; });
       radios.forEach(function(radio) {
         if (radio.value === value && !radio.checked) {
           radio.checked = true;
