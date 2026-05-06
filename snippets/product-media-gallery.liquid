@@ -324,23 +324,28 @@
   function syncOptionsFromMedia(mediaId) {
     var opts = mediaOptions[String(mediaId)];
     if (!opts) return;
-    var formId = 'product-form-{{ section.id }}';
     Object.keys(opts).forEach(function(optionName, idx) {
       var value = opts[optionName];
       var position = idx + 1;
-      // Radio name is "{optionName}-{position}" per product-variant-options.liquid
       var inputName = optionName + '-' + position;
-      var radio = document.querySelector('input[type="radio"][name="' + inputName + '"][value="' + value + '"]');
-      if (radio && !radio.checked) {
-        radio.checked = true;
-        radio.dispatchEvent(new Event('change', { bubbles: true }));
-      }
+      // Find by name, then match value via .value property (avoids HTML-escape mismatch)
+      var radios = document.querySelectorAll('input[type="radio"][name="' + inputName + '"]');
+      radios.forEach(function(radio) {
+        if (radio.value === value && !radio.checked) {
+          radio.checked = true;
+          radio.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      });
       // Dropdown fallback
-      var sel = document.querySelector('select[form="' + formId + '"] option[value="' + value + '"]');
-      if (sel) {
-        sel.parentElement.value = value;
-        sel.parentElement.dispatchEvent(new Event('change', { bubbles: true }));
-      }
+      var selects = document.querySelectorAll('select');
+      selects.forEach(function(sel) {
+        Array.prototype.forEach.call(sel.options, function(opt) {
+          if (opt.value === value) {
+            sel.value = value;
+            sel.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        });
+      });
     });
   }
 
