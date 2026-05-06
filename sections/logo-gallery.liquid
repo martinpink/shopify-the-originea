@@ -1,0 +1,167 @@
+<style>
+  .logo-gallery {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+  .logo-gallery__title {
+    text-align: center;
+    margin-bottom: 1.6rem;
+    font-size: 1.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .logo-gallery__track-wrapper {
+    overflow: hidden;
+    position: relative;
+  }
+  .logo-gallery__track {
+    display: flex;
+    gap: 1.6rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 2rem 1.2rem;
+  }
+  .logo-gallery__track::-webkit-scrollbar {
+    display: none;
+  }
+  .logo-gallery__item {
+    flex: 0 0 calc(25% - 1.2rem);
+    scroll-snap-align: start;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    background: #f9f7f4;
+  }
+  .logo-gallery__item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 3/4;
+  }
+  .logo-gallery__nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 1.6rem;
+  }
+  .logo-gallery__btn {
+    background: rgb(var(--color-foreground));
+    color: rgb(var(--color-background));
+    border: none;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  .logo-gallery__btn:hover { opacity: 1; }
+  @media (max-width: 749px) {
+    .logo-gallery__item {
+      flex: 0 0 calc(70% - 0.8rem);
+    }
+  }
+</style>
+
+<div class="logo-gallery page-width">
+  {%- if section.settings.title != blank -%}
+    <h2 class="logo-gallery__title">{{ section.settings.title }}</h2>
+  {%- endif -%}
+
+  <div class="logo-gallery__track-wrapper">
+    <div class="logo-gallery__track" id="logo-gallery-track-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image != blank -%}
+          <div class="logo-gallery__item">
+            {{- block.settings.image | image_url: width: 600 | image_tag:
+              loading: 'lazy',
+              alt: block.settings.image.alt | default: section.settings.title
+            -}}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="logo-gallery__nav">
+    <button class="logo-gallery__btn" id="logo-gallery-prev-{{ section.id }}" aria-label="Précédent">&#8592;</button>
+    <button class="logo-gallery__btn" id="logo-gallery-next-{{ section.id }}" aria-label="Suivant">&#8594;</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var track = document.getElementById('logo-gallery-track-{{ section.id }}');
+  var prev  = document.getElementById('logo-gallery-prev-{{ section.id }}');
+  var next  = document.getElementById('logo-gallery-next-{{ section.id }}');
+  if (!track || !prev || !next) return;
+
+  function scrollBy(dir) {
+    var item = track.querySelector('.logo-gallery__item');
+    if (!item) return;
+    var amount = (item.offsetWidth + 16) * dir;
+    track.scrollBy({ left: amount, behavior: 'smooth' });
+  }
+
+  prev.addEventListener('click', function() { scrollBy(-1); });
+  next.addEventListener('click', function() { scrollBy(1); });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Logo Gallery",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Exemples de logos personnalisés"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo Gallery"
+    }
+  ]
+}
+{% endschema %}
