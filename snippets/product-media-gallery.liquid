@@ -326,23 +326,48 @@
 <script>
 (function() {
   function initGalleryArrows() {
-    var wraps = document.querySelectorAll('.originea-gallery-viewer-wrap');
-    wraps.forEach(function(wrap) {
+    document.querySelectorAll('.originea-gallery-viewer-wrap').forEach(function(wrap) {
       var prev = wrap.querySelector('.originea-gallery-arrow--prev');
       var next = wrap.querySelector('.originea-gallery-arrow--next');
-      var sliderComponent = wrap.querySelector('slider-component');
-      if (!prev || !next || !sliderComponent) return;
+      var mediaGallery = wrap.closest('media-gallery');
+      var slider = wrap.querySelector('[id^="Slider-Gallery-"]');
+      if (!prev || !next || !slider) return;
+
+      function getSlides() {
+        return Array.from(slider.querySelectorAll('[data-media-id]'));
+      }
+
+      function getActiveIndex(slides) {
+        var idx = slides.findIndex(function(s) { return s.classList.contains('is-active'); });
+        return idx >= 0 ? idx : 0;
+      }
+
+      function goTo(slides, index) {
+        if (index < 0 || index >= slides.length) return;
+        var target = slides[index];
+        var mediaId = target.dataset.mediaId;
+        if (mediaGallery && mediaGallery.setActiveMedia) {
+          mediaGallery.setActiveMedia(mediaId, false);
+        } else {
+          // Fallback: scroll directly
+          slides.forEach(function(s) { s.classList.remove('is-active'); });
+          target.classList.add('is-active');
+          slider.scrollTo({ left: target.offsetLeft, behavior: 'smooth' });
+        }
+      }
 
       prev.addEventListener('click', function() {
-        var btn = sliderComponent.querySelector('.slider-button--prev');
-        if (btn) btn.click();
+        var slides = getSlides();
+        goTo(slides, getActiveIndex(slides) - 1);
       });
+
       next.addEventListener('click', function() {
-        var btn = sliderComponent.querySelector('.slider-button--next');
-        if (btn) btn.click();
+        var slides = getSlides();
+        goTo(slides, getActiveIndex(slides) + 1);
       });
     });
   }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initGalleryArrows);
   } else {
