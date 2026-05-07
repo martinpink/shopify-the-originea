@@ -1727,3 +1727,30 @@ a.originea-contact__detail-value:hover {
   pointer-events: all;
   display: block !important;
 }
+
+/* ═══════════════════════════════════════════════
+   Devis 100+ block
+═══════════════════════════════════════════════ */
+
+.originea-devis-block {
+  margin-top: 2rem;
+  padding: 1.6rem;
+  border: 1px solid rgba(var(--color-foreground), 0.12);
+  border-radius: 0.8rem;
+  background: rgba(var(--color-foreground), 0.03);
+}
+
+.originea-devis-block__text {
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  color: rgb(var(--color-foreground));
+  line-height: 1.5;
+}
+
+.originea-devis-block__btn {
+  display: block;
+  text-align: center;
+  font-size: 1.3rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
