@@ -1729,28 +1729,124 @@ a.originea-contact__detail-value:hover {
 }
 
 /* ═══════════════════════════════════════════════
-   Devis 100+ block
+   Devis 100+ pill button
 ═══════════════════════════════════════════════ */
 
-.originea-devis-block {
-  margin-top: 2rem;
-  padding: 1.6rem;
-  border: 1px solid rgba(var(--color-foreground), 0.12);
-  border-radius: 0.8rem;
-  background: rgba(var(--color-foreground), 0.03);
-}
-
-.originea-devis-block__text {
-  font-size: 1.4rem;
-  margin-bottom: 1.2rem;
+.originea-devis-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 6.4rem;
+  height: 4.5rem;
+  padding: 0 2rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.55);
+  border-radius: 10rem;
+  background: transparent;
   color: rgb(var(--color-foreground));
-  line-height: 1.5;
+  font-size: 1.4rem;
+  font-family: inherit;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
 }
 
-.originea-devis-block__btn {
-  display: block;
-  text-align: center;
+.originea-devis-pill:hover {
+  border-color: rgb(var(--color-foreground));
+  background: rgba(var(--color-foreground), 0.05);
+}
+
+/* ═══════════════════════════════════════════════
+   Devis 100+ modal
+═══════════════════════════════════════════════ */
+
+.originea-devis-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.originea-devis-modal[hidden] { display: none; }
+
+.originea-devis-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.originea-devis-modal__box {
+  position: relative;
+  background: rgb(var(--color-background));
+  border-radius: 1.2rem;
+  padding: 3.2rem;
+  width: min(52rem, calc(100vw - 3.2rem));
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  box-shadow: 0 2rem 6rem rgba(0,0,0,0.18);
+}
+
+.originea-devis-modal__close {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+  background: none;
+  border: none;
+  font-size: 2.4rem;
+  cursor: pointer;
+  color: rgb(var(--color-foreground));
+  line-height: 1;
+  padding: 0.4rem;
+}
+
+.originea-devis-modal__title {
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.originea-devis-modal__subtitle {
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.7);
+  margin-bottom: 2.4rem;
+}
+
+.originea-devis-modal__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.originea-devis-modal__row label {
   font-size: 1.3rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+.originea-devis-modal__row input,
+.originea-devis-modal__row select,
+.originea-devis-modal__row textarea {
+  width: 100%;
+  padding: 1rem 1.4rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.25);
+  border-radius: 0.6rem;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  font-size: 1.4rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.originea-devis-modal__row input:focus,
+.originea-devis-modal__row select:focus,
+.originea-devis-modal__row textarea:focus {
+  outline: none;
+  border-color: rgb(var(--color-foreground));
+}
+
+.originea-devis-modal__submit {
+  width: 100%;
+  margin-top: 0.8rem;
 }

@@ -51,6 +51,9 @@
             block: block,
             picker_type: picker_type
           %}
+          {%- if option.name == 'Format' and product.tags contains 'devis-100' -%}
+            <button type="button" class="originea-devis-pill" id="originea-devis-trigger-{{ section.id }}">100+</button>
+          {%- endif -%}
         </fieldset>
       {%- else -%}
         <div class="product-form__input product-form__input--dropdown">
