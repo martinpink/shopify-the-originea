@@ -1848,3 +1848,16 @@ a.originea-contact__detail-value:hover {
   width: 100%;
   margin-top: 0.8rem;
 }
+
+.originea-devis-modal__hint {
+  font-size: 1.2rem;
+  opacity: 0.6;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.originea-devis-modal__note {
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.55);
+  line-height: 1.5;
+}

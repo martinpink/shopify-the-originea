@@ -1168,8 +1168,13 @@
                           <input type="date" id="originea-devis-date-{{ section.id }}" name="contact[date_evenement]">
                         </div>
                         <div class="originea-devis-modal__row">
+                          <label for="originea-devis-prenoms-{{ section.id }}">Prénoms à imprimer <span class="originea-devis-modal__hint">(un par ligne)</span></label>
+                          <textarea id="originea-devis-prenoms-{{ section.id }}" name="contact[prenoms]" rows="6" placeholder="Marie&#10;Thomas&#10;Camille&#10;..."></textarea>
+                          <span class="originea-devis-modal__note">Laissez vide si vous souhaitez nous envoyer la liste par email après confirmation du devis.</span>
+                        </div>
+                        <div class="originea-devis-modal__row">
                           <label for="originea-devis-msg-{{ section.id }}">Message (optionnel)</label>
-                          <textarea id="originea-devis-msg-{{ section.id }}" name="contact[body]" rows="3" placeholder="Précisions sur votre commande..."></textarea>
+                          <textarea id="originea-devis-msg-{{ section.id }}" name="contact[body]" rows="2" placeholder="Précisions sur votre commande..."></textarea>
                         </div>
                         <button type="submit" class="button button--primary originea-devis-modal__submit">Envoyer ma demande</button>
                       </form>
