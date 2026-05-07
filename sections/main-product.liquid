@@ -1178,6 +1178,12 @@
                         </div>
                         <button type="submit" class="button button--primary originea-devis-modal__submit">Envoyer ma demande</button>
                       </form>
+                      <div class="originea-devis-modal__success" hidden>
+                        <div class="originea-devis-modal__success-icon">&#10003;</div>
+                        <h3>Demande envoyée !</h3>
+                        <p>Merci pour votre demande. Nous vous répondrons dans les 24h avec votre devis personnalisé.</p>
+                        <button type="button" class="button button--primary originea-devis-modal__success-close">Fermer</button>
+                      </div>
                     </div>
                   </div>
                   <script>
@@ -1190,6 +1196,9 @@
                       var backdrop = modal.querySelector('.originea-devis-modal__backdrop');
                       var closeBtn = modal.querySelector('.originea-devis-modal__close');
                       var fruitSel = modal.querySelector('#originea-devis-fruit-{{ section.id }}');
+                      var form = modal.querySelector('.originea-devis-modal__form');
+                      var successDiv = modal.querySelector('.originea-devis-modal__success');
+                      var successClose = modal.querySelector('.originea-devis-modal__success-close');
 
                       function openModal() {
                         var checked = document.querySelector('input[type="radio"][name^="Fruit"]:checked');
@@ -1203,6 +1212,42 @@
                       function closeModal() {
                         modal.setAttribute('hidden', '');
                         document.body.style.overflow = '';
+                        // Reset form for next time
+                        if (form) { form.reset(); form.removeAttribute('hidden'); }
+                        if (successDiv) successDiv.setAttribute('hidden', '');
+                      }
+
+                      // AJAX form submission
+                      if (form) {
+                        form.addEventListener('submit', function(e) {
+                          e.preventDefault();
+                          var data = new FormData(form);
+                          fetch('/contact', {
+                            method: 'POST',
+                            body: data,
+                            headers: { 'Accept': 'application/json' }
+                          }).then(function() {
+                            // Fire Klaviyo event for confirmation email flow
+                            var email = form.querySelector('[name="contact[email]"]').value;
+                            var name  = form.querySelector('[name="contact[name]"]').value;
+                            var fruit = form.querySelector('[name="contact[fruit]"]').value;
+                            var qty   = form.querySelector('[name="contact[quantite]"]').value;
+                            if (window._learnq) {
+                              window._learnq.push(['identify', { '$email': email, '$first_name': name }]);
+                              window._learnq.push(['track', 'Devis Requested', {
+                                'Product': {{ product.title | json }},
+                                'Fruit': fruit,
+                                'Quantite': qty,
+                                'Source': 'Devis Form 100+'
+                              }]);
+                            }
+                            form.setAttribute('hidden', '');
+                            successDiv.removeAttribute('hidden');
+                          }).catch(function() {
+                            form.setAttribute('hidden', '');
+                            successDiv.removeAttribute('hidden');
+                          });
+                        });
                       }
 
                       document.addEventListener('click', function(e) {
@@ -1210,6 +1255,7 @@
                       });
                       if (closeBtn) closeBtn.addEventListener('click', closeModal);
                       if (backdrop) backdrop.addEventListener('click', closeModal);
+                      if (successClose) successClose.addEventListener('click', closeModal);
                       modal.addEventListener('keydown', function(e) {
                         if (e.key === 'Escape') closeModal();
                       });
