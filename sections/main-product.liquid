@@ -1217,30 +1217,57 @@
                         if (successDiv) successDiv.setAttribute('hidden', '');
                       }
 
+                      // Klaviyo proxy initializer — safe to run before klaviyo.js loads
+                      (function() {
+                        if (!window.klaviyo) {
+                          window._klOnsite = window._klOnsite || [];
+                          try {
+                            window.klaviyo = new Proxy({}, {
+                              get: function(n, i) {
+                                return 'push' === i
+                                  ? function() { window._klOnsite.push.apply(window._klOnsite, arguments); }
+                                  : function() {
+                                      var args = Array.prototype.slice.call(arguments);
+                                      var cb = typeof args[args.length - 1] === 'function' ? args.pop() : undefined;
+                                      return new Promise(function(resolve) {
+                                        window._klOnsite.push([i].concat(args, [function(v) { if (cb) cb(v); resolve(v); }]));
+                                      });
+                                    };
+                              }
+                            });
+                          } catch(e) {
+                            window.klaviyo = window.klaviyo || [];
+                            window.klaviyo.push = function() { window._klOnsite.push.apply(window._klOnsite, arguments); };
+                          }
+                        }
+                      })();
+
                       // AJAX form submission
                       if (form) {
                         form.addEventListener('submit', function(e) {
                           e.preventDefault();
                           var data = new FormData(form);
+                          var email = form.querySelector('[name="contact[email]"]').value;
+                          var name  = form.querySelector('[name="contact[name]"]').value;
+                          var fruit = form.querySelector('[name="contact[fruit]"]').value;
+                          var qty   = form.querySelector('[name="contact[quantite]"]').value;
                           fetch('/contact', {
                             method: 'POST',
                             body: data,
                             headers: { 'Accept': 'application/json' }
                           }).then(function() {
-                            // Fire Klaviyo event for confirmation email flow
-                            var email = form.querySelector('[name="contact[email]"]').value;
-                            var name  = form.querySelector('[name="contact[name]"]').value;
-                            var fruit = form.querySelector('[name="contact[fruit]"]').value;
-                            var qty   = form.querySelector('[name="contact[quantite]"]').value;
-                            if (window._learnq) {
-                              window._learnq.push(['identify', { '$email': email, '$first_name': name }]);
-                              window._learnq.push(['track', 'Devis Requested', {
+                            // Identify first, then track — required by Klaviyo
+                            window.klaviyo.identify({
+                              '$email': email,
+                              '$first_name': name
+                            }).then(function() {
+                              window.klaviyo.track('Devis Requested', {
                                 'Product': {{ product.title | json }},
                                 'Fruit': fruit,
                                 'Quantite': qty,
                                 'Source': 'Devis Form 100+'
-                              }]);
-                            }
+                              });
+                            });
                             form.setAttribute('hidden', '');
                             successDiv.removeAttribute('hidden');
                           }).catch(function() {
