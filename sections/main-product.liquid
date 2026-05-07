@@ -1133,33 +1133,79 @@
                 -%}
 
                 {%- if product.tags contains 'devis-100' -%}
-                  <div class="originea-devis-block">
-                    <p class="originea-devis-block__text">Vous avez besoin de <strong>plus de 100 unités</strong> ? Contactez-nous pour un devis personnalisé.</p>
-                    <a
-                      href="/pages/contact"
-                      class="originea-devis-block__btn button button--secondary"
-                      id="originea-devis-btn-{{ section.id }}"
-                    >
-                      Commander 100+ — Demander un devis
-                    </a>
+                  <div id="originea-devis-modal-{{ section.id }}" class="originea-devis-modal" role="dialog" aria-modal="true" aria-label="Demande de devis" hidden>
+                    <div class="originea-devis-modal__backdrop"></div>
+                    <div class="originea-devis-modal__box">
+                      <button type="button" class="originea-devis-modal__close" aria-label="Fermer">&times;</button>
+                      <h3 class="originea-devis-modal__title">Demande de devis — 100+ unités</h3>
+                      <p class="originea-devis-modal__subtitle">Remplissez ce formulaire et nous vous répondrons sous 24h.</p>
+                      <form class="originea-devis-modal__form" id="originea-devis-form-{{ section.id }}" action="/contact" method="post">
+                        <input type="hidden" name="form_type" value="contact">
+                        <input type="hidden" name="utf8" value="✓">
+                        <input type="hidden" name="contact[subject]" id="originea-devis-subject-{{ section.id }}" value="Demande de devis — {{ product.title | escape }}">
+                        <div class="originea-devis-modal__row">
+                          <label for="originea-devis-name-{{ section.id }}">Nom & Prénom</label>
+                          <input type="text" id="originea-devis-name-{{ section.id }}" name="contact[name]" required placeholder="Marie Dupont">
+                        </div>
+                        <div class="originea-devis-modal__row">
+                          <label for="originea-devis-email-{{ section.id }}">Email</label>
+                          <input type="email" id="originea-devis-email-{{ section.id }}" name="contact[email]" required placeholder="marie@exemple.fr">
+                        </div>
+                        <div class="originea-devis-modal__row">
+                          <label for="originea-devis-fruit-{{ section.id }}">Fruit</label>
+                          <select id="originea-devis-fruit-{{ section.id }}" name="contact[fruit]">
+                            {%- for value in product.options_with_values[0].values -%}
+                              <option value="{{ value }}">{{ value }}</option>
+                            {%- endfor -%}
+                          </select>
+                        </div>
+                        <div class="originea-devis-modal__row">
+                          <label for="originea-devis-qty-{{ section.id }}">Quantité souhaitée</label>
+                          <input type="number" id="originea-devis-qty-{{ section.id }}" name="contact[quantite]" min="100" placeholder="ex. 200" required>
+                        </div>
+                        <div class="originea-devis-modal__row">
+                          <label for="originea-devis-date-{{ section.id }}">Date de l’événement</label>
+                          <input type="date" id="originea-devis-date-{{ section.id }}" name="contact[date_evenement]">
+                        </div>
+                        <div class="originea-devis-modal__row">
+                          <label for="originea-devis-msg-{{ section.id }}">Message (optionnel)</label>
+                          <textarea id="originea-devis-msg-{{ section.id }}" name="contact[body]" rows="3" placeholder="Précisions sur votre commande..."></textarea>
+                        </div>
+                        <button type="submit" class="button button--primary originea-devis-modal__submit">Envoyer ma demande</button>
+                      </form>
+                    </div>
                   </div>
                   <script>
                   (function() {
-                    var btn = document.getElementById('originea-devis-btn-{{ section.id }}');
-                    if (!btn) return;
-                    var productTitle = {{ product.title | json }};
-                    function updateDevisLink() {
-                      var fruit = '';
-                      var fruitRadio = document.querySelector('input[type="radio"][name^="Fruit"]:checked');
-                      if (fruitRadio) fruit = fruitRadio.value;
-                      var subject = encodeURIComponent('Demande de devis — ' + productTitle);
-                      var body = encodeURIComponent('Bonjour,\n\nJe souhaite commander plus de 100 étiquettes.\n\nFruit : ' + (fruit || '—') + '\nQuantité souhaitée : \nDate de l’événement : \n\nMerci de me contacter.');
-                      btn.href = '/pages/contact?subject=' + subject + '&body=' + body;
+                    var trigger = document.getElementById(‘originea-devis-trigger-{{ section.id }}’);
+                    var modal   = document.getElementById(‘originea-devis-modal-{{ section.id }}’);
+                    if (!trigger || !modal) return;
+
+                    var backdrop = modal.querySelector(‘.originea-devis-modal__backdrop’);
+                    var closeBtn = modal.querySelector(‘.originea-devis-modal__close’);
+                    var fruitSel = modal.querySelector(‘#originea-devis-fruit-{{ section.id }}’);
+
+                    function openModal() {
+                      // Sync fruit selection from variant picker
+                      var checked = document.querySelector(‘input[type="radio"][name^="Fruit"]:checked’);
+                      if (checked && fruitSel) fruitSel.value = checked.value;
+                      modal.removeAttribute(‘hidden’);
+                      document.body.style.overflow = ‘hidden’;
+                      modal.querySelector(‘input,select’).focus();
                     }
-                    document.querySelectorAll('input[type="radio"]').forEach(function(r) {
-                      r.addEventListener('change', updateDevisLink);
+
+                    function closeModal() {
+                      modal.setAttribute(‘hidden’, ‘’);
+                      document.body.style.overflow = ‘’;
+                      trigger.focus();
+                    }
+
+                    trigger.addEventListener(‘click’, openModal);
+                    closeBtn.addEventListener(‘click’, closeModal);
+                    backdrop.addEventListener(‘click’, closeModal);
+                    modal.addEventListener(‘keydown’, function(e) {
+                      if (e.key === ‘Escape’) closeModal();
                     });
-                    updateDevisLink();
                   })();
                   </script>
                 {%- endif -%}
