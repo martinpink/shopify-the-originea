@@ -1217,15 +1217,20 @@
                         if (successDiv) successDiv.setAttribute('hidden', '');
                       }
 
-                      function waitForKlaviyo(callback, attempts) {
-                        attempts = attempts || 0;
-                        if (attempts > 50) return; // give up after 5s
-                        var kl = window.klaviyo;
-                        if (kl && typeof kl.push === 'function' && !Array.isArray(kl)) {
-                          callback(kl);
-                        } else {
-                          setTimeout(function() { waitForKlaviyo(callback, attempts + 1); }, 100);
-                        }
+                      function sendKlaviyoEvent(email, name, fruit, qty) {
+                        var learnq = window._learnq = window._learnq || [];
+                        console.log('[Devis] sending Klaviyo event, _learnq length before:', learnq.length);
+                        learnq.push(['identify', {
+                          '$email': email,
+                          '$first_name': name
+                        }]);
+                        learnq.push(['track', 'Devis Requested', {
+                          'Product': {{ product.title | json }},
+                          'Fruit': fruit,
+                          'Quantite': qty,
+                          'Source': 'Devis Form 100+'
+                        }]);
+                        console.log('[Devis] _learnq length after:', learnq.length, '| window.klaviyo type:', typeof window.klaviyo);
                       }
 
                       // AJAX form submission
@@ -1244,18 +1249,7 @@
                           }).then(function() {
                             form.setAttribute('hidden', '');
                             successDiv.removeAttribute('hidden');
-                            waitForKlaviyo(function(kl) {
-                              kl.identify({
-                                '$email': email,
-                                '$first_name': name
-                              });
-                              kl.track('Devis Requested', {
-                                'Product': {{ product.title | json }},
-                                'Fruit': fruit,
-                                'Quantite': qty,
-                                'Source': 'Devis Form 100+'
-                              });
-                            });
+                            sendKlaviyoEvent(email, name, fruit, qty);
                           }).catch(function() {
                             form.setAttribute('hidden', '');
                             successDiv.removeAttribute('hidden');
