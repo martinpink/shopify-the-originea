@@ -1131,6 +1131,39 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
+
+                {%- if product.tags contains 'devis-100' -%}
+                  <div class="originea-devis-block">
+                    <p class="originea-devis-block__text">Vous avez besoin de <strong>plus de 100 unités</strong> ? Contactez-nous pour un devis personnalisé.</p>
+                    <a
+                      href="/pages/contact"
+                      class="originea-devis-block__btn button button--secondary"
+                      id="originea-devis-btn-{{ section.id }}"
+                    >
+                      Commander 100+ — Demander un devis
+                    </a>
+                  </div>
+                  <script>
+                  (function() {
+                    var btn = document.getElementById('originea-devis-btn-{{ section.id }}');
+                    if (!btn) return;
+                    var productTitle = {{ product.title | json }};
+                    function updateDevisLink() {
+                      var fruit = '';
+                      var fruitRadio = document.querySelector('input[type="radio"][name^="Fruit"]:checked');
+                      if (fruitRadio) fruit = fruitRadio.value;
+                      var subject = encodeURIComponent('Demande de devis — ' + productTitle);
+                      var body = encodeURIComponent('Bonjour,\n\nJe souhaite commander plus de 100 étiquettes.\n\nFruit : ' + (fruit || '—') + '\nQuantité souhaitée : \nDate de l’événement : \n\nMerci de me contacter.');
+                      btn.href = '/pages/contact?subject=' + subject + '&body=' + body;
+                    }
+                    document.querySelectorAll('input[type="radio"]').forEach(function(r) {
+                      r.addEventListener('change', updateDevisLink);
+                    });
+                    updateDevisLink();
+                  })();
+                  </script>
+                {%- endif -%}
+
               {%- when 'trust_badges' -%}
                 <div class="originea-trust-badges" {{ block.shopify_attributes }}>
                   <div class="originea-trust-badge">
