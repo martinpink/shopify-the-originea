@@ -52,7 +52,7 @@
             picker_type: picker_type
           %}
           {%- if option.name == 'Format' and product.tags contains 'devis-100' -%}
-            <button type="button" class="originea-devis-pill" id="originea-devis-trigger-{{ section.id }}">100+</button>
+            <button type="button" class="originea-devis-pill" data-devis-trigger>100+</button>
           {%- endif -%}
         </fieldset>
       {%- else -%}
