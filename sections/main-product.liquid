@@ -1218,19 +1218,32 @@
                       }
 
                       function sendKlaviyoEvent(email, name, fruit, qty) {
-                        var learnq = window._learnq = window._learnq || [];
-                        console.log('[Devis] sending Klaviyo event, _learnq length before:', learnq.length);
-                        learnq.push(['identify', {
-                          '$email': email,
-                          '$first_name': name
-                        }]);
-                        learnq.push(['track', 'Devis Requested', {
-                          'Product': {{ product.title | json }},
-                          'Fruit': fruit,
-                          'Quantite': qty,
-                          'Source': 'Devis Form 100+'
-                        }]);
-                        console.log('[Devis] _learnq length after:', learnq.length, '| window.klaviyo type:', typeof window.klaviyo);
+                        fetch('https://a.klaviyo.com/client/events/?company_id=QSGLiB', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/json',
+                            'revision': '2023-12-15'
+                          },
+                          body: JSON.stringify({
+                            data: {
+                              type: 'event',
+                              attributes: {
+                                metric: { data: { type: 'metric', attributes: { name: 'Devis Requested' } } },
+                                profile: { data: { type: 'profile', attributes: { email: email, first_name: name } } },
+                                properties: {
+                                  Product: {{ product.title | json }},
+                                  Fruit: fruit,
+                                  Quantite: qty,
+                                  Source: 'Devis Form 100+'
+                                }
+                              }
+                            }
+                          })
+                        }).then(function(r) {
+                          console.log('[Devis] Klaviyo event sent, status:', r.status);
+                        }).catch(function(err) {
+                          console.log('[Devis] Klaviyo event error:', err);
+                        });
                       }
 
                       // AJAX form submission
