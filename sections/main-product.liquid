@@ -1152,13 +1152,23 @@
                           <input type="email" id="originea-devis-email-{{ section.id }}" name="contact[email]" required placeholder="marie@exemple.fr">
                         </div>
                         <div class="originea-devis-modal__row">
-                          <label for="originea-devis-fruit-{{ section.id }}">Fruit</label>
+                          <label for="originea-devis-fruit-{{ section.id }}">{{ product.options_with_values[0].name }}</label>
                           <select id="originea-devis-fruit-{{ section.id }}" name="contact[fruit]">
                             {%- for value in product.options_with_values[0].values -%}
                               <option value="{{ value }}">{{ value }}</option>
                             {%- endfor -%}
                           </select>
                         </div>
+                        {%- if product.options.size >= 2 and product.options_with_values[1].name != 'Format' -%}
+                          <div class="originea-devis-modal__row">
+                            <label for="originea-devis-couleur-{{ section.id }}">{{ product.options_with_values[1].name }}</label>
+                            <select id="originea-devis-couleur-{{ section.id }}" name="contact[couleur]">
+                              {%- for value in product.options_with_values[1].values -%}
+                                <option value="{{ value }}">{{ value }}</option>
+                              {%- endfor -%}
+                            </select>
+                          </div>
+                        {%- endif -%}
                         <div class="originea-devis-modal__row">
                           <label for="originea-devis-qty-{{ section.id }}">Quantité souhaitée</label>
                           <input type="number" id="originea-devis-qty-{{ section.id }}" name="contact[quantite]" min="100" placeholder="ex. 200" required>
@@ -1217,7 +1227,7 @@
                         if (successDiv) successDiv.setAttribute('hidden', '');
                       }
 
-                      function sendKlaviyoEvent(email, name, fruit, qty) {
+                      function sendKlaviyoEvent(email, name, fruit, couleur, qty) {
                         fetch('https://a.klaviyo.com/client/events/?company_id=QSGLiB', {
                           method: 'POST',
                           headers: {
@@ -1233,6 +1243,7 @@
                                 properties: {
                                   Product: {{ product.title | json }},
                                   Fruit: fruit,
+                                  Couleur: couleur,
                                   Quantite: qty,
                                   Source: 'Devis Form 100+'
                                 }
@@ -1254,6 +1265,8 @@
                           var email = form.querySelector('[name="contact[email]"]').value;
                           var name  = form.querySelector('[name="contact[name]"]').value;
                           var fruit = form.querySelector('[name="contact[fruit]"]').value;
+                          var couleurEl = form.querySelector('[name="contact[couleur]"]');
+                          var couleur = couleurEl ? couleurEl.value : '';
                           var qty   = form.querySelector('[name="contact[quantite]"]').value;
                           fetch('/contact', {
                             method: 'POST',
@@ -1262,7 +1275,7 @@
                           }).then(function() {
                             form.setAttribute('hidden', '');
                             successDiv.removeAttribute('hidden');
-                            sendKlaviyoEvent(email, name, fruit, qty);
+                            sendKlaviyoEvent(email, name, fruit, couleur, qty);
                           }).catch(function() {
                             form.setAttribute('hidden', '');
                             successDiv.removeAttribute('hidden');
